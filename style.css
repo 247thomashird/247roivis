@@ -1,0 +1,35 @@
+body{
+	font-family:Arial;
+	margin:0;
+	padding:0;
+}
+.topbar {
+	background-color:black;
+	height:55px;
+	font-size:2em;
+	color:white;
+	padding:0.2em;
+	margin:0;
+	font-weight:300;
+}
+.lowersegment{
+	background-color:#e5e6e7;
+	height:665px;
+	width:300px;
+	border-right:1px solid grey;
+}
+.lowerleft{
+	background-color:blue;
+	width:20%;
+}
+.settingsbar {
+	overflow:scroll;
+}
+.buttons{
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	height:80px;
+	width:300px;
+	border-top: 1px solid grey;
+}

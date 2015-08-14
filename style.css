@@ -3,6 +3,12 @@ body{
 	margin:0;
 	padding:0;
 }
+.primary{
+	background-color:#049094 !important;
+}
+.secondary{
+	background-color:#ef8822 !important;
+}
 .topbar {
 	background-color:black;
 	height:55px;
@@ -19,11 +25,13 @@ body{
 	border-right:1px solid grey;
 }
 .lowerleft{
-	background-color:blue;
-	width:20%;
+	background-color:transparent;
+	width:300px;
+
 }
 .settingsbar {
 	overflow:scroll;
+	width:100%;
 }
 .buttons{
 	position:fixed;
@@ -32,4 +40,7 @@ body{
 	height:80px;
 	width:300px;
 	border-top: 1px solid grey;
+}
+.lowerright{
+	background-color:green;
 }

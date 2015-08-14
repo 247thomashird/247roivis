@@ -4,9 +4,15 @@
 	<!--google charts related-->
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<!-- UV charts-->
-	<script type="text/javascript" src-"http://cdnjs.cloudflare.com/ajax/libs/d3/3.2.2/d3.v3.min.js"></script>
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.2.2/d3.v3.min.js"></script>
+	<script type="text/javascript" src="uvcharts.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="app.js"></script>
+
+	<!--material design library-->
+	<link rel="stylesheet" href="mdl/material.css">
+	<script src="mdl/material.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	
 </head>
 <body>
@@ -16,12 +22,75 @@
 	<div class="lowersegment">
 		<div class="lowerleft">
 			<div class="settingsbar">
+				<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50">
+				<div class = "channelinput">
+					<table>
+						<tr><td>Voice Agents</td>
+							<td>
+								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+								  <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked />
+								  <span class="mdl-checkbox__label"></span>
+								</label>
+							</td>
+							<td>
+								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+								  <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" checked />
+								  <span class="mdl-checkbox__label"></span>
+								</label>
+							</td>
+						</tr>
+						<tr><td>Cost Per Interaction</td>
+							<td>
+							  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" style="width:50px">
+							    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" style="width:50px"/>
+							    <label class="mdl-textfield__label" for="sample4">Number...</label>
+							    <span class="mdl-textfield__error">Input is not a number!</span>
+							  </div></td>
+							  <td>
+							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50px">
+							    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample5" style="width:50px"/>
+							    <label class="mdl-textfield__label" style="text-size:12px;" for="sample5">Number...</label>
+							    <span class="mdl-textfield__error">Input is not a number!</span>
+							  </div></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<div class="buttons">
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect primary">Calculate</button>
+				<button class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
 			</div>
 		</div>
 		<div class = "lowerright">
 			<div id="chart1">
+				<script>
+				var  products=['Voice Agent','IVR','Vivid Speech', 'Virtual Assistant','Mobile Chat', 'Web Chat'];
+				var costbefore=[1,2,3,4,5,6];
+				var costafter=[6,5,4,3,2,1];
+
+				var graphdef = {
+					categories: ['before','after'],
+					dataset : {
+						'before' : [
+						{name: 'Voice Agents',value: 1 },
+						{name: 'IVR',value:2},
+						{name: 'Vivid Speech',value:3},
+						{name: 'Virtual Assistant',value:4},
+						{name: 'Web Chat',value:5},
+						{name: 'Mobile Chat',value:6}
+						],
+						'after' : [
+						{name: 'Voice Agents',value: 1 },
+						{name: 'IVR',value:2},
+						{name: 'Vivid Speech',value:3},
+						{name: 'Virtual Assistant',value:4},
+						{name: 'Web Chat',value:5},
+						{name: 'Mobile Chat',value:6}
+						]
+					}
+				};
+				var chart = uv.chart('StackedBar',graphdef);
+				</script>
 			</div>
 		</div>
 	</div>

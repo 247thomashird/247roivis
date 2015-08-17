@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
 <head>
+	<!--jquery-->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<!--google charts related-->
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<!-- UV charts-->
@@ -8,6 +10,9 @@
 	<script type="text/javascript" src="uvcharts.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="app.js"></script>
+	<!--morris charts-->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
+    <script src="morris/morris.js"></script>
 
 	<!--material design library-->
 	<link rel="stylesheet" href="mdl/material.css">
@@ -44,13 +49,13 @@
 							  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label textfield-demo" style="width:50px">
 							    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample4" style="width:50px"/>
 							    <label class="mdl-textfield__label" for="sample4">Number...</label>
-							    <span class="mdl-textfield__error">Input is not a number!</span>
+							    <span class="mdl-textfield__error">NAN</span>
 							  </div></td>
 							  <td>
-							<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width:50px">
+							<div class="mdl-textfield mdl-js-textfield" style="width:50px">
 							    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="sample5" style="width:50px"/>
 							    <label class="mdl-textfield__label" style="text-size:12px;" for="sample5">Number...</label>
-							    <span class="mdl-textfield__error">Input is not a number!</span>
+							    <span class="mdl-textfield__error">NAN</span>
 							  </div></td>
 						</tr>
 					</table>
@@ -64,32 +69,46 @@
 		<div class = "lowerright">
 			<div id="chart1">
 				<script>
-				var  products=['Voice Agent','IVR','Vivid Speech', 'Virtual Assistant','Mobile Chat', 'Web Chat'];
-				var costbefore=[1,2,3,4,5,6];
-				var costafter=[6,5,4,3,2,1];
+				// var  products=['Voice Agent','IVR','Vivid Speech', 'Virtual Assistant','Mobile Chat', 'Web Chat'];
+				// var costbefore=[1,2,3,4,5,6];
+				// var costafter=[6,5,4,3,2,1];
 
-				var graphdef = {
-					categories: ['before','after'],
-					dataset : {
-						'before' : [
-						{name: 'Voice Agents',value: 1 },
-						{name: 'IVR',value:2},
-						{name: 'Vivid Speech',value:3},
-						{name: 'Virtual Assistant',value:4},
-						{name: 'Web Chat',value:5},
-						{name: 'Mobile Chat',value:6}
-						],
-						'after' : [
-						{name: 'Voice Agents',value: 1 },
-						{name: 'IVR',value:2},
-						{name: 'Vivid Speech',value:3},
-						{name: 'Virtual Assistant',value:4},
-						{name: 'Web Chat',value:5},
-						{name: 'Mobile Chat',value:6}
-						]
-					}
-				};
-				var chart = uv.chart('StackedBar',graphdef);
+				// var graphdef = {
+				// 	categories: ['before','after'],
+				// 	dataset : {
+				// 		'before' : [
+				// 		{name: 'Voice Agents',value: 1 },
+				// 		{name: 'IVR',value:2},
+				// 		{name: 'Vivid Speech',value:3},
+				// 		{name: 'Virtual Assistant',value:4},
+				// 		{name: 'Web Chat',value:5},
+				// 		{name: 'Mobile Chat',value:6}
+				// 		],
+				// 		'after' : [
+				// 		{name: 'Voice Agents',value: 1 },
+				// 		{name: 'IVR',value:2},
+				// 		{name: 'Vivid Speech',value:3},
+				// 		{name: 'Virtual Assistant',value:4},
+				// 		{name: 'Web Chat',value:5},
+				// 		{name: 'Mobile Chat',value:6}
+				// 		]
+				// 	}
+				// };
+				// var chart = uv.chart('StackedBar',graphdef);
+
+				//morris
+				Morris.Bar({
+					element: 'chart1',
+					data: [
+					{y:'before',m: 1, n:2, o: 3},
+					{y:'after',m:3,n:2,o:1}
+					],
+					xkey: 'y',
+					ykeys: ['m','n','o'],
+					labels: ['M','N','O'],
+					stacked:true
+				});
+
 				</script>
 			</div>
 		</div>

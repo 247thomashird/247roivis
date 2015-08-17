@@ -2,7 +2,7 @@
 <html>
 <head>
 	<!--jquery-->
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
 	<!--google charts related-->
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<!-- UV charts-->
@@ -12,7 +12,16 @@
 	<script type="text/javascript" src="app.js"></script>
 	<!--morris charts-->
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
-    <script src="morris/morris.js"></script>
+    <!--<script src="morris/morris.js"></script>-->
+    <link rel="stylesheet" href="morris/morris.css">
+    <!--jqplot-->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script type="text/javascript" src="jqplot/jquery.jqplot.js"></script>
+	<script type="text/javascript" src="jqplot/plugins/jqplot.barRenderer.js"></script>
+	<script type="text/javascript" src="jqplot/plugins/jqplot.pieRenderer.js"></script>
+	<script type="text/javascript" src="jqplot/plugins/jqplot.categoryAxisRenderer.js"></script>
+	<script type="text/javascript" src="jqplot/plugins/jqplot.pointLabels.js"></script>
+	<link rel="stylesheet" type="text/css" hrf="../src/jquery.jqplot.css" />
 
 	<!--material design library-->
 	<link rel="stylesheet" href="mdl/material.css">
@@ -26,18 +35,33 @@
 	</div>
 	<div class="lowersegment">
 		<div class="lowerleft">
-			<div class="settingsbar">
+			<div class="settingsbar" id="settingsbar">
+				<br><h1>Monthly Voice Traffic</h1>
+				<br>
 				<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50">
+				<br>
+				<br><h1>Monthly Voice Traffic</h1>
+				<br>
+				<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50">
+				<br>
+				<br><h1>Monthly Voice Traffic</h1>
+				<br>
+				<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50">
+				<br>
+				<br><h1>Monthly Voice Traffic</h1>
+				<br>
+				<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50">
+				<br>
 				<div class = "channelinput">
 					<table>
-						<tr><td>Voice Agents</td>
-							<td>
+						<tr><td class="slefttd">Voice Agents</td>
+							<td class="scentertd">
 								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
 								  <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked />
 								  <span class="mdl-checkbox__label"></span>
 								</label>
 							</td>
-							<td>
+							<td class="srighttd">
 								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
 								  <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" checked />
 								  <span class="mdl-checkbox__label"></span>
@@ -62,8 +86,8 @@
 				</div>
 			</div>
 			<div class="buttons">
-				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect primary">Calculate</button>
-				<button class="mdl-button mdl-js-button mdl-js-ripple-effect">Reset</button>
+				<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect primary mdl-color-text--white" style="margin-left:20px;width:150px;margin-top:7px;">Calculate</button>
+				<button class="mdl-button mdl-js-button mdl-js-ripple-effect" style="margin-left:20px;width:80px;margin-top:7px;">Reset</button>
 			</div>
 		</div>
 		<div class = "lowerright">
@@ -97,21 +121,62 @@
 				// var chart = uv.chart('StackedBar',graphdef);
 
 				//morris
-				Morris.Bar({
-					element: 'chart1',
-					data: [
-					{y:'before',m: 1, n:2, o: 3},
-					{y:'after',m:3,n:2,o:1}
-					],
-					xkey: 'y',
-					ykeys: ['m','n','o'],
-					labels: ['M','N','O'],
-					stacked:true
-				});
+				// Morris.Bar({
+				// 	element: 'chart1',
+				// 	data: [
+				// 	{y:'before',m: 1, n:2, o: 3},
+				// 	{y:'after',m:3,n:2,o:1}
+				// 	],
+				// 	xkey: 'y',
+				// 	ykeys: ['m','n','o'],
+				// 	labels: ['M','N','O'],
+				// 	stacked:true,
+				// 	hideHover: true
+				// });
+				// $("#chart1").ready(function(){
+				// 	plot4 = $.jqplot('chart', [[[2,1], [6,2], [7,3], [10,4]], [[7,1], [5,2],[3,3],[2,4]], [[14,1], [9,2], [9,3], [8,4]]], {
+			    //         stackSeries: true,
+			    //         captureRightClick: true,
+			    //         seriesDefaults:{
+			    //             renderer:$.jqplot.BarRenderer,
+			    //             shadowAngle: 135,
+			    //             rendererOptions: {
+			    //                 barDirection: 'horizontal',
+			    //                 highlightMouseDown: true   
+			    //             },
+			    //             pointLabels: {show: true, formatString: '$%d'}
+			    //         },
+			    //         legend: {
+			    //             show: true,
+			    //             location: 'e',
+			    //             placement: 'outside'
+			    //         },
+			    //         axes: {
+			    //             yaxis: {
+			    //                 renderer: $.jqplot.CategoryAxisRenderer
+			    //             }
+			    //         }
+			    //     });
+							// });
+				
 
+				
 				</script>
 			</div>
 		</div>
 	</div>
+	<script>
+	window.onload = function(){
+		resize();
+	}
+	$(window).resize(function(){
+		resize();
+	});
+	function resize(){
+		console.log("resize");
+		var height = $(window).height();
+		$("#settingsbar").height(height-55-50);
+	}
+	</script>
 </body>
 </html>

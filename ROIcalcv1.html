@@ -2,17 +2,19 @@
 <html>
 <head>
 	<!--jquery-->
-	<!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>-->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<!--google charts related-->
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<!-- UV charts-->
 	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.2.2/d3.v3.min.js"></script>
 	<script type="text/javascript" src="uvcharts.min.js"></script>
+
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<script></script>
 	<script type="text/javascript" src="app.js"></script>
 	<!--morris charts-->
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.2/raphael-min.js"></script>
-    <!--<script src="morris/morris.js"></script>-->
+    <script src="morris/morris.js"></script>
     <link rel="stylesheet" href="morris/morris.css">
     <!--jqplot-->
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -23,6 +25,12 @@
 	<script type="text/javascript" src="jqplot/plugins/jqplot.pointLabels.js"></script>
 	<link rel="stylesheet" type="text/css" hrf="../src/jquery.jqplot.css" />
 
+	<!--bootstrap-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
 	<!--material design library-->
 	<link rel="stylesheet" href="mdl/material.css">
 	<script src="mdl/material.js"></script>
@@ -31,7 +39,8 @@
 </head>
 <body>
 	<div class="topbar">
-		ROI Service Calculator
+
+		<a onclick="$('#settingsbar').toggle();">ROI Service Calculator</a>
 	</div>
 	<div class="lowersegment">
 		<div class="lowerleft">
@@ -91,6 +100,11 @@
 			</div>
 		</div>
 		<div class = "lowerright">
+			<!-- <ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#">Home</a></li>
+  <li role="presentation"><a href="#">Profile</a></li>
+  <li role="presentation"><a href="#">Messages</a></li>
+</ul> -->
 			<div id="chart1">
 				<script>
 				// var  products=['Voice Agent','IVR','Vivid Speech', 'Virtual Assistant','Mobile Chat', 'Web Chat'];
@@ -121,62 +135,55 @@
 				// var chart = uv.chart('StackedBar',graphdef);
 
 				//morris
-				// Morris.Bar({
-				// 	element: 'chart1',
-				// 	data: [
-				// 	{y:'before',m: 1, n:2, o: 3},
-				// 	{y:'after',m:3,n:2,o:1}
-				// 	],
-				// 	xkey: 'y',
-				// 	ykeys: ['m','n','o'],
-				// 	labels: ['M','N','O'],
-				// 	stacked:true,
-				// 	hideHover: true
-				// });
-				// $("#chart1").ready(function(){
-				// 	plot4 = $.jqplot('chart', [[[2,1], [6,2], [7,3], [10,4]], [[7,1], [5,2],[3,3],[2,4]], [[14,1], [9,2], [9,3], [8,4]]], {
-			    //         stackSeries: true,
-			    //         captureRightClick: true,
-			    //         seriesDefaults:{
-			    //             renderer:$.jqplot.BarRenderer,
-			    //             shadowAngle: 135,
-			    //             rendererOptions: {
-			    //                 barDirection: 'horizontal',
-			    //                 highlightMouseDown: true   
-			    //             },
-			    //             pointLabels: {show: true, formatString: '$%d'}
-			    //         },
-			    //         legend: {
-			    //             show: true,
-			    //             location: 'e',
-			    //             placement: 'outside'
-			    //         },
-			    //         axes: {
-			    //             yaxis: {
-			    //                 renderer: $.jqplot.CategoryAxisRenderer
-			    //             }
-			    //         }
-			    //     });
-							// });
+				Morris.Bar({
+					element: 'chart1',
+					data: [
+					{y:'before',m: 1, n:2, o: 3},
+					{y:'after',m:3,n:2,o:1}
+					],
+					xkey: 'y',
+					ykeys: ['m','n','o'],
+					labels: ['M','N','O'],
+					stacked:true,
+					hideHover: true
+				});
+				
 				
 
 				
 				</script>
 			</div>
+			<div id="chart2">
+				<script>
+				$("#chart1").ready(function(){
+					plot4 = $.jqplot('chart2', [[[2,1], [6,2], [7,3], [10,4]], [[7,1], [5,2],[3,3],[2,4]], [[14,1], [9,2], [9,3], [8,4]]], {
+			            stackSeries: true,
+			            captureRightClick: true,
+			            seriesDefaults:{
+			                renderer:$.jqplot.BarRenderer,
+			                rendererOptions: {
+			                    barDirection: 'horizontal',
+			                    highlightMouseDown: true   
+			                },
+			                pointLabels: {show: true, formatString: '$%d'}
+			            },
+			            legend: {
+			                show: true,
+			                location: 'e',
+			                placement: 'outside'
+			            },
+			            axes: {
+			                yaxis: {
+			                    renderer: $.jqplot.CategoryAxisRenderer
+			                }
+			            }
+			        });
+							});
+				</script>
+			</div>
+			<div id="chart3">
+			</div>
 		</div>
 	</div>
-	<script>
-	window.onload = function(){
-		resize();
-	}
-	$(window).resize(function(){
-		resize();
-	});
-	function resize(){
-		console.log("resize");
-		var height = $(window).height();
-		$("#settingsbar").height(height-55-50);
-	}
-	</script>
 </body>
 </html>

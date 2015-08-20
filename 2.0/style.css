@@ -1,0 +1,44 @@
+html,body,head {
+	margin:0px;
+	padding:0px;
+
+}
+.primary{ 
+	background-color:#049094 !important;
+}
+.bgcolor{
+	background-color:#e5e6e7;
+}
+.topbar{
+	color:white;
+	background-color:black;
+	height:55px;
+	position: fixed;
+	top:0px;
+	left:0px;
+	width:100%;
+	line-height:55px;
+	font-size:22px;
+}
+.lower{
+	margin-top:55px;
+}
+.left{
+	width:300px;
+	height:500px;
+	border-right:1px solid grey;
+	float:left;
+}
+.buttons{
+	width:300px;
+	position: fixed;
+	left:0px;
+	bottom:0px;
+	height:50px;
+	border-right: 1px solid grey;
+	border-top: 1px solid grey;
+}
+.right{
+	float:left;
+	margin-left:300px;
+}

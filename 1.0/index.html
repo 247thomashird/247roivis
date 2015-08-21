@@ -23,7 +23,7 @@
 		<span style="font-size:30px;display:inline-block;color:white;font-weight:300;line-height:55px;">&nbspService ROI Calculator (beta)</span>
 		<span style="font-size:18px;display:inline-block;color:white;font-weight:300;line-height:55px;float:right;padding-right:15px"data-toggle="modal" data-target="#myModal">About</span>
 		<span style="font-size:18px;display:inline-block;color:white;font-weight:300;line-height:55px;float:right;padding-right:15px"data-toggle="modal" data-target="#myModal2">Scenariosmodal</span>
-		<a href="scenarios.pdf" target="_blank"><span style="font-size:18px;display:inline-block;color:white;font-weight:300;line-height:55px;float:right;padding-right:15px">Scenarios</span></a>
+		<!-- <a href="scenarios.pdf" target="_blank"><span style="font-size:18px;display:inline-block;color:white;font-weight:300;line-height:55px;float:right;padding-right:15px">Scenarios</span></a> -->
 	</div>
 
 	<!-- Modal -->
@@ -107,7 +107,35 @@
 						$2.50 per interaction<br>
 						20% containment<br><br>
 					</div>
-					<div class="modalbutton" onclick="scenario1();setTimeout(function(){calcvalues();colorupdate();showmain();},100);" data-dismiss="modal">Run Scenario</div>
+					<div class="modalbutton" onclick="scenario1();setTimeout(function(){calcvalues();colorupdate();showmain();},100);" data-dismiss="modal">Run Scenario</div><br><br>
+					<div class="tealtext">Scenario 2</div>
+					<div class ="regulartext">
+						Context of Use<br>
+						Currently Company2 has Voice Agents, IVR, and Web Chat.<br>
+						Today when a coustomer can't find the information they are looking for on the web, they will call in.<br>
+						If we can keep customers in the digital channel this is a cheaper way to serve them.<br>
+						Proposal is to keep existing channels the same and add Virtual Assistant.<br>
+						This model is a more system wide look at thi interplay of web and voice.<br><br>
+						Traffic Values<br>
+						Monthly voice volume: 24 million<br>
+						Assuming 50% mobile<br>
+						Monthly web volume: 15 million<br>
+						40% mobile<br><br>
+						Product Inputs<br><br>
+						1. Voice (current and future)<br>
+						$9.60 cost per interaction<br>
+						2. IVR (current and future)<br>
+						$1.00 per interaction<br>
+						60% containment<br>
+						3. Web Chat(current and future)<br>
+						$4 per interaction<br>
+						5% containment<br>
+						4. Virtual Assistant<br>
+						$3.00 per interaction<br>
+						10% containment<br><br>
+					</div>
+						<div class="modalbutton" onclick="scenario2();setTimeout(function(){calcvalues();colorupdate();showmain();},100);" data-dismiss="modal">Run Scenario</div>
+
 				</div>
 		    </div>
 		    <div class="modal-footer">

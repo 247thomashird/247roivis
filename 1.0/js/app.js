@@ -762,6 +762,64 @@ function scenario1(){
 		document.getElementById('247vvv').value=voicevolume/1000000;
 		document.getElementById('247wvv').value=webvolume/1000000;
 }
+function scenario2(){
+	bvoion=true,bivron=true,bvson=false,bmcon=false,bwcon=true,bvaon=false;
+	avoion=true,aivron=true,avson=false,amcon=false,awcon=true,avaon=true;
+	bivre = 0.6,aivre=0.6,bvse=0.0,avse=0.2,bmce=0.0,amce=0.0,bwce=0.05,awce=0.05,bvae=0.0,avae=0.1;
+	voicevolume=24000000,webvolume=15000000;
+	bvoicpi=9.60,avoicpi=9.60, bivrcpi =1.0,aivrcpi=1.0,bvscpi=0.0,avscpi=2.5,bmccpi=0.0,amccpi=0.0,bwccpi=4.0,awccpi=4.0,bvacpi=0.0,avacpi=3.0;
+	bvoinps=0,avoinps=0, bivrnps = 0,aivrnps=0,bvsnps=0,avsnps=0,bmcnps=0,amcnps=0,bwcnps=0,awcnps=0,bvanps=0,avanps=0;
+	bvoiaht=0,avoiaht=0, bivraht = 0,aivraht=0,bvsaht=0,avsaht=0,bmcaht=0,amcaht=0,bwcaht=0,awcaht=0,bvaaht=0,avaaht=0;
+	lvs=0.4,dvs=0.5;
+
+	bvoivol=0,bivrvol=0,bvsvol=0,bmcvol=0,bwcvol=0,bvavol=0;
+	avoivol=0,aivrvol=0,avsvol=0,amcvol=0,awcvol=0,avavol=0;
+
+		document.getElementById('bvoicb').checked = bvoion;
+		document.getElementById('avoicb').checked = avoion;
+		document.getElementById('bivrcb').checked = bivron;
+		document.getElementById('aivrcb').checked = aivron;
+		document.getElementById('bvscb').checked = bvson;
+		document.getElementById('avscb').checked = avson;
+		document.getElementById('bmccb').checked = bmcon;
+		document.getElementById('amccb').checked = amcon;
+		document.getElementById('bwccb').checked = bwcon;
+		document.getElementById('awccb').checked = awcon;
+		document.getElementById('bvacb').checked = bvaon;
+		document.getElementById('avacb').checked = avaon;
+
+	//getting volumes
+	//$("#tealslider").slider("option","value")=voicevolume;
+	//$("#purpleslider").slider("option","value")=webvolume;
+
+	//getting effectivenesses
+		document.getElementById('bivreff').value = bivre*100;
+		document.getElementById('aivreff').value = aivre*100;
+		document.getElementById('bvseff').value = bvse*100;
+		document.getElementById('avseff').value = avse*100;
+		document.getElementById('bmceff').value = bmce*100;
+		document.getElementById('amceff').value = amce*100;
+		document.getElementById('bwceff').value = bwce*100;
+		document.getElementById('awceff').value = awce*100;
+		document.getElementById('bvaeff').value = bvae*100;
+		document.getElementById('avaeff').value = avae*100;
+
+		document.getElementById('bvoicpi').value=bvoicpi;
+		document.getElementById('avoicpi').value=avoicpi; 
+		document.getElementById('bivrcpi').value=bivrcpi;
+		document.getElementById('aivrcpi').value=aivrcpi;
+		document.getElementById('bvscpi').value=bvscpi;
+		document.getElementById('avscpi').value=avscpi;
+		document.getElementById('bmccpi').value=bmccpi;
+		document.getElementById('amccpi').value=amccpi;
+		document.getElementById('bwccpi').value=bwccpi;
+		document.getElementById('awccpi').value=awccpi;
+		document.getElementById('bvacpi').value=bvacpi;
+		document.getElementById('avacpi').value=avacpi;
+
+		document.getElementById('247vvv').value=voicevolume/1000000;
+		document.getElementById('247wvv').value=webvolume/1000000;
+}
 /****************************/
 /***********Charts***********/
 /****************************/

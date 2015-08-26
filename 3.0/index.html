@@ -2,18 +2,14 @@
 <html>
 <head>
 	
-
-
-
-
 	<!--jquery-->
 
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 	<!--google charts related-->
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
-	s<!--bootstrap-->
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<!--bootstrap-->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 
@@ -27,20 +23,20 @@
 	<link rel="stylesheet" href="mdl/material.css">
 	<script src="mdl/material.js"></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-	<meta name="viewport" content="width=1300px, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
 	<div class="topbar">
 
-		<a onclick="$('#settingsbar').toggle();">ROI Service Calculator</a>
+		<a onclick="$('#settingsbar').toggle();" style="color:white;">ROI Service Calculator</a>
 	</div>
 	<div class="lowersegment">
 		<div class="lowerleft">
 			<div class="settingsbar" id="settingsbar">
 				<br><h2>Monthly Voice Traffic</h2>
 				<br>
-				<input class="mdl-slider mdl-js-slider primary" type="range" min="0" max="100" value="50">
+				<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50">
 				<br>
 				<br><h2>Monthly Web Traffic</h2>
 				<br>
@@ -76,6 +72,14 @@
 							    <span class="mdl-textfield__error">NAN</span>
 							  </div></td>
 						</tr><br>
+						<tr><td>Cost Per Interaction</td>
+							<td>
+								<input type="text" class="inputbox" placeholder"$0.00">
+							</td>
+							<td>
+								<input type="text" class="inputbox" placeholder"$0.00">
+							</td>
+						</tr>
 					</table>
 				</div>
 			</div>
@@ -86,7 +90,7 @@
 		</div>
 		<div class = "lowerright">
 			<div class="container">
-				<ul class="nav nav-pills">
+				<ul class="nav nav-pills centerpills">
 				  <li role="presentation" class="active"><a href="#" data-toggle="pill">Home</a></li>
 				  <li role="presentation"><a href="#" data-toggle="pill">Profile</a></li>
 				  <li role="presentation"><a href="#" data-toggle="pill">Messages</a></li>

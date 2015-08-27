@@ -157,6 +157,7 @@ function scenario1(){
 
 
 
+
 function drawchart(){
 	var  products=['genre','Voice Agents','IVR','Vivid Speech', 'Virtual Assistant','Mobile Chat', 'Web Chat'];
 	var costbefore=['before',before.voiceagent.volume,before.ivr.volume,before.vs.volume,
@@ -175,7 +176,10 @@ function drawchart(){
 		legend:{ position: 'bottom'},
 		bar:{groupwidth:'75'},
 		isStacked: true,
-		colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370']
+		colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370'],
+		hAxis: {
+            maxValue: voice.volume
+          }
 	};
 	var chart = new google.visualization.BarChart(document.getElementById('chart3'));
 	chart.draw(data,options);
@@ -191,4 +195,5 @@ function resize(){
 	console.log("resize");
 	var height = $(window).height();
 	$("#settingsbar").height(height-55-50);
+	drawchart();
 }

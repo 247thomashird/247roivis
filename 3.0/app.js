@@ -67,6 +67,7 @@ function calculatebutton(){
 
 	calculatevolumes(before);
 	calculatevolumes(after);
+	updatesummary();
 }
 
 function clearallproducts(boa){
@@ -134,6 +135,31 @@ function calculatevolumes(boa){
  	boa.voiceagent.calccost();
 }
 
+function updatesummary(){
+	function numberWithCommas(x) {
+		if (x==0){return '';}
+		var parens = (x>0 ? false:true);
+	    var parts = Math.abs(x).toString().split(".");
+	    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    if (parens){
+	    return "($"+parts.join(".")+")";}
+	    return "$"+parts.join(".");
+	}
+	function updateline(tslot,pslot){
+	document.getElementById(tslot+'b').innerHTML = numberWithCommas( eval('before.'+pslot+'.cost'));
+	document.getElementById(tslot+'a').innerHTML = numberWithCommas( eval('after.'+pslot+'.cost'));
+	document.getElementById(tslot+'s').innerHTML = numberWithCommas( eval('before.'+pslot+'.cost - after.'+pslot+'.cost'));
+	
+	}
+
+	updateline('voi','voiceagent');
+	updateline('ivr','ivr');
+	updateline('vs','vs');
+	updateline('va','va');
+	updateline('mc','mobileagent');
+	updateline('wc','webagent');
+}
+
 
 function scenario1(){
 	web.volume=0;
@@ -148,6 +174,7 @@ function scenario1(){
 	after.vs.containment=0.2;
 	calculatevolumes(before);
 	calculatevolumes(after);
+	updatesummary();
 
 	before.voiceagent.printall();
 	after.voiceagent.printall();

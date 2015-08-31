@@ -39,9 +39,16 @@ a {
 }
 .lowerleft{
 	width:300px;
+<<<<<<< HEAD
 	border-right: 1px solid #e3e3e3;
 	float:left;
 	height: 100%;
+=======
+	border-right:1px solid grey;
+	float:left;
+	height: 100%;
+	background-color:#e5e6e7;
+>>>>>>> master
 }
 .lowerleft h2 {
 	font-size:22px;

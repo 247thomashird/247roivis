@@ -67,6 +67,7 @@ function calculatebutton(){
 
 	calculatevolumes(before);
 	calculatevolumes(after);
+	updatesummary();
 }
 
 function clearallproducts(boa){
@@ -134,6 +135,31 @@ function calculatevolumes(boa){
  	boa.voiceagent.calccost();
 }
 
+function updatesummary(){
+	function numberWithCommas(x) {
+		if (x==0){return '';}
+		var parens = (x>0 ? false:true);
+	    var parts = Math.abs(x).toString().split(".");
+	    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    if (parens){
+	    return "($"+parts.join(".")+")";}
+	    return "$"+parts.join(".");
+	}
+	function updateline(tslot,pslot){
+	document.getElementById(tslot+'b').innerHTML = numberWithCommas( eval('before.'+pslot+'.cost'));
+	document.getElementById(tslot+'a').innerHTML = numberWithCommas( eval('after.'+pslot+'.cost'));
+	document.getElementById(tslot+'s').innerHTML = numberWithCommas( eval('before.'+pslot+'.cost - after.'+pslot+'.cost'));
+	
+	}
+
+	updateline('voi','voiceagent');
+	updateline('ivr','ivr');
+	updateline('vs','vs');
+	updateline('va','va');
+	updateline('mc','mobileagent');
+	updateline('wc','webagent');
+}
+
 
 function scenario1(){
 	web.volume=0;
@@ -148,12 +174,14 @@ function scenario1(){
 	after.vs.containment=0.2;
 	calculatevolumes(before);
 	calculatevolumes(after);
+	updatesummary();
 
 	before.voiceagent.printall();
 	after.voiceagent.printall();
 	after.vs.printall();
 	drawchart();
 }
+
 
 
 
@@ -175,7 +203,10 @@ function drawchart(){
 		legend:{ position: 'bottom'},
 		bar:{groupwidth:'75'},
 		isStacked: true,
-		colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370']
+		colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370'],
+		hAxis: {
+            maxValue: voice.volume
+          }
 	};
 	var chart = new google.visualization.BarChart(document.getElementById('chart3'));
 	chart.draw(data,options);
@@ -191,4 +222,5 @@ function resize(){
 	console.log("resize");
 	var height = $(window).height();
 	$("#settingsbar").height(height-55-50);
+	drawchart();
 }

@@ -100,9 +100,21 @@ a {
 	background-color:white;
 	height: calc(100% - 55px);
 }
-.centerpills{
-	margin: auto auto;
-	width:250px;
+
+/*Tab Control Button Group */
+.tab-btn-group button{
+	border-color:#049094 !important;
+}
+button.active{
+	background-color:#049094 !important;
+	border-color:#049094 !important;
+}
+button a, button a:hover{
+	text-decoration: none;
+	color: #049094 !important;
+}
+button.active a, .active a:hover{
+	color: white !important;
 }
 
 /* Let's get this party started */

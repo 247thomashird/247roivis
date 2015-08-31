@@ -81,24 +81,32 @@ a {
 	margin-left:2px;
 	padding:3px;
 }
+
+/*Buttons*/
+
+.btn-primary{
+	background-color:#049094 !important;
+	border-color:#049094 !important;
+}
+
+/*Calculate and Reset buttons and container*/
 .buttons{
 	position:fixed;
 	bottom:0px;
 	left:0px;
-	height:50px;
+	padding: 15px;
 	width:300px;
 	border-top: 1px solid #e3e3e3;
 	border-right: 1px solid #e3e3e3;
 	z-index: 20;
+	background-color: white;
 }
-.lowerright{
-	padding-top:55px;
-
-	float:left;
-	background-color:#e5e6e7;
-	width:calc(100% - 300px);
-	background-color:white;
-	height: calc(100% - 55px);
+#calculate-btn{
+	float: right;
+	min-width: 130px;
+}
+#reset-btn, #reset-btn:hover{
+	color: #808080;
 }
 
 /*Tab Control Button Group */
@@ -116,6 +124,19 @@ button a, button a:hover{
 button.active a, .active a:hover{
 	color: white !important;
 }
+
+
+
+.lowerright{
+	padding-top:55px;
+
+	float:left;
+	background-color:#e5e6e7;
+	width:calc(100% - 300px);
+	background-color:white;
+	height: calc(100% - 55px);
+}
+
 
 /* Let's get this party started */
 ::-webkit-scrollbar {

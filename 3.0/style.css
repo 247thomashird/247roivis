@@ -2,8 +2,7 @@ body{
 	font-family:Arial;
 	margin:0;
 	padding:0;
-	/*background-color:#e5e6e7;*/
-	background-color: white;
+	background-color:white;
 	height:100%;
 	width:100%;
 }
@@ -17,30 +16,44 @@ a {
 	background-color:#ef8822 !important;
 }
 .topbar {
-	background-color:white;
-	height:55px;
-	font-size:2em;
-	color:#6e6f72 !important;
-	padding:0.2em;
-	margin:0;
-	font-weight:300;
+	background-color: white;
+	height:65px;
+	margin:0; padding: 15px;
 	position: fixed;
 	top:0;
 	left:0;
 	width:100%;
 	z-index: 20;
-	line-height:55px;
 	border-bottom: 1px solid #e3e3e3;
+	vertical-align: bottom;
 }
+.topbar img{
+	height: 30px;
+	margin-right: 20px;
+
+	position: absolute; bottom: 15px;
+}
+.topbar a{
+	display: block;
+	font-size:25px;
+	position: absolute; bottom: 15px; left:120px;
+	font-weight: 300;
+}
+#about-btn{
+	float: right;
+}
+
 .lowersegments{
 	background-color:#e5e6e7;
-	margin-top:55px;
+	margin-top:65px;
 }
+
 .lowerleft{
 	width:300px;
-	border-right:1px solid #e3e3e3;
+	border-right: 1px solid #e3e3e3;
 	float:left;
 	height: 100%;
+	/*background-color:#e5e6e7;*/
 }
 .lowerleft h2 {
 	font-size:22px;
@@ -49,7 +62,7 @@ a {
 }
 .settingsbar {
 	overflow-y:scroll;
-	padding:55px 20px 0px 20px;
+	padding:65px 20px 0px 20px;
 }
 
 .slefttd{
@@ -79,30 +92,61 @@ a {
 	margin-left:2px;
 	padding:3px;
 }
+
+/*Buttons*/
+
+.btn-primary{
+	background-color:#049094 !important;
+	border-color:#049094 !important;
+}
+
+/*Calculate and Reset buttons and container*/
 .buttons{
 	position:fixed;
 	bottom:0px;
 	left:0px;
-	height:50px;
+	padding: 15px;
 	width:300px;
-	border-top: 1px solid grey;
-	border-right: 1px solid grey;
-	background-color:#e5e6e7;
+	border-top: 1px solid #e3e3e3;
+	border-right: 1px solid #e3e3e3;
 	z-index: 20;
+	background-color: white;
 }
+#calculate-btn{
+	float: right;
+	min-width: 130px;
+}
+#reset-btn, #reset-btn:hover{
+	color: #808080;
+}
+
+/*Tab Control Button Group */
+.tab-btn-group button{
+	border-color:#049094 !important;
+}
+button.active{
+	background-color:#049094 !important;
+	border-color:#049094 !important;
+}
+button a, button a:hover{
+	text-decoration: none;
+	color: #049094 !important;
+}
+button.active a, .active a:hover{
+	color: white !important;
+}
+
+
+
 .lowerright{
-	padding-top:55px;
-	
+	padding-top:65px;
 	float:left;
 	background-color:#e5e6e7;
 	width:calc(100% - 300px);
 	background-color:white;
-	height: calc(100% - 55px);
+	height: calc(100% - 65px);
 }
-.centerpills{
-	margin: auto auto;
-	width:250px;
-}
+
 
 /* Let's get this party started */
 ::-webkit-scrollbar {
@@ -125,4 +169,3 @@ a {
 ::-webkit-scrollbar-thumb:window-inactive {
 	background: rgba(255,0,0,0.0);
 }
-

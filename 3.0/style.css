@@ -15,33 +15,37 @@ a {
 .secondary{
 	background-color:#ef8822 !important;
 }
+
+/*Header bar*/
 .topbar {
 	background-color: white;
 	height:65px;
-	margin:0; padding: 15px;
 	position: fixed;
 	top:0;
 	left:0;
 	width:100%;
 	z-index: 20;
 	border-bottom: 1px solid #e3e3e3;
-	vertical-align: bottom;
 }
-.topbar img{
-	height: 30px;
-	margin-right: 20px;
-
-	position: absolute; bottom: 15px;
-}
-.topbar a{
+.topbar > * {
 	display: block;
+}
+#logo{
+	height: 20px;
+	position: absolute; top: 22px; left: 20px;
+}
+#app-title{
 	font-size:25px;
-	position: absolute; bottom: 15px; left:120px;
 	font-weight: 300;
+	position: absolute; top: 23px; left: 100px;
 }
 #about-btn{
-	float: right;
+	position: absolute; top: 16px; right: 20px;
 }
+
+/*End Header bar*/
+
+
 
 .lowersegments{
 	background-color:#e5e6e7;

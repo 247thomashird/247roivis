@@ -49,21 +49,13 @@ var before = {va:new product(),vs:new product,ivr:new product,
 webagent:new product(),mobileagent:new product(),voiceagent:new product()};
 var after = {va:new product(),vs:new product,ivr:new product,
 webagent:new product(),mobileagent:new product(),voiceagent:new product()};
-// var web=new product();
-// var voice=new product();
-// var desktop=new product();
-// var mobileweb = new product();
-// var mobilevoice = new product();
-// var phone = new product();
-// var va = new product();
-// var vs = new product();
-// var ivr = new product();
-// var webagent = new product();
-// var voiceagent = new product();
 
 function calculatebutton(){
+
 	clearallproducts(before);
 	clearallproducts(after);
+
+	getvalues();
 
 	calculatevolumes(before);
 	calculatevolumes(after);
@@ -84,6 +76,17 @@ function clearallproducts(boa){
 	boa.webagent.clear();
 	boa.mobileagent.clear();
 	boa.voiceagent.clear();
+}
+function getvalues(){
+	web.volume=document.getElementById('webvolume').value;
+	voice.volume=document.getElementById('voicevolume').value;
+
+	desktop.acceptpercent = 1 - document.getElementById('websplit').value/100;
+	mobileweb.acceptpercent = document.getElementById('websplit').value/100;
+	mobilevoice.acceptpercent = document.getElementById('voicesplit').value/100;
+	phone.acceptpercent = 1 - document.getElementById('voicesplit').value/100;
+
+	
 }
 
 function calculatevolumes(boa){
@@ -145,11 +148,12 @@ function updatesummary(){
 	    return "($"+parts.join(".")+")";}
 	    return "$"+parts.join(".");
 	}
+	var beforesum = 0,aftersum = 0, savingssum = 0;
 	function updateline(tslot,pslot){
 	document.getElementById(tslot+'b').innerHTML = numberWithCommas( eval('before.'+pslot+'.cost'));
 	document.getElementById(tslot+'a').innerHTML = numberWithCommas( eval('after.'+pslot+'.cost'));
 	document.getElementById(tslot+'s').innerHTML = numberWithCommas( eval('before.'+pslot+'.cost - after.'+pslot+'.cost'));
-	
+	beforesum+= eval('before.'+pslot+'.cost');aftersum+=eval('after.'+pslot+'.cost');savingssum+=eval('before.'+pslot+'.cost - after.'+pslot+'.cost');
 	}
 
 	updateline('voi','voiceagent');
@@ -158,6 +162,10 @@ function updatesummary(){
 	updateline('va','va');
 	updateline('mc','mobileagent');
 	updateline('wc','webagent');
+	document.getElementById('totalb').innerHTML = numberWithCommas(beforesum);
+	document.getElementById('totala').innerHTML = numberWithCommas(aftersum);
+	document.getElementById('totals').innerHTML = numberWithCommas(savingssum);
+	//console.log('beforesum:'+numberWithCommas(aftersum));
 }
 
 
@@ -167,7 +175,9 @@ function scenario1(){
 	phone.acceptpercent = 0.5;
 	mobilevoice.acceptpercent = 0.5;
 	before.voiceagent.cpi=11.60;
+	before.voiceagent.enabled = true;
 	after.voiceagent.cpi=11.60;
+	after.voiceagent.enabled = true;
 
 	after.vs.enabled=true;
 	after.vs.cpi=2.5;

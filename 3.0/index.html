@@ -28,23 +28,62 @@
 <body>
 
 	<div class="topbar">
-
-		<a onclick="$('#settingsbar').toggle();" >ROI Service Calculator</a>
+		<a onclick="$('#settingsbar').toggle();">ROI Service Calculator</a>
 	</div>
 	<div class="lowersegment">
 		<div class="lowerleft">
 			<div class="settingsbar" id="settingsbar">
-				<br><h2>Monthly Voice Traffic</h2>
+				<br><h2>Monthly Voice Traffic
+				<input type="text" class="inputbox" placeholder="0" id="voicetraffic"></h2>
+
 				<br>
-				<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50">
+				<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="voicesplit">
 				<br>
-				<br><h2>Monthly Web Traffic</h2>
+				<br><h2>Monthly Web Traffic
+				<input type="text" class="inputbox" placeholder="0" id="webtraffic"></h2>
+
 				<br>
-				<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50">
+				<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="websplit">
 				<br>
+				<!--voice Agents-->
 				<div class = "channelinput">
 					<table>
 						<tr><td class="slefttd">Voice Agents</td>
+							<td class="scentertd">
+								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+								  <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked />
+								  <span class="mdl-checkbox__label"></span>
+								</label>
+							</td>
+							<td class="srighttd">
+								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect " for="checkbox-2">
+								  <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" checked />
+								  <span class="mdl-checkbox__label"></span>
+								</label>
+							</td>
+						</tr><br>
+						<tr><td>Cost Per Interaction</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="$0.00">
+							</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="$0.00">
+							</td>
+						</tr>
+						<tr><td>First Call Resolution</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="00%">
+							</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="00%">
+							</td>
+						</tr>
+					</table>
+				</div>
+				<!--IVR-->
+				<div class = "channelinput">
+					<table>
+						<tr><td class="slefttd">IVR</td>
 							<td class="scentertd">
 								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
 								  <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked />
@@ -60,10 +99,158 @@
 						</tr><br>
 						<tr><td>Cost Per Interaction</td>
 							<td>
-								<input type="text" class="inputbox" placeholder"$0.00">
+								<input type="text" class="inputbox" placeholder="$0.00">
 							</td>
 							<td>
-								<input type="text" class="inputbox" placeholder"$0.00">
+								<input type="text" class="inputbox" placeholder="$0.00">
+							</td>
+						</tr>
+						<tr><td>Containment Rate</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="00%">
+							</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="00%">
+							</td>
+						</tr>
+					</table>
+				</div>
+				<!--Vivid Speech-->
+				<div class = "channelinput">
+					<table>
+						<tr><td class="slefttd">Vivid Speech</td>
+							<td class="scentertd">
+								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+								  <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked />
+								  <span class="mdl-checkbox__label"></span>
+								</label>
+							</td>
+							<td class="srighttd">
+								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+								  <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" checked />
+								  <span class="mdl-checkbox__label"></span>
+								</label>
+							</td>
+						</tr><br>
+						<tr><td>Cost Per Interaction</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="$0.00">
+							</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="$0.00">
+							</td>
+						</tr>
+						<tr><td>Containment Rate</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="00%">
+							</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="00%">
+							</td>
+						</tr>
+					</table>
+				</div>
+				<!--Virtual Assistant-->
+				<div class = "channelinput">
+					<table>
+						<tr><td class="slefttd">Virtual Assistant</td>
+							<td class="scentertd">
+								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+								  <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked />
+								  <span class="mdl-checkbox__label"></span>
+								</label>
+							</td>
+							<td class="srighttd">
+								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+								  <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" checked />
+								  <span class="mdl-checkbox__label"></span>
+								</label>
+							</td>
+						</tr><br>
+						<tr><td>Cost Per Interaction</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="$0.00">
+							</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="$0.00">
+							</td>
+						</tr>
+						<tr><td>Containment Rate</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="00%">
+							</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="00%">
+							</td>
+						</tr>
+					</table>
+				</div>
+				<!--Mobile Chat-->
+				<div class = "channelinput">
+					<table>
+						<tr><td class="slefttd">Mobile Chat</td>
+							<td class="scentertd">
+								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+								  <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked />
+								  <span class="mdl-checkbox__label"></span>
+								</label>
+							</td>
+							<td class="srighttd">
+								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+								  <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" checked />
+								  <span class="mdl-checkbox__label"></span>
+								</label>
+							</td>
+						</tr><br>
+						<tr><td>Cost Per Interaction</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="$0.00">
+							</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="$0.00">
+							</td>
+						</tr>
+						<tr><td>Containment Rate</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="00%">
+							</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="00%">
+							</td>
+						</tr>
+					</table>
+				</div>
+				<!--Web Chat-->
+				<div class = "channelinput">
+					<table>
+						<tr><td class="slefttd">Web Chat</td>
+							<td class="scentertd">
+								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-1">
+								  <input type="checkbox" id="checkbox-1" class="mdl-checkbox__input" checked />
+								  <span class="mdl-checkbox__label"></span>
+								</label>
+							</td>
+							<td class="srighttd">
+								<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="checkbox-2">
+								  <input type="checkbox" id="checkbox-2" class="mdl-checkbox__input" checked />
+								  <span class="mdl-checkbox__label"></span>
+								</label>
+							</td>
+						</tr><br>
+						<tr><td>Cost Per Interaction</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="$0.00">
+							</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="$0.00">
+							</td>
+						</tr>
+						<tr><td>Containment Rate</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="00%">
+							</td>
+							<td>
+								<input type="text" class="inputbox" placeholder="00%">
 							</td>
 						</tr>
 					</table>

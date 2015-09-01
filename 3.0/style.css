@@ -17,21 +17,34 @@ a {
 }
 .topbar {
 	background-color: white;
-	height:55px;
-	line-height:55px;
-	font-size:2em;
-	margin:0; padding: 0px 15px;
+	height:65px;
+	margin:0; padding: 15px;
 	position: fixed;
 	top:0;
 	left:0;
 	width:100%;
 	z-index: 20;
 	border-bottom: 1px solid #e3e3e3;
+	vertical-align: bottom;
+}
+.topbar img{
+	height: 35px;
+	margin-right: 20px;
+
+	position: absolute; bottom: 15px;
+}
+.topbar a{
+	display: block;
+	font-size:25px;
+	position: absolute; bottom: 15px; left:130px;
+}
+#about-btn{
+	float: right;
 }
 
 .lowersegments{
 	background-color:#e5e6e7;
-	margin-top:55px;
+	margin-top:65px;
 }
 
 .lowerleft{
@@ -48,7 +61,7 @@ a {
 }
 .settingsbar {
 	overflow-y:scroll;
-	padding:55px 20px 0px 20px;
+	padding:65px 20px 0px 20px;
 }
 
 .slefttd{
@@ -125,13 +138,12 @@ button.active a, .active a:hover{
 
 
 .lowerright{
-	padding-top:55px;
-
+	padding-top:65px;
 	float:left;
 	background-color:#e5e6e7;
 	width:calc(100% - 300px);
 	background-color:white;
-	height: calc(100% - 55px);
+	height: calc(100% - 65px);
 }
 
 

@@ -1,54 +1,56 @@
+
 google.load('visualization','1.0', {'packages' :['corechart', 'bar']});
 google.setOnLoadCallback(drawchart);
 
-function platform(){
-	this.volume=0;
-	this.clear = function(){
+/*variables*/
+	function platform(){
 		this.volume=0;
+		this.clear = function(){
+			this.volume=0;
+		}
 	}
-}
-var web = new platform();
-var voice = new platform();
-function device(){
-	this.volume = 0;
-	this.acceptpercent = 0;
- 	this.clear = function(){
- 		this.volume=0;
- 		this.acceptpercent = 0;
- 	}
-}
-var desktop = new device();
-var mobileweb = new device();
-var mobilevoice = new device();
-var phone = new device();
-function product(){
-	this.enabled=false;
-	this.containment=0;
-	this.volume=0;
-	this.cpi=0;
-	this.cost=this.volume*this.cpi;
-	this.clear = function(){
+	var web = new platform();
+	var voice = new platform();
+	function device(){
+		this.volume = 0;
+		this.acceptpercent = 0;
+	 	this.clear = function(){
+	 		this.volume=0;
+	 		this.acceptpercent = 0;
+	 	}
+	}
+	var desktop = new device();
+	var mobileweb = new device();
+	var mobilevoice = new device();
+	var phone = new device();
+	function product(){
 		this.enabled=false;
 		this.containment=0;
 		this.volume=0;
 		this.cpi=0;
 		this.cost=this.volume*this.cpi;
+		this.clear = function(){
+			this.enabled=false;
+			this.containment=0;
+			this.volume=0;
+			this.cpi=0;
+			this.cost=this.volume*this.cpi;
+		}
+		this.calccost = function(){
+			this.cost=this.volume*this.cpi;
+		}
+		this.print = function(){
+			console.log("volume: "+this.volume+"  cost: "+this.cost);
+		}
+		this.printall = function(){
+			console.log("enabled: "+this.enabled+" containment: "+this.containment+
+				" volume: "+this.volume+" cpi: "+this.cpi+" cost: "+this.cost);
+		}
 	}
-	this.calccost = function(){
-		this.cost=this.volume*this.cpi;
-	}
-	this.print = function(){
-		console.log("volume: "+this.volume+"  cost: "+this.cost);
-	}
-	this.printall = function(){
-		console.log("enabled: "+this.enabled+" containment: "+this.containment+
-			" volume: "+this.volume+" cpi: "+this.cpi+" cost: "+this.cost);
-	}
-}
-var before = {va:new product(),vs:new product,ivr:new product,
-webagent:new product(),mobileagent:new product(),voiceagent:new product()};
-var after = {va:new product(),vs:new product,ivr:new product,
-webagent:new product(),mobileagent:new product(),voiceagent:new product()};
+	var before = {va:new product(),vs:new product,ivr:new product,
+	webagent:new product(),mobileagent:new product(),voiceagent:new product()};
+	var after = {va:new product(),vs:new product,ivr:new product,
+	webagent:new product(),mobileagent:new product(),voiceagent:new product()};
 
 function calculatebutton(){
 
@@ -56,127 +58,128 @@ function calculatebutton(){
 	clearallproducts(after);
 
 	getvalues();
+	colorupdate();
 
 	calculatevolumes(before);
 	calculatevolumes(after);
 	updatesummary();
 }
+/*math*/
+	function clearallproducts(boa){
+		web.clear();
+		voice.clear();
+		desktop.clear();
+		mobileweb.clear();
+		mobilevoice.clear();
+		phone.clear();
 
-function clearallproducts(boa){
-	web.clear();
-	voice.clear();
-	desktop.clear();
-	mobileweb.clear();
-	mobilevoice.clear();
-	phone.clear();
-
-	boa.va.clear();
-	boa.vs.clear();
-	boa.ivr.clear();
-	boa.webagent.clear();
-	boa.mobileagent.clear();
-	boa.voiceagent.clear();
-}
-
-function printall(){
-	// web.printall();
-	// voice.printall();
-	// desktop.printall();
-	// mobileweb.printall();
-	// mobilevoice.printall();
-	// phone.printall();
-
-	before.va.printall();
-	before.vs.printall();
-	before.ivr.printall();
-	before.webagent.printall();
-	before.mobileagent.printall();
-	before.voiceagent.printall();
-
-	after.va.printall();
-	after.vs.printall();
-	after.ivr.printall();
-	after.webagent.printall();
-	after.mobileagent.printall();
-	after.voiceagent.printall();
-}
-function getvalues(){
-	web.volume=document.getElementById('webtraffic').value;
-	voice.volume=document.getElementById('voicetraffic').value;
-
-	desktop.acceptpercent = 1 - document.getElementById('websplit').value/100;
-	mobileweb.acceptpercent = document.getElementById('websplit').value/100;
-	mobilevoice.acceptpercent = document.getElementById('voicesplit').value/100;
-	phone.acceptpercent = 1 - document.getElementById('voicesplit').value/100;
-
-	function updateproduct(product,shorthand){
-		console.log(product);
-		eval('before.'+product+'.enabled = document.getElementById("cb'+shorthand+'1").checked');
-		eval('after.'+product+'.enabled = document.getElementById("cb'+shorthand+'2").checked');
-
-		eval('before.'+product+'.cpi = document.getElementById("cpi'+shorthand+'1").value');
-		eval('after.'+product+'.cpi = document.getElementById("cpi'+shorthand+'2").value');
-
-		eval('before.'+product+'.containment = document.getElementById("con'+shorthand+'1").value');
-		eval('after.'+product+'.containment = document.getElementById("con'+shorthand+'2").value');
+		boa.va.clear();
+		boa.vs.clear();
+		boa.ivr.clear();
+		boa.webagent.clear();
+		boa.mobileagent.clear();
+		boa.voiceagent.clear();
 	}
-	updateproduct('ivr','ivr');
-	updateproduct('voiceagent','voi');
-	updateproduct('vs','vs');
-	updateproduct('va','va');
-	updateproduct('webagent','wc');
-	updateproduct('mobileagent','mc');
 
-}
+	function printall(){
+		// web.printall();
+		// voice.printall();
+		// desktop.printall();
+		// mobileweb.printall();
+		// mobilevoice.printall();
+		// phone.printall();
 
-function calculatevolumes(boa){
+		before.va.printall();
+		before.vs.printall();
+		before.ivr.printall();
+		before.webagent.printall();
+		before.mobileagent.printall();
+		before.voiceagent.printall();
 
-	desktop.volume=web.volume*desktop.acceptpercent;
-	var desktopvolume = desktop.volume;
-	mobileweb.volume=web.volume*mobileweb.acceptpercent;
-	var mobilewebvolume=mobileweb.volume;
-	mobilevoice.volume = voice.volume*mobilevoice.acceptpercent;
-	var mobilevoicevolume = mobilevoice.volume;
-	phone.volume = voice.volume*phone.acceptpercent;
-	var phonevolume = phone.volume;
-
-	/*va*/
-	if(boa.va.enabled){
-		boa.va.volume=desktop.volume*boa.va.containment;
-		desktopvolume-=boa.va.volume;
-		boa.va.volume+=mobileweb.volume*boa.va.containment;
-		mobilewebvolume-=mobileweb.volume*boa.va.containment;
-		boa.va.calccost();
+		after.va.printall();
+		after.vs.printall();
+		after.ivr.printall();
+		after.webagent.printall();
+		after.mobileagent.printall();
+		after.voiceagent.printall();
 	}
-	/*vs*/
-	if(boa.vs.enabled){
-		boa.vs.volume=mobilevoice.volume*boa.vs.containment;
-		mobilevoicevolume-=mobilevoice.volume*boa.vs.containment;
-		boa.vs.calccost();
+	function getvalues(){
+		web.volume=document.getElementById('webtraffic').value;
+		voice.volume=document.getElementById('voicetraffic').value;
+
+		desktop.acceptpercent = 1 - document.getElementById('websplit').value/100;
+		mobileweb.acceptpercent = document.getElementById('websplit').value/100;
+		mobilevoice.acceptpercent = document.getElementById('voicesplit').value/100;
+		phone.acceptpercent = 1 - document.getElementById('voicesplit').value/100;
+
+		function updateproduct(product,shorthand){
+			console.log(product);
+			eval('before.'+product+'.enabled = document.getElementById("cb'+shorthand+'1").checked');
+			eval('after.'+product+'.enabled = document.getElementById("cb'+shorthand+'2").checked');
+
+			eval('before.'+product+'.cpi = document.getElementById("cpi'+shorthand+'1").value');
+			eval('after.'+product+'.cpi = document.getElementById("cpi'+shorthand+'2").value');
+
+			eval('before.'+product+'.containment = document.getElementById("con'+shorthand+'1").value');
+			eval('after.'+product+'.containment = document.getElementById("con'+shorthand+'2").value');
+		}
+		updateproduct('ivr','ivr');
+		updateproduct('voiceagent','voi');
+		updateproduct('vs','vs');
+		updateproduct('va','va');
+		updateproduct('webagent','wc');
+		updateproduct('mobileagent','mc');
+
 	}
-	/*IVR*/
-	if(boa.ivr.enabled){
-		boa.ivr.volume=mobilevoice.volume*boa.ivr.containment;
-		mobilevoicevolume-=mobilevoice.volume*boa.ivr.containment;
-		boa.ivr.volume+=phone.volume*boa.ivr.containment;
-		phonevolume-=phonevolume*boa.ivr.containment;
-		boa.ivr.calccost();
+
+	function calculatevolumes(boa){
+
+		desktop.volume=web.volume*desktop.acceptpercent;
+		var desktopvolume = desktop.volume;
+		mobileweb.volume=web.volume*mobileweb.acceptpercent;
+		var mobilewebvolume=mobileweb.volume;
+		mobilevoice.volume = voice.volume*mobilevoice.acceptpercent;
+		var mobilevoicevolume = mobilevoice.volume;
+		phone.volume = voice.volume*phone.acceptpercent;
+		var phonevolume = phone.volume;
+
+		/*va*/
+		if(boa.va.enabled){
+			boa.va.volume=desktop.volume*boa.va.containment;
+			desktopvolume-=boa.va.volume;
+			boa.va.volume+=mobileweb.volume*boa.va.containment;
+			mobilewebvolume-=mobileweb.volume*boa.va.containment;
+			boa.va.calccost();
+		}
+		/*vs*/
+		if(boa.vs.enabled){
+			boa.vs.volume=mobilevoice.volume*boa.vs.containment;
+			mobilevoicevolume-=mobilevoice.volume*boa.vs.containment;
+			boa.vs.calccost();
+		}
+		/*IVR*/
+		if(boa.ivr.enabled){
+			boa.ivr.volume=mobilevoice.volume*boa.ivr.containment;
+			mobilevoicevolume-=mobilevoice.volume*boa.ivr.containment;
+			boa.ivr.volume+=phone.volume*boa.ivr.containment;
+			phonevolume-=phonevolume*boa.ivr.containment;
+			boa.ivr.calccost();
+		}
+		/*web chat*/
+	 	if(boa.webagent.enabled){
+	 		boa.webagent.volume=desktopvolume*boa.webagent.containment;
+	 		desktopvolume-=desktopvolume*boa.webagent.containment;
+	 		boa.webagent.calccost();
+	 	}
+	 	/*mobile chat*/
+	 	if(boa.mobileagent.enabled){
+	 		boa.mobileagent.volume=mobilewebvolume*boa.mobileagent.containment;
+	 		mobilewebvolume-=mobilewebvolume*boa.mobileagent.containment;
+	 		boa.mobileagent.calccost();
+	 	}
+	 	boa.voiceagent.volume=desktopvolume+mobilewebvolume+mobilevoicevolume+phonevolume;
+	 	boa.voiceagent.calccost();
 	}
-	/*web chat*/
- 	if(boa.webagent.enabled){
- 		boa.webagent.volume=desktopvolume*boa.webagent.containment;
- 		desktopvolume-=desktopvolume*boa.webagent.containment;
- 		boa.webagent.calccost();
- 	}
- 	/*mobile chat*/
- 	if(boa.mobileagent.enabled){
- 		boa.mobileagent.volume=mobilewebvolume*boa.mobileagent.containment;
- 		mobilewebvolume-=mobilewebvolume*boa.mobileagent.containment;
- 		boa.mobileagent.calccost();
- 	}
- 	boa.voiceagent.volume=desktopvolume+mobilewebvolume+mobilevoicevolume+phonevolume;
- 	boa.voiceagent.calccost();
-}
 
 function updatesummary(){
 	function numberWithCommas(x) {
@@ -208,57 +211,129 @@ function updatesummary(){
 	//console.log('beforesum:'+numberWithCommas(aftersum));
 }
 
+/*demos*/
+	function scenario1(){
+		web.volume=0;
+		voice.volume=1250000;
+		phone.acceptpercent = 0.5;
+		mobilevoice.acceptpercent = 0.5;
+		before.voiceagent.cpi=11.60;
+		before.voiceagent.enabled = true;
+		after.voiceagent.cpi=11.60;
+		after.voiceagent.enabled = true;
 
-function scenario1(){
-	web.volume=0;
-	voice.volume=1250000;
-	phone.acceptpercent = 0.5;
-	mobilevoice.acceptpercent = 0.5;
-	before.voiceagent.cpi=11.60;
-	before.voiceagent.enabled = true;
-	after.voiceagent.cpi=11.60;
-	after.voiceagent.enabled = true;
+		after.vs.enabled=true;
+		after.vs.cpi=2.5;
+		after.vs.containment=0.2;
+		calculatevolumes(before);
+		calculatevolumes(after);
+		updatesummary();
 
-	after.vs.enabled=true;
-	after.vs.cpi=2.5;
-	after.vs.containment=0.2;
-	calculatevolumes(before);
-	calculatevolumes(after);
-	updatesummary();
+		drawchart();
+	}
 
-	drawchart();
-}
+/*charts*/
+	function drawchart(){
+		var  products=['genre','Voice Agents','IVR','Vivid Speech', 'Virtual Assistant','Mobile Chat', 'Web Chat'];
+		var costbefore=['before',before.voiceagent.volume,before.ivr.volume,before.vs.volume,
+		before.va.volume,before.mobileagent.volume,before.webagent.volume];
+		var costafter=['after',after.voiceagent.volume,after.ivr.volume,after.vs.volume,
+		after.va.volume,after.mobileagent.volume,after.webagent.volume];
+		var chartw = window.innerWidth-300;
+		var data = new google.visualization.arrayToDataTable([
+			products,
+			costbefore,
+			costafter
+			])
+		var options = {
+			width:chartw,
+			height: 360,
+			legend:{ position: 'bottom'},
+			bar:{groupwidth:'75'},
+			isStacked: true,
+			colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370'],
+			hAxis: {
+	            maxValue: voice.volume
+	          }
+		};
+		var chart = new google.visualization.BarChart(document.getElementById('chart3'));
+		chart.draw(data,options);
+	}
 
+/*colors*/
+	function colorupdate(){
+		var onoroff = [];
+		var off = "#bbbbbb";
+		for (var i=0;i<29;i++){
+			onoroff[i]=0;
+		}
+		function seton(product,array){
+			if (eval('after.'+product+'.enabled')){
+				for (var i=0;i<array.length;i++){
+					var temp = array[i];
+					onoroff[temp]=1;
+				}
+			}
+		}
+		seton('voiceagent',[0,2,3,5,6,8,9,10,13,16,23,25,27,28]);
+		seton('ivr',[0,2,3,5,6,8,9,10,12,14,21,25,27,28]);
+		seton('vs',[0,2,5,8,10,12,14,20,21,24,25,26,27,28]);
+		seton('mobileagent',[0,2,5,8,10,11,15,19,24,26,28]);
+		seton('webagent',[0,1,4,7,10,11,15,19,24,26,28]);
+		seton('va',[0,1,2,4,5,7,8,10,12,14,20,24,26,28]);
 
+		onoroff[0] = ((onoroff[0]) ? '#666666':off);
+		onoroff[1] = ((onoroff[1]) ? '#666666':off);
+		onoroff[2] = ((onoroff[2]) ? '#666666':off);
+		onoroff[3] = ((onoroff[3]) ? '#666666':off);
+		onoroff[4] = ((onoroff[4]) ? '#666666':off);
+		onoroff[5] = ((onoroff[5]) ? '#666666':off);
+		onoroff[6] = ((onoroff[6]) ? '#666666':off);
+		onoroff[7] = ((onoroff[7]) ? '#666666':off);
+		onoroff[8] = ((onoroff[8]) ? '#666666':off);
+		onoroff[9] = ((onoroff[9]) ? '#666666':off);
+		onoroff[10] = ((onoroff[10]) ? '#ef8822':off);
+		onoroff[11] = ((onoroff[11]) ? '#ffb972':off);
+		onoroff[12] = ((onoroff[12]) ? '#ef8822':off);
+		onoroff[13] = ((onoroff[13]) ? '#ffb972':off);
+		onoroff[14] = ((onoroff[14]) ? '#ef8822':off);
+		onoroff[15] = ((onoroff[15]) ? '#ef8822':off);
+		onoroff[16] = ((onoroff[16]) ? '#ef8822':off);
+		onoroff[17] = ((onoroff[17]) ? '#ef8822':off);
+		onoroff[18] = ((onoroff[18]) ? '#ef8822':off);
+		onoroff[19] = ((onoroff[19]) ? '#912370':off);
+		onoroff[20] = ((onoroff[20]) ? '#912370':off);
+		onoroff[21] = ((onoroff[21]) ? '#049094':off);
+		onoroff[22] = ((onoroff[22]) ? '#912370':off);
+		onoroff[23] = ((onoroff[23]) ? '#049094':off);
+		onoroff[24] = ((onoroff[24]) ? '#912370':off);
+		onoroff[25] = ((onoroff[25]) ? '#049094':off);
+		onoroff[26] = ((onoroff[26]) ? '#912370':off);
+		onoroff[27] = ((onoroff[27]) ? '#049094':off);
+		onoroff[28] = ((onoroff[28]) ? '#666666':off);
 
-
-function drawchart(){
-	var  products=['genre','Voice Agents','IVR','Vivid Speech', 'Virtual Assistant','Mobile Chat', 'Web Chat'];
-	var costbefore=['before',before.voiceagent.volume,before.ivr.volume,before.vs.volume,
-	before.va.volume,before.mobileagent.volume,before.webagent.volume];
-	var costafter=['after',after.voiceagent.volume,after.ivr.volume,after.vs.volume,
-	after.va.volume,after.mobileagent.volume,after.webagent.volume];
-	var chartw = window.innerWidth-300;
-	var data = new google.visualization.arrayToDataTable([
-		products,
-		costbefore,
-		costafter
-		])
-	var options = {
-		width:chartw,
-		height: 360,
-		legend:{ position: 'bottom'},
-		bar:{groupwidth:'75'},
-		isStacked: true,
-		colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370'],
-		hAxis: {
-            maxValue: voice.volume
-          }
-	};
-	var chart = new google.visualization.BarChart(document.getElementById('chart3'));
-	chart.draw(data,options);
-}
-
+		for (var i=0;i<29;i++){
+			var color = onoroff[i];
+			document.getElementsByClassName(i+'a')[0].setAttribute('stroke',color);
+		}
+		function changecirclecolor(name,color){
+			var parts = document.getElementsByClassName(name+ 'a');
+			for(var i=0;i<parts.length;i++){
+			parts[i].setAttribute('fill',color);
+			}
+		}
+		changecirclecolor(0,onoroff[0]);
+		changecirclecolor(4,onoroff[4]);
+		changecirclecolor(5,onoroff[5]);
+		changecirclecolor(6,onoroff[6]);
+		changecirclecolor(10,onoroff[10]);
+		changecirclecolor(14,onoroff[14]);
+		changecirclecolor(15,onoroff[15]);
+		changecirclecolor(16,onoroff[16]);
+		changecirclecolor(24,onoroff[24]);
+		changecirclecolor(25,onoroff[25]);
+		changecirclecolor(28,onoroff[28]);
+		}
 window.onload = function(){
 	resize();
 }
@@ -268,6 +343,6 @@ $(window).resize(function(){
 function resize(){
 	console.log("resize");
 	var height = $(window).height();
-	$("#settingsbar").height(height-55-50);
+	$("#settingsbar").height(height-65-76);
 	drawchart();
 }

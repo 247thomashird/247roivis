@@ -77,16 +77,56 @@ function clearallproducts(boa){
 	boa.mobileagent.clear();
 	boa.voiceagent.clear();
 }
+
+function printall(){
+	// web.printall();
+	// voice.printall();
+	// desktop.printall();
+	// mobileweb.printall();
+	// mobilevoice.printall();
+	// phone.printall();
+
+	before.va.printall();
+	before.vs.printall();
+	before.ivr.printall();
+	before.webagent.printall();
+	before.mobileagent.printall();
+	before.voiceagent.printall();
+
+	after.va.printall();
+	after.vs.printall();
+	after.ivr.printall();
+	after.webagent.printall();
+	after.mobileagent.printall();
+	after.voiceagent.printall();
+}
 function getvalues(){
-	web.volume=document.getElementById('webvolume').value;
-	voice.volume=document.getElementById('voicevolume').value;
+	web.volume=document.getElementById('webtraffic').value;
+	voice.volume=document.getElementById('voicetraffic').value;
 
 	desktop.acceptpercent = 1 - document.getElementById('websplit').value/100;
 	mobileweb.acceptpercent = document.getElementById('websplit').value/100;
 	mobilevoice.acceptpercent = document.getElementById('voicesplit').value/100;
 	phone.acceptpercent = 1 - document.getElementById('voicesplit').value/100;
 
-	
+	function updateproduct(product,shorthand){
+		console.log(product);
+		eval('before.'+product+'.enabled = document.getElementById("cb'+shorthand+'1").checked');
+		eval('after.'+product+'.enabled = document.getElementById("cb'+shorthand+'2").checked');
+
+		eval('before.'+product+'.cpi = document.getElementById("cpi'+shorthand+'1").value');
+		eval('after.'+product+'.cpi = document.getElementById("cpi'+shorthand+'2").value');
+
+		eval('before.'+product+'.containment = document.getElementById("con'+shorthand+'1").value');
+		eval('after.'+product+'.containment = document.getElementById("con'+shorthand+'2").value');
+	}
+	updateproduct('ivr','ivr');
+	updateproduct('voiceagent','voi');
+	updateproduct('vs','vs');
+	updateproduct('va','va');
+	updateproduct('webagent','wc');
+	updateproduct('mobileagent','mc');
+
 }
 
 function calculatevolumes(boa){
@@ -186,9 +226,6 @@ function scenario1(){
 	calculatevolumes(after);
 	updatesummary();
 
-	before.voiceagent.printall();
-	after.voiceagent.printall();
-	after.vs.printall();
 	drawchart();
 }
 

@@ -1,4 +1,4 @@
-
+var debug = true;
 google.load('visualization','1.0', {'packages' :['corechart', 'bar']});
 google.setOnLoadCallback(drawchart);
 
@@ -14,8 +14,10 @@ google.setOnLoadCallback(drawchart);
 	function device(){
 		this.volume = 0;
 		this.acceptpercent = 0;
+		this.roundvolume = 0;
 	 	this.clear = function(){
 	 		this.volume=0;
+	 		this.roundvolume = 0;
 	 		this.acceptpercent = 0;
 	 	}
 	}
@@ -27,6 +29,7 @@ google.setOnLoadCallback(drawchart);
 		this.enabled=false;
 		this.containment=0;
 		this.volume=0;
+		this.roundvolume=0;
 		this.cpi=0;
 		this.cost=this.volume*this.cpi;
 		this.clear = function(){
@@ -35,8 +38,11 @@ google.setOnLoadCallback(drawchart);
 			this.volume=0;
 			this.cpi=0;
 			this.cost=this.volume*this.cpi;
+			this.roundvolume = 0;
 		}
 		this.calccost = function(){
+			this.volume+=this.roundvolume;
+			this.roundvolume=0;
 			this.cost=this.volume*this.cpi;
 		}
 		this.print = function(){
@@ -44,7 +50,7 @@ google.setOnLoadCallback(drawchart);
 		}
 		this.printall = function(){
 			console.log("enabled: "+this.enabled+" containment: "+this.containment+
-				" volume: "+this.volume+" cpi: "+this.cpi+" cost: "+this.cost);
+				" volume: "+this.volume+" roundvolume: "+this.roundvolume+" cpi: "+this.cpi+" cost: "+this.cost);
 		}
 	}
 	var before = {va:new product(),vs:new product,ivr:new product,
@@ -53,16 +59,16 @@ google.setOnLoadCallback(drawchart);
 	webagent:new product(),mobileagent:new product(),voiceagent:new product()};
 
 function calculatebutton(){
-
+	var rounds = 1;
 	clearallproducts(before);
 	clearallproducts(after);
 
 	getvalues();
 	colorupdate();
-
-	calculatevolumes(before);
-	calculatevolumes(after);
+	
+	roundequation(rounds);
 	updatesummary();
+	drawchart();
 }
 /*math*/
 	function clearallproducts(boa){
@@ -80,7 +86,14 @@ function calculatebutton(){
 		boa.mobileagent.clear();
 		boa.voiceagent.clear();
 	}
-
+	function printvolumes(){
+		console.log("web: "+web.volume);
+		console.log("voice: "+voice.volume);
+		console.log("desktop: "+desktop.volume);
+		console.log("mobileweb: "+mobileweb.volume);
+		console.log("mobilevoice: "+mobilevoice.volume);
+		console.log("phone: "+phone.volume);
+	}
 	function printall(){
 		// web.printall();
 		// voice.printall();
@@ -88,14 +101,14 @@ function calculatebutton(){
 		// mobileweb.printall();
 		// mobilevoice.printall();
 		// phone.printall();
-
+		console.log("before");
 		before.va.printall();
 		before.vs.printall();
 		before.ivr.printall();
 		before.webagent.printall();
 		before.mobileagent.printall();
 		before.voiceagent.printall();
-
+		console.log("after");
 		after.va.printall();
 		after.vs.printall();
 		after.ivr.printall();
@@ -104,8 +117,8 @@ function calculatebutton(){
 		after.voiceagent.printall();
 	}
 	function getvalues(){
-		web.volume=document.getElementById('webtraffic').value;
-		voice.volume=document.getElementById('voicetraffic').value;
+		web.volume=document.getElementById('webtraffic').value*1000000;
+		voice.volume=document.getElementById('voicetraffic').value*1000000;
 
 		desktop.acceptpercent = 1 - document.getElementById('websplit').value/100;
 		mobileweb.acceptpercent = document.getElementById('websplit').value/100;
@@ -113,15 +126,15 @@ function calculatebutton(){
 		phone.acceptpercent = 1 - document.getElementById('voicesplit').value/100;
 
 		function updateproduct(product,shorthand){
-			console.log(product);
+			if (debug){console.log("getting values"+product);}
 			eval('before.'+product+'.enabled = document.getElementById("cb'+shorthand+'1").checked');
 			eval('after.'+product+'.enabled = document.getElementById("cb'+shorthand+'2").checked');
 
 			eval('before.'+product+'.cpi = document.getElementById("cpi'+shorthand+'1").value');
 			eval('after.'+product+'.cpi = document.getElementById("cpi'+shorthand+'2").value');
 
-			eval('before.'+product+'.containment = document.getElementById("con'+shorthand+'1").value');
-			eval('after.'+product+'.containment = document.getElementById("con'+shorthand+'2").value');
+			eval('before.'+product+'.containment = document.getElementById("con'+shorthand+'1").value/100');
+			eval('after.'+product+'.containment = document.getElementById("con'+shorthand+'2").value/100');
 		}
 		updateproduct('ivr','ivr');
 		updateproduct('voiceagent','voi');
@@ -129,6 +142,7 @@ function calculatebutton(){
 		updateproduct('va','va');
 		updateproduct('webagent','wc');
 		updateproduct('mobileagent','mc');
+		if (debug){console.log("post value gather printall\n\n");printall();};
 
 	}
 
@@ -179,13 +193,90 @@ function calculatebutton(){
 	 	}
 	 	boa.voiceagent.volume=desktopvolume+mobilewebvolume+mobilevoicevolume+phonevolume;
 	 	boa.voiceagent.calccost();
-	}
 
+	}
+	function roundequation(rounds){
+		var desktopvolume=web.volume*desktop.acceptpercent;
+		var mobilewebvolume=web.volume*mobileweb.acceptpercent;
+		var mobilevoicevolume = voice.volume*mobilevoice.acceptpercent;
+		var phonevolume = voice.volume*phone.acceptpercent;
+		var remaining = rounds;
+
+		calculateroundvolumes(before,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
+		calculateroundvolumes(after,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
+		if (debug){
+			console.log("post cost printall\n");
+			printall();
+		}
+	}
+	function calculateroundvolumes(boa,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining){
+		if (remaining==0){
+			return 0;
+		} else{
+			
+			remaining-=1;
+		}
+		desktop.roundvolume = desktopvolume;
+		mobileweb.roundvolume = mobilewebvolume;
+		mobilevoice.roundvolume = mobilevoicevolume;
+		phone.roundvolume = phonevolume;
+
+		/*va*/
+		if(boa.va.enabled){
+			boa.va.roundvolume=desktop.roundvolume*boa.va.containment;
+			desktopvolume-=boa.va.volume;
+			boa.va.roundvolume+=mobileweb.roundvolume*boa.va.containment;
+			mobilewebvolume-=mobileweb.roundvolume*boa.va.containment;
+			boa.va.calccost();
+		}
+		/*vs*/
+		if(boa.vs.enabled){
+			boa.vs.roundvolume=mobilevoice.roundvolume*boa.vs.containment;
+			mobilevoicevolume-=mobilevoice.roundvolume*boa.vs.containment;
+			boa.vs.calccost();
+		}
+		/*IVR*/
+		if(boa.ivr.enabled){
+			boa.ivr.roundvolume=mobilevoice.roundvolume*boa.ivr.containment;
+			mobilevoicevolume-=mobilevoice.roundvolume*boa.ivr.containment;
+			boa.ivr.roundvolume+=phone.roundvolume*boa.ivr.containment;
+			phonevolume-=phonevolume*boa.ivr.containment;
+			boa.ivr.calccost();
+		}
+		/*web chat*/
+	 	if(boa.webagent.enabled){
+	 		boa.webagent.roundvolume=desktopvolume*boa.webagent.containment;
+	 		desktopvolume-=desktopvolume*boa.webagent.containment;
+	 		boa.webagent.calccost();
+	 	}
+	 	/*mobile chat*/
+	 	if(boa.mobileagent.enabled){
+	 		boa.mobileagent.roundvolume=mobilewebvolume*boa.mobileagent.containment;
+	 		mobilewebvolume-=mobilewebvolume*boa.mobileagent.containment;
+	 		boa.mobileagent.calccost();
+	 	}
+	 	if(boa.voiceagent.enabled){
+	 		boa.voiceagent.roundvolume=mobilevoicevolume*boa.voiceagent.containment;
+	 		mobilevoicevolume-=mobilevoicevolume*boa.voiceagent.containment;
+	 		boa.voiceagent.roundvolume+=phonevolume*boa.voiceagent.containment;
+	 		phonevolume-=phonevolume*boa.voiceagent.containment;
+	 		boa.voiceagent.calccost();
+	 	}
+	 	desktop.volume += desktop.roundvolume;
+		mobileweb.volume += mobileweb.roundvolume;
+		mobilevoice.volume += mobileweb.roundvolume;
+		phone.volume += phone.roundvolume;
+		if (debug){
+			console.log("remaining rounds: "+remaining+"\n\tdesktop: "+desktopvolume+"\n\tmobileweb: "+mobilewebvolume+
+				"\n\tmobilevoice: "+mobilevoicevolume+"\n\tphone: "+phonevolume);
+		}
+	 	calculateroundvolumes(boa,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
+	}
 function updatesummary(){
 	function numberWithCommas(x) {
 		if (x==0){return '';}
 		var parens = (x>0 ? false:true);
-	    var parts = Math.abs(x).toString().split(".");
+	    var parts = Math.floor(Math.abs(x)).toString().split(".");
 	    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	    if (parens){
 	    return "($"+parts.join(".")+")";}
@@ -213,24 +304,71 @@ function updatesummary(){
 
 /*demos*/
 	function scenario1(){
-		web.volume=0;
-		voice.volume=1250000;
-		phone.acceptpercent = 0.5;
-		mobilevoice.acceptpercent = 0.5;
-		before.voiceagent.cpi=11.60;
-		before.voiceagent.enabled = true;
-		after.voiceagent.cpi=11.60;
-		after.voiceagent.enabled = true;
+		document.getElementById("voicetraffic").value=1.25;
+		document.getElementById('webtraffic').value=0;
 
-		after.vs.enabled=true;
-		after.vs.cpi=2.5;
-		after.vs.containment=0.2;
+		document.getElementById('websplit').value = 50;
+		document.getElementById('voicesplit').value = 50;
+
+		document.getElementById('cbvoi1').checked = true;
+		document.getElementById('cbvoi2').checked = true;
+		document.getElementById('cbivr1').checked = false;
+		document.getElementById('cbivr2').checked = false;
+		document.getElementById('cbvs1').checked = false;
+		document.getElementById('cbvs2').checked = true;
+		document.getElementById('cbva1').checked = false;
+		document.getElementById('cbva2').checked = false;
+		document.getElementById('cbmc1').checked = false;
+		document.getElementById('cbmc2').checked = false;
+		document.getElementById('cbwc1').checked = false;
+		document.getElementById('cbwc2').checked = false;
+
+		document.getElementById('cpivoi1').value = 11.60;
+		document.getElementById('cpivoi2').value = 11.60;
+		document.getElementById('cpiivr1').value = 0;
+		document.getElementById('cpiivr2').value = 0;
+		document.getElementById('cpivs1').value = 0;
+		document.getElementById('cpivs2').value = 2.5;
+		document.getElementById('cpiva1').value = 0;
+		document.getElementById('cpiva2').value = 0;
+		document.getElementById('cpimc1').value = 0;
+		document.getElementById('cpimc2').value = 0;
+		document.getElementById('cpiwc1').value = 0;
+		document.getElementById('cpiwc2').value = 0;
+
+		document.getElementById('convoi1').value = 40;
+		document.getElementById('convoi2').value = 40;
+		document.getElementById('conivr1').value = 0;
+		document.getElementById('conivr2').value = 0;
+		document.getElementById('convs1').value = 0;
+		document.getElementById('convs2').value = 20;
+		document.getElementById('conva1').value = 0;
+		document.getElementById('conva2').value = 0;
+		document.getElementById('conmc1').value = 0;
+		document.getElementById('conmc2').value = 0;
+		document.getElementById('conwc1').value = 0;
+		document.getElementById('conwc2').value = 0;
+
+
+
+		// web.volume=0;
+		// voice.volume=1250000;
+		// phone.acceptpercent = 0.5;
+		// mobilevoice.acceptpercent = 0.5;
+		// before.voiceagent.cpi=11.60;
+		// before.voiceagent.enabled = true;
+		// after.voiceagent.cpi=11.60;
+		// after.voiceagent.enabled = true;
+
+		// after.vs.enabled=true;
+		// after.vs.cpi=2.5;
+		// after.vs.containment=0.2;
 		calculatevolumes(before);
 		calculatevolumes(after);
 		updatesummary();
 
 		drawchart();
-	}
+ 	}
 
 /*charts*/
 	function drawchart(){
@@ -239,7 +377,7 @@ function updatesummary(){
 		before.va.volume,before.mobileagent.volume,before.webagent.volume];
 		var costafter=['after',after.voiceagent.volume,after.ivr.volume,after.vs.volume,
 		after.va.volume,after.mobileagent.volume,after.webagent.volume];
-		var chartw = window.innerWidth-300;
+		var chartw = window.innerWidth-400;
 		var data = new google.visualization.arrayToDataTable([
 			products,
 			costbefore,

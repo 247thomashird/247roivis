@@ -54,9 +54,9 @@ google.setOnLoadCallback(drawchart);
 		}
 	}
 	var before = {va:new product(),vs:new product,ivr:new product,
-	webagent:new product(),mobileagent:new product(),voiceagent:new product()};
+	webagent:new product(),mobileagent:new product(),voiceagent:new product(),outcome:false};
 	var after = {va:new product(),vs:new product,ivr:new product,
-	webagent:new product(),mobileagent:new product(),voiceagent:new product()};
+	webagent:new product(),mobileagent:new product(),voiceagent:new product(),outcome:false};
 
 function calculatebutton(){
 	var rounds = 2;
@@ -115,6 +115,7 @@ function calculatebutton(){
 		after.webagent.printall();
 		after.mobileagent.printall();
 		after.voiceagent.printall();
+		console.log("\n\n")
 	}
 	function getvalues(){
 		web.volume=document.getElementById('webtraffic').value*1000000;
@@ -202,8 +203,8 @@ function calculatebutton(){
 		var phonevolume = voice.volume*phone.acceptpercent;
 		var remaining = rounds;
 
-		calculateroundvolumes(before,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
-		calculateroundvolumes(after,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
+		calculateroundvolumes2(before,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
+		calculateroundvolumes2(after,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
 		if (debug){
 			console.log("post cost printall\n");
 			printall();
@@ -223,9 +224,9 @@ function calculatebutton(){
 
 		/*va*/
 		if(boa.va.enabled){
-			boa.va.roundvolume=desktop.roundvolume*boa.va.containment;
-			desktopvolume-=boa.va.volume;
-			boa.va.roundvolume+=mobileweb.roundvolume*boa.va.containment;
+			boa.va.roundvolume=desktopvolume*boa.va.containment;
+			desktopvolume-=boa.va.roundvolume*boa.va.containment;
+			boa.va.roundvolume+=mobilewebvolume*boa.va.containment;
 			mobilewebvolume-=mobileweb.roundvolume*boa.va.containment;
 			boa.va.calccost();
 		}
@@ -237,9 +238,9 @@ function calculatebutton(){
 		}
 		/*IVR*/
 		if(boa.ivr.enabled){
-			boa.ivr.roundvolume=mobilevoice.roundvolume*boa.ivr.containment;
+			boa.ivr.roundvolume=mobilevoicevolume*boa.ivr.containment;
 			mobilevoicevolume-=mobilevoice.roundvolume*boa.ivr.containment;
-			boa.ivr.roundvolume+=phone.roundvolume*boa.ivr.containment;
+			boa.ivr.roundvolume+=phonevolume*boa.ivr.containment;
 			phonevolume-=phonevolume*boa.ivr.containment;
 			boa.ivr.calccost();
 		}
@@ -255,6 +256,7 @@ function calculatebutton(){
 	 		mobilewebvolume-=mobilewebvolume*boa.mobileagent.containment;
 	 		boa.mobileagent.calccost();
 	 	}
+	 	/*voice agents*/
 	 	if(boa.voiceagent.enabled){
 	 		boa.voiceagent.roundvolume=mobilevoicevolume*boa.voiceagent.containment;
 	 		mobilevoicevolume-=mobilevoicevolume*boa.voiceagent.containment;
@@ -272,6 +274,87 @@ function calculatebutton(){
 		}
 	 	calculateroundvolumes(boa,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
 	}
+	function calculateroundvolumes2(boa,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining){
+		if (remaining == 0){
+			if (debug){console.log("unattended:\n\tdesktop: "+desktopvolume+"\n\tmobileweb: "+mobilewebvolume+"\n\tmobilevoice: "+mobilevoicevolume+"\n\tphone: "+phonevolume);}
+			boa.voiceagent.volume+=desktopvolume+mobilevoicevolume+mobilewebvolume+phonevolume;
+			boa.voiceagent.calccost();
+			return 0;
+		} else {
+			console.log("\nround number: "+remaining);
+			if (debug){console.log("volumes:\n\tdesktop: "+desktopvolume+"\n\tmobileweb: "+mobilewebvolume+"\n\tmobilevoice: "+mobilevoicevolume+"\n\tphone: "+phonevolume);}
+			remaining -=1;
+		}
+		desktop.roundvolume = desktopvolume;
+		mobileweb.roundvolume = mobilewebvolume;
+		mobilevoice.roundvolume = mobilevoicevolume;
+		phone.roundvolume = phonevolume;
+
+		/*va*/
+		if (boa.va.enabled){
+			boa.va.roundvolume = (boa.outcome ? boa.va.containment*desktopvolume:desktopvolume);
+			desktopvolume-=boa.va.containment*desktopvolume;
+			boa.va.roundvolume+=(boa.outcome? boa.va.contaiment*mobilewebvolume:mobilewebvolume);
+			mobilewebvolume-=boa.va.containment*mobilewebvolume;
+			if (debug){
+				console.log("VA roundvolume: "+boa.va.roundvolume+" totalvolume: "+boa.va.volume);
+			}
+			boa.va.calccost();
+		}
+		/*ivr*/
+		if (boa.ivr.enabled){
+			boa.ivr.roundvolume = (boa.outcome ? boa.ivr.containment*mobilevoicevolume:mobilevoicevolume);
+			moblievoicevolume-=boa.ivr.containment*mobilevoicevolume;
+			boa.ivr.roundvolume+= (boa.outcome ? boa.ivr.containment*phonevolume:phonevolume);
+			phonevolume-=boa.ivr.containment*phonevolume;
+			if (debug){
+				console.log("IVR roundvolume: "+boa.ivr.roundvolume+" totalvolume: "+boa.ivr.volume);
+			}
+			boa.ivr.calccost();
+		}
+		/*vs*/
+		if (boa.vs.enabled){
+			boa.vs.roundvolume= (boa.outcome ? boa.vs.containment*mobilevoicevolume:mobilevoicevolume);
+			mobilevoicevolume-=boa.vs.containment*mobilevoicevolume;
+			if (debug){
+				console.log("VS roundvolume: "+boa.vs.roundvolume+" totalvolume: "+boa.vs.volume);
+			}
+			boa.vs.calccost();
+		}
+		/*mobileagent*/
+		if (boa.mobileagent.enabled){
+			boa.mobileagent.roundvolume = (boa.outcome ? boa.mobileagent.containment*mobilewebvolume:mobilewebvolume);
+			mobilewebvolume-=boa.mobileagent.containment*mobilewebvolume;
+			if (debug){
+				console.log("MC roundvolume: "+boa.mobileagent.roundvolume+" totalvolume: "+boa.mobileagent.volume);
+			}
+			boa.mobileagent.calccost();
+		}
+		/*webagent*/
+		if (boa.webagent.enabled){
+			boa.webagent.roundvolume = (boa.outcome ? boa.webagent.containment*desktopvolume:desktopvolume);
+			desktopvolume-=boa.webagent.containment*desktopvolume;
+			if (debug){
+				console.log("WC roundvolume: "+boa.webagent.roundvolume+" totalvolume: "+boa.webagent.volume);
+			}
+			boa.webagent.calccost();
+		}
+		if (boa.voiceagent.enabled){
+			boa.voiceagent.roundvolume = (boa.outcome ? boa.voiceagent.containment*mobilevoicevolume:mobilevoicevolume);
+			mobilevoicevolume-=boa.voiceagent.containment*mobilevoicevolume;
+			boa.voiceagent.roundvolume +=(boa.outcome ? boa.voiceagent.containment*phonevolume:phonevolume);
+			phonevolume-=boa.voiceagent.containment*phonevolume;
+			if (debug){
+				console.log("Voi roundvolume: "+boa.voiceagent.roundvolume+" totalvolume: "+boa.voiceagent.volume);
+			}
+			boa.voiceagent.calccost();
+		}
+		desktop.volume += desktop.roundvolume;
+		mobileweb.volume += mobileweb.roundvolume;
+		mobilevoice.volume += mobileweb.roundvolume;
+		phone.volume += phone.roundvolume;
+		calculateroundvolumes2(boa,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
+	}	
 function updatesummary(){
 	function numberWithCommas(x) {
 		if (x==0){return '';}
@@ -336,8 +419,8 @@ function updatesummary(){
 		document.getElementById('cpiwc1').value = 0;
 		document.getElementById('cpiwc2').value = 0;
 
-		document.getElementById('convoi1').value = 40;
-		document.getElementById('convoi2').value = 40;
+		document.getElementById('convoi1').value = 100;
+		document.getElementById('convoi2').value = 100;
 		document.getElementById('conivr1').value = 0;
 		document.getElementById('conivr2').value = 0;
 		document.getElementById('convs1').value = 0;

@@ -1,0 +1,444 @@
+<!doctype html>
+<html>
+<head>
+
+	<!--jquery-->
+
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<!--google charts related-->
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+	<!--bootstrap-->
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="app.js"></script>
+
+
+
+
+	<!--material design library-->
+	<link rel="stylesheet" href="mdl/material.css">
+	<script src="mdl/material.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+	<div class="topbar">
+	  <img id="logo" src="img/24_7_LOGO.svg">
+	  <div id="app-title">ROI Service Calculator</div>
+	  <button id="about-btn" class="btn btn-default btn-sm">About</button>
+	</div>
+	<div class="lowersegment">
+		<div class="lowerleft">
+			<div class="settingsbar" id="settingsbar">
+				<div class="channel-input-section monthly-section">
+					<h2>Monthly Voice Traffic</h2>
+					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="voicetraffic">
+					<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="voicesplit">
+				</div>
+				<div class="channel-input-section monthly-section">
+					<h2>Monthly Web Traffic</h2>
+					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="webtraffic">
+					<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="websplit">
+				</div>
+				<!--voice Agents-->
+					<table class="channel-input-section">
+							<tr>
+								<td class="column-label channel-label">Voice Agents</td>
+								<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbvoi1"><input type="checkbox" id="cbvoi1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+								<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox" for="cbvoi2"><input type="checkbox" id="cbvoi2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							</tr>
+							<tr>
+								<td class="column-label">Cost Per Interaction</td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpivoi1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpivoi2"></td>
+							</tr>
+							<tr>
+								<td class="column-label">First Call Resolution</td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="convoi1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convoi2"></td>
+							</tr>
+						</table>
+				<!--IVR-->
+					<table class="channel-input-section">
+							<tr>
+								<td class="column-label channel-label">IVR</td>
+								<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbivr1"><input type="checkbox" id="cbivr1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+								<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbivr2"><input type="checkbox" id="cbivr2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							</tr>
+							<tr>
+								<td class="column-label">Cost Per Interaction</td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiivr1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiivr2"></td>
+							</tr>
+							<tr>
+								<td class="column-label">Containment Rate</td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conivr1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conivr2"></td>
+							</tr>
+						</table>
+				<!--Vivid Speech-->
+						<table class="channel-input-section">
+							<tr>
+								<td class="column-label channel-label">Vivid Speech</td>
+								<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbvs1"><input type="checkbox" id="cbvs1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+								<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbvs2"><input type="checkbox" id="cbvs2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							</tr>
+							<tr>
+								<td class="column-label">Cost Per Interaction</td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpivs1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpivs2"></td>
+							</tr>
+							<tr>
+								<td class="column-label">Containment Rate</td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="convs1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convs2"></td>
+							</tr>
+						</table>
+				<!--Virtual Assistant-->
+				<table class="channel-input-section">
+							<tr>
+								<td class="column-label channel-label">Virtual Assistant</td>
+								<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbva1"><input type="checkbox" id="cbva1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+								<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbva2"><input type="checkbox" id="cbva2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							</tr>
+							<tr>
+								<td class="column-label">Cost Per Interaction</td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiva1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiva2"></td>
+							</tr>
+							<tr>
+								<td class="column-label">Containment Rate</td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conva1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conva2"></td>
+							</tr>
+						</table>
+				<!--Mobile Chat-->
+					<table class="channel-input-section">
+							<tr>
+								<td class="column-label channel-label">Mobile Chat</td>
+								<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbmc1"><input type="checkbox" id="cbmc1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+								<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbmc2"><input type="checkbox" id="cbmc2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							</tr>
+							<tr>
+								<td class="column-label">Cost Per Interaction</td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpimc1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpimc2"></td>
+							</tr>
+							<tr>
+								<td class="column-label">First Chat Resolution</td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conmc1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conmc2"></td>
+							</tr>
+						</table>
+				<!--Web Chat-->
+					<table class="channel-input-section">
+							<tr>
+								<td class="column-label channel-label">Web Chat</td>
+								<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbwc1"><input type="checkbox" id="cbwc1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+								<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbwc2"><input type="checkbox" id="cbwc2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							</tr>
+							<tr>
+								<td class="column-label">Cost Per Interaction</td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiwc1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiwc2"></td>
+							</tr>
+							<tr>
+								<td class="column-label">First Chat Resolution</td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conwc1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conwc2"></td>
+							</tr>
+						</table>
+			</div>
+			<div class="calc-buttons-container">
+				<button class="btn btn-link btn-xs" id="reset-btn" style="">Reset</button>
+				<button class="btn btn-primary btn-lg" id="calculate-btn" style="">Calculate</button>
+			</div>
+		</div>
+		<div class = "lowerright">
+
+			<div style="text-align:center; margin-top:10px;">
+				<div class="btn-group tab-btn-group" role="group" style="display:inline-block;">
+				  <button type="button" class="btn btn-default active"><a href="#summary" data-toggle="pill" role="button">Summary</a></button>
+				  <button type="button" class="btn btn-default"><a href="#chart" data-toggle="pill" role="button">Charts</a></button>
+				  <button type="button" class="btn btn-default"><a href="#map" data-toggle="pill" role="button">Journey Map</a></button>
+				</div>
+			</div>
+
+			<div class="tab-content">
+			  <div id="summary" class="tab-pane fade in active">
+			  	<br>
+			    <div style="margin: 0 50px 0 50px;">
+				    <table class="table">
+					    <thead>
+					      <tr>
+					        <th></th>
+					        <th>Curren Plan Cost</th>
+					        <th>New Plan Cost</th>
+					        <th>Savings</th>
+					      </tr>
+					    </thead>
+				    <tbody>
+				      <tr>
+				        <td>Voice Agents</td>
+				        <td id="voib"></td>
+				        <td id="voia"></td>
+				        <td id="vois"></td>
+				      </tr>
+				      <tr>
+				        <td>IVR</td>
+				        <td id="ivrb"></td>
+				        <td id="ivra"></td>
+				        <td id="ivrs"></td>
+				      </tr>
+				      <tr>
+				        <td>Vivid Speech</td>
+				        <td id="vsb"></td>
+				        <td id="vsa"></td>
+				        <td id="vss"></td>
+				      </tr>
+				      <tr>
+				        <td>Virtual Assistant</td>
+				        <td id="vab"></td>
+				        <td id="vaa"></td>
+				        <td id="vas"></td>
+				      </tr>
+				      <tr>
+				        <td>Mobile Chat</td>
+				        <td id="mcb"></td>
+				        <td id="mca"></td>
+				        <td id="mcs"></td>
+				      </tr>
+				      <tr>
+				        <td>Web Chat</td>
+				        <td id="wcb"></td>
+				        <td id="wca"></td>
+				        <td id="wcs"></td>
+				      </tr>
+				      <tr>
+				        <td>Totals</td>
+				        <td id="totalb"></td>
+				        <td id="totala"></td>
+				        <td id="totals"></td>
+				      </tr>
+				    </tbody>
+				  </table>
+				</div>
+			  </div>
+			  <div id="chart" class="tab-pane fade">
+			    <div id="chart3"></div>
+			  </div>
+			  <div id="map" class="tab-pane fade">
+			    <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"   viewBox="-50 0 1395 446.5" xml:space="preserve">
+							<!--22-->
+									<path fill="none" stroke="#912370" class="22a"stroke-width="20" stroke-miterlimit="10" d="M1047,151h-27.2c-10.6,0-20.8,4.2-28.3,11.7L796.9,357.3c-15.2,15.2-35.8,23.7-57.3,23.7H711"/>
+						    <!--1-->
+									<path fill="none" stroke="#666666" class="1a" stroke-width="20" stroke-miterlimit="10" d="M229,140.5h-31.2c-15.9,0-31.2,6.3-42.4,17.6l-50.7,50.7c-7.5,7.5-17.7,11.7-28.3,11.7H13"/>
+							<!--2-->
+									<line fill="none" stroke="#666666" class="2a"stroke-width="20" stroke-miterlimit="10" x1="245" y1="221" x2="60" y2="221"/>
+							<!--3-->
+									<path fill="none" stroke="#666666" class="3a"stroke-width="20" stroke-miterlimit="10" d="M231,301.5h-33.4c-15.9,0-31.2-6.3-42.4-17.6l-50.7-50.7c-7.5-7.5-17.7-11.7-28.3-11.7H12.7"/>
+							<!--7-->
+									<line fill="none" stroke="#666666" class="7a"stroke-width="20" stroke-miterlimit="10" x1="360" y1="141" x2="230" y2="141"/>
+							<!--8-->
+									<line fill="none" stroke="#666666" class="8a"stroke-width="20" stroke-miterlimit="10" x1="334" y1="221" x2="245" y2="221"/>
+							<!--9-->
+									<line fill="none" stroke="#666666" class="9a"stroke-width="20" stroke-miterlimit="10" x1="360" y1="302" x2="230" y2="302"/>
+							<!--11-->
+
+									<path fill="none" stroke="#ffb972" class="11a" stroke-width="20" stroke-miterlimit="10" d="M789.3,60.7H597.4c-15.9,0-31.2,6.3-42.4,17.6L504.3,129c-7.5,7.5-17.7,11.7-28.3,11.7H374"/>
+							<!--12-->
+									<line fill="none" stroke="#ef8822" class="12a"stroke-width="20" stroke-miterlimit="10" x1="537.4" y1="220.7" x2="374" y2="220.7"/>
+							<!--13-->
+									<path fill="none" stroke="#ffb972" class="13a"stroke-width="20" stroke-miterlimit="10" d="M789.3,381H597.4c-15.9,0-31.2-6.3-42.4-17.6l-50.7-50.7c-7.5-7.5-17.7-11.7-28.3-11.7H374"/>
+							<!--17-->
+									<line fill="none" stroke="#ef8822" class="17a"stroke-width="5" stroke-miterlimit="10" stroke-dasharray="5" x1="563.6" y1="221" x2="703.6" y2="81"/>
+							<!--18-->
+									<line fill="none" stroke="#ef8822" class="18a"stroke-width="5" stroke-miterlimit="10" stroke-dasharray="5" x1="563.6" y1="221" x2="703.6" y2="361"/>
+							<!--19-->
+									<path fill="none" stroke="#912370" class="19a"stroke-width="20" stroke-miterlimit="10" d="M1056,151h-47.7c-10.6,0-20.8-4.2-28.3-11.7
+											l-60.7-60.7C908,67.3,892.8,61,876.9,61H734.4"/>
+							<!--20-->
+									<path fill="none" stroke="#912370" class="20a"stroke-width="20" stroke-miterlimit="10" d="M1046,151H869H711.9c-15.9,0-31.2,6.3-42.4,17.6l-40.7,40.7c-7.5,7.5-17.7,11.7-28.3,11.7H597"/>
+							<!--21-->
+									<path fill="none" stroke="#049094" class="21a"stroke-width="20" stroke-miterlimit="10" d="M1046,291H869H711.9c-15.9,0-31.2-6.3-42.4-17.6l-40.7-40.7c-7.5-7.5-17.7-11.7-28.3-11.7H597"/>
+
+							<!--23-->
+									<path fill="none" stroke="#049094" class="23a" stroke-width="20" stroke-miterlimit="10" d="M1056,290.7h-33.4c-10.6,0-20.8,4.2-28.3,11.7l-60.7,60.7c-11.3,11.2-26.5,17.6-42.4,17.6H698.7"/>
+							<!--26-->
+									<path fill="none" stroke="#912370" class="26a"stroke-width="20" stroke-miterlimit="10" d="M1236,221h-33.4c-10.6,0-20.8-4.2-28.3-11.7l-40.4-40.4c-11.4-11.4-27-17.9-43.1-17.9H1077h-20"/>
+
+							<!--27-->
+									<path fill="none" stroke="#049094" class="27a" stroke-width="20" stroke-miterlimit="10" d="M1236,220.7h-33.4c-10.6,0-20.8,4.2-28.3,11.7l-40.4,40.4c-11.4,11.4-27,17.9-43.1,17.9H1077h-18h-3h-6"/>
+
+							<!--0-->
+									<g>
+
+										<path fill="#FFFFFF" d="M50,268.5c-26.2,0-47.5-21.3-47.5-47.5s21.3-47.5,47.5-47.5s47.5,21.3,47.5,47.5S76.2,268.5,50,268.5z"/>
+
+										<path fill="#666666" class="0a"d="M50,176c24.8,0,45,20.2,45,45s-20.2,45-45,45S5,245.8,5,221S25.2,176,50,176 M50,171
+											c-27.6,0-50,22.4-50,50s22.4,50,50,50s50-22.4,50-50S77.6,171,50,171L50,171z"/>
+
+										<circle fill="#666666" class="0a"cx="50" cy="221" r="40"/>
+
+										<circle fill="#FFFFFF" cx="46" cy="217" r="5.6"/>
+
+										<path fill="#FFFFFF" d="M56,233.2v-1.5c0-3.4-2.8-6.2-6.2-6.2h-7.5c-3.4,0-6.2,2.8-6.2,6.2v1.5H56z"/>
+
+										<path fill="#FFFFFF" d="M53,209.4c0-0.7,0.2-1.4,0.7-2.1c0.4-0.7,1.1-1.3,2-1.8c0.9-0.5,1.9-0.7,3-0.7c1.1,0,2,0.2,2.8,0.6
+											c0.8,0.4,1.4,0.9,1.9,1.6c0.4,0.7,0.7,1.4,0.7,2.2c0,0.6-0.1,1.2-0.4,1.6c-0.3,0.5-0.6,0.9-0.9,1.2c-0.3,0.3-1,0.9-1.9,1.7
+											c-0.2,0.2-0.4,0.4-0.6,0.6s-0.3,0.3-0.3,0.5c-0.1,0.1-0.1,0.3-0.2,0.4c0,0.1-0.1,0.4-0.2,0.8c-0.1,0.8-0.6,1.1-1.3,1.1
+											c-0.4,0-0.7-0.1-1-0.4s-0.4-0.6-0.4-1.1c0-0.6,0.1-1.1,0.3-1.6s0.4-0.8,0.8-1.2c0.3-0.3,0.7-0.7,1.3-1.2c0.5-0.4,0.8-0.7,1-0.9
+											s0.4-0.4,0.5-0.7c0.1-0.3,0.2-0.5,0.2-0.8c0-0.6-0.2-1.1-0.7-1.5c-0.4-0.4-1-0.6-1.7-0.6c-0.8,0-1.4,0.2-1.8,0.6
+											c-0.4,0.4-0.7,1-1,1.8c-0.2,0.8-0.7,1.2-1.4,1.2c-0.4,0-0.8-0.1-1-0.4C53.1,210,53,209.7,53,209.4z M58.4,221.4
+											c-0.4,0-0.8-0.1-1.2-0.4c-0.3-0.3-0.5-0.7-0.5-1.2c0-0.5,0.2-0.9,0.5-1.2c0.3-0.3,0.7-0.5,1.2-0.5c0.5,0,0.9,0.2,1.2,0.5
+											c0.3,0.3,0.5,0.7,0.5,1.2c0,0.5-0.2,0.9-0.5,1.2C59.2,221.3,58.8,221.4,58.4,221.4z"/>
+									</g>
+							<!--end 0-->
+
+							<!--4-->
+									<g>
+										<path fill="#FFFFFF" d="M230,173.5c-17.9,0-32.5-14.6-32.5-32.5s14.6-32.5,32.5-32.5s32.5,14.6,32.5,32.5S247.9,173.5,230,173.5z"/>
+										<path fill="#666666" class="4a"d="M230,111c16.5,0,30,13.5,30,30s-13.5,30-30,30s-30-13.5-30-30S213.5,111,230,111 M230,106c-19.3,0-35,15.7-35,35s15.7,35,35,35c19.3,0,35-15.7,35-35S249.3,106,230,106L230,106z"/>
+										<circle fill="#666666" cx="230" class="4a"cy="141" r="25"/>
+										<path fill="#FFFFFF" d="M216,146.5c0,1.1,0.9,2,2,2h24c1.1,0,2-0.9,2-2v-16c0-1.1-0.9-2-2-2h-24c-1.1,0-2,0.9-2,2V146.5z
+											 M219,131.5h22v14h-22V131.5z"/>
+										<path fill="#FFFFFF" d="M221.1,153.5c0.6-2,2-3,3.6-3h10c1.6,0,3,1,3.6,3H221.1z"/>
+									</g>
+							<!--end 4-->
+
+							<!--5-->
+									<g>
+										<path fill="#FFFFFF" d="M230,253.5c-17.9,0-32.5-14.6-32.5-32.5s14.6-32.5,32.5-32.5s32.5,14.6,32.5,32.5S247.9,253.5,230,253.5z"/>
+										<path fill="#666666" class="5a"d="M230,191c16.5,0,30,13.5,30,30s-13.5,30-30,30s-30-13.5-30-30S213.5,191,230,191 M230,186c-19.3,0-35,15.7-35,35s15.7,35,35,35c19.3,0,35-15.7,35-35S249.3,186,230,186L230,186z"/>
+										<circle fill="#666666" class="5a"cx="230" cy="221" r="25"/>
+										<path fill="#FFFFFF" d="M222,232c0,1.1,0.9,2,2,2h12c1.1,0,2-0.9,2-2v-22c0-1.1-0.9-2-2-2h-12c-1.1,0-2,0.9-2,2V232z M228.2,230.8c0-0.8,0.7-1.5,1.5-1.5s1.5,0.7,1.5,1.5s-0.7,1.5-1.5,1.5S228.2,231.6,228.2,230.8z M224,211h12v16h-12V211z"/>
+									</g>
+							<!--end 5-->
+
+							<!--6-->
+									<g>
+										<path fill="#FFFFFF" d="M230,333.5c-17.9,0-32.5-14.6-32.5-32.5s14.6-32.5,32.5-32.5s32.5,14.6,32.5,32.5S247.9,333.5,230,333.5z"/>
+										<path fill="#666666" class="6a"d="M230,271c16.5,0,30,13.5,30,30s-13.5,30-30,30s-30-13.5-30-30S213.5,271,230,271 M230,266c-19.3,0-35,15.7-35,35s15.7,35,35,35c19.3,0,35-15.7,35-35S249.3,266,230,266L230,266z"/>
+										<circle fill="#666666" class="6a"cx="230" cy="301" r="25"/>
+										<path fill="#FFFFFF" d="M241.8,308.7c-1.4,3.3-4.5,3.8-5.6,3.8c-0.3,0-5.1,0.3-11.9-6.2c-5.5-5.2-6.2-10.8-6.2-11.9c-0.1-1,0.2-3.6,3.8-5.6c0.4-0.2,1.3-0.3,1.6-0.1c0.1,0.1,3.1,5.1,3.2,5.2c0.1,0.2,0.1,0.3,0.1,0.5c0,0.2-0.2,0.5-0.5,0.8c-0.3,0.3-0.7,0.7-1.1,0.9c-0.4,0.3-0.7,0.6-1.1,0.9c-0.3,0.3-0.5,0.6-0.5,0.8c0,0.5,0.5,2.4,3.8,5.3c3.3,2.9,4.9,3.7,5,3.8c0.2,0.1,0.3,0.1,0.4,0.1c0.2,0,0.5-0.2,0.8-0.5c0.3-0.3,1.4-1.8,1.7-2.1c0.3-0.3,0.6-0.5,0.8-0.5c0.2,0,0.3,0,0.5,0.1c0.2,0.1,5.1,3,5.2,3.1C242.2,307.4,242,308.2,241.8,308.7"/>
+									</g>
+							<!--end 6-->
+
+							<!--10-->
+									<g>
+										<path fill="#FFFFFF" d="M390,318.5c-53.8,0-97.5-43.7-97.5-97.5s43.7-97.5,97.5-97.5c53.8,0,97.5,43.7,97.5,97.5
+											S443.8,318.5,390,318.5z"/>
+										<path fill="#ef8822" class="10a"d="M390,126c52.4,0,95,42.6,95,95s-42.6,95-95,95s-95-42.6-95-95S337.6,126,390,126 M390,121c-55.2,0-100,44.8-100,100s44.8,100,100,100s100-44.8,100-100S445.2,121,390,121L390,121z"/>
+										<circle fill="#ef8822" class="10a"cx="390" cy="221" r="90"/>
+										<polygon fill="none"stroke="#FFFFFF" stroke-linejoin="round" stroke-miterlimit="10" points="410.5,215.5 390.3,226
+											368.5,215.5 368.5,190.2 389.5,179.7 410.5,190.2 			"/>
+										<circle fill="#FFFFFF" cx="368.9" cy="190.8" r="3.5"/>
+										<circle fill="#FFFFFF"  cx="410.5" cy="190.8" r="3.5"/>
+										<circle fill="#FFFFFF" cx="368.9" cy="215.2" r="3.5"/>
+										<circle fill="#FFFFFF" cx="410.5" cy="215.2" r="3.5"/>
+										<circle fill="#FFFFFF" cx="390" cy="200.9" r="3.5"/>
+										<circle fill="#FFFFFF" cx="390" cy="226.2" r="3.5"/>
+										<circle fill="#FFFFFF" cx="390" cy="179.8" r="3.5"/>
+
+
+										<line fill="none" stroke="#FFFFFF" stroke-linejoin="round" stroke-miterlimit="10" x1="389.6" y1="200.7" x2="368.5" y2="190.2"/>
+
+										<line fill="none" stroke="#FFFFFF" stroke-linejoin="round" stroke-miterlimit="10" x1="410.6" y1="190.2" x2="389.6" y2="200.7"/>
+										<line fill="none"  stroke="#FFFFFF" stroke-linejoin="round" stroke-miterlimit="10" x1="389.5" y1="201" x2="389.5" y2="227"/>
+										<text transform="matrix(1 0 0 1 380.0278 256.0078)" fill="#FFFFFF"   class="10alt"font-family="'HelveticaNeue-Bold'" font-size="16">Platform</text>
+										<polygon fill="#FFFFFF"  class="10alt" name='1'points="361.8,256.3 361.8,255.5 363.2,255.5 363.2,245.1 361.8,245.1 361.8,244.3 364.2,244.3 364.2,256.3 				"/>
+										<polygon fill="#FFFFFF" class="10alt"  points="338.5,256.3 338.5,244.3 340.9,244.3 340.9,245.1 339.5,245.1 339.5,255.5 340.9,255.5 340.9,256.3 				"/>
+										<path fill="#FFFFFF"  class="10alt" d="M347.4,252.2c0.2-0.1,0.3-0.2,0.5-0.3c1.5-0.9,2.9-2,2.9-4.1c0-2.1-1.5-3.5-3.8-3.5c-1.2,0-2.2,0.4-2.9,1.1c-0.7,0.8-1.1,1.9-1,3.2l0,0.1h1.7l0-0.1c0-0.9,0.2-1.7,0.7-2.2c0.4-0.4,0.9-0.6,1.4-0.6c1.2,0,2.1,0.8,2.1,2c0,1.5-0.8,2.2-2.9,3.5c-1.8,1.1-3.1,2.1-3.4,4.9l0,0.1h7.9v-1.5h-6C345,253.6,346.2,253,347.4,252.2z"/>
+										<path fill="#FFFFFF"  class="10alt" d="M358.2,252v-7.7h-1.6l-5.1,7.4l0,0.3v1.5h5.1v2.7h1.6v-2.7h1.6V252H358.2z M353.1,252l3.5-5.2v5.2H353.1z"/>
+										<path fill="#FFFFFF"  class="10alt" d="M366.3,244.3v1.6h6.1c-2.6,2.9-4.3,6.6-4.5,10.2l0,0.1h1.9l0-0.1c0.2-3.6,2.1-8,4.5-10.4l0,0v-1.4H366.3z"/>
+										<circle fill="none" class="10alt2"cx="390" cy="221" r="90"/>
+									</g>
+							<!--end 10-->
+
+							<!--14-->
+									<g>
+										<path fill="#FFFFFF" d="M560,268.5c-26.2,0-47.5-21.3-47.5-47.5s21.3-47.5,47.5-47.5c26.2,0,47.5,21.3,47.5,47.5
+											S586.2,268.5,560,268.5z"/>
+										<path fill="#ef8822" class="14a"d="M560,176c24.8,0,45,20.2,45,45s-20.2,45-45,45s-45-20.2-45-45S535.2,176,560,176 M560,171
+											c-27.6,0-50,22.4-50,50s22.4,50,50,50s50-22.4,50-50S587.6,171,560,171L560,171z"/>
+										<circle fill="#ef8822"class="14a" cx="560" cy="221" r="40"/>
+										<path fill="#FFFFFF" d="M560,235c-7.7,0-14-6.3-14-14s6.3-14,14-14s14,6.3,14,14S567.7,235,560,235z M560,209.3
+											c-6.4,0-11.7,5.2-11.7,11.7s5.2,11.7,11.7,11.7s11.7-5.2,11.7-11.7S566.4,209.3,560,209.3z"/>
+										<rect x="558.6" y="213.4" fill="#FFFFFF" width="2.8" height="2.6"/>
+										<rect x="558.6" y="218.6" fill="#FFFFFF" width="2.8" height="10"/>
+									</g>
+							<!--end 14-->
+
+							<!--15-->
+									<g>
+										<path fill="#FFFFFF" d="M710,123.5c-26.2,0-47.5-21.3-47.5-47.5s21.3-47.5,47.5-47.5c26.2,0,47.5,21.3,47.5,47.5S736.2,123.5,710,123.5z"/>
+										<path fill="#ef8822" class="15a"d="M710,31c24.8,0,45,20.2,45,45s-20.2,45-45,45s-45-20.2-45-45S685.2,31,710,31 M710,26c-27.6,0-50,22.4-50,50s22.4,50,50,50s50-22.4,50-50S737.6,26,710,26L710,26z"/>
+										<circle fill="#ef8822" class="15a"cx="710" cy="76" r="40"/>
+										<circle fill="#FFFFFF" cx="703.6" cy="76.7" r="5.1"/>
+										<path fill="#FFFFFF" d="M707,85h-6.8c-3.1,0-6.2,2-6.2,5.1V92h19v-1.9C713,87,710.1,85,707,85z"/>
+										<path fill="#FFFFFF" d="M706.1,72.3v0.4c0,0.9,0.4,1.6,1.3,1.6h0.6C707.6,73.4,706.9,72.7,706.1,72.3z"/>
+										<path fill="#FFFFFF" d="M726.9,60h-19.5c-0.9,0-1.5-0.4-1.5,0.5V70c2,0.7,3.5,3,4.3,5h3.4l0.1,5.1l4.6-4.2l1.2-0.9h7.4c0.9,0,1.1-1.5,1.1-2.4v-7.8v-4.3C728,59.6,727.8,60,726.9,60z M722,66h-2v-1h-2v5h2v2h-6v-2h2v-5h-2v1h-2v-3h10V66z"/>
+									</g>
+							<!--end 15-->
+
+							<!--16-->
+									<g>
+										<path fill="#FFFFFF" d="M710,413.5c-26.2,0-47.5-21.3-47.5-47.5s21.3-47.5,47.5-47.5c26.2,0,47.5,21.3,47.5,47.5
+											S736.2,413.5,710,413.5z"/>
+										<path fill="#ef8822" class="16a"d="M710,321c24.8,0,45,20.2,45,45s-20.2,45-45,45s-45-20.2-45-45S685.2,321,710,321 M710,316
+											c-27.6,0-50,22.4-50,50s22.4,50,50,50s50-22.4,50-50S737.6,316,710,316L710,316z"/>
+										<circle fill="#ef8822"class="16a" cx="710" cy="366" r="40"/>
+										<circle fill="#FFFFFF" cx="702.1" cy="366.5" r="5.1"/>
+										<path fill="#FFFFFF" d="M705.5,374h-6.8c-3.1,0-5.7,2.8-5.7,5.9v1.1h18v-1.1C711,376.8,708.6,374,705.5,374z"/>
+										<path fill="#FFFFFF" d="M725.4,349h-19.5c-0.9,0-0.9,0.5-0.9,1.3v9.5c2,0.7,3,2.2,3.7,4.2h3.4l0.1,5.5l4.6-4.4l1.2-1.1h7.4c0.9,0,1.6-0.6,1.6-1.5v-7.8v-4.3C727,349.5,726.3,349,725.4,349z M712.3,358c-0.1,0.1-0.3,0.2-0.5,0.2c-0.2,0-0.4-0.1-0.5-0.2c-0.3-0.3-0.3-0.7,0-1c0.2-0.2,0.3-0.4,0.3-0.7c0-0.3-0.1-0.5-0.3-0.7c-0.1-0.1-0.2-0.3-0.2-0.5c0-0.2,0.1-0.4,0.2-0.5c0.3-0.3,0.7-0.3,1,0c0.5,0.5,0.7,1.1,0.7,1.7C713,357,712.7,357.6,712.3,358z M714.1,360c-0.2,0-0.4-0.1-0.5-0.2c-0.3-0.3-0.3-0.7,0-1c0.7-0.7,1.1-1.6,1.1-2.5c0-1-0.4-1.8-1.1-2.5c-0.3-0.3-0.3-0.7,0-1c0.3-0.3,0.7-0.3,1,0c1,0.9,1.5,2.2,1.5,3.5c0,1.3-0.5,2.6-1.5,3.5C714.5,360,714.3,360,714.1,360z M716.9,361.6c-0.1,0.1-0.3,0.2-0.5,0.2c-0.2,0-0.4-0.1-0.5-0.2c-0.1-0.1-0.2-0.3-0.2-0.5c0-0.2,0.1-0.4,0.2-0.5c1.2-1.2,1.8-2.7,1.8-4.3c0-1.6-0.6-3.2-1.8-4.3c-0.3-0.3-0.3-0.7,0-1c0.3-0.3,0.7-0.3,1,0c1.4,1.4,2.2,3.3,2.2,5.3C719.2,358.3,718.4,360.2,716.9,361.6z"/>
+									</g>
+							<!--end 16-->
+
+							<!--24-->
+									<g>
+										<path fill="#FFFFFF" d="M1050,188.5c-20.7,0-37.5-16.8-37.5-37.5s16.8-37.5,37.5-37.5s37.5,16.8,37.5,37.5S1070.7,188.5,1050,188.5z"/>
+										<path fill="#912370" class="24a"d="M1050,116c19.3,0,35,15.7,35,35s-15.7,35-35,35s-35-15.7-35-35S1030.7,116,1050,116 M1050,111c-22.1,0-40,17.9-40,40s17.9,40,40,40c22.1,0,40-17.9,40-40S1072.1,111,1050,111L1050,111z"/>
+										<circle fill="#912370" class="24a"cx="1050" cy="151" r="30"/>
+										<path fill="#FFFFFF" d="M1050,161.2c-8.6,0-14.6-9.1-14.8-9.5c-0.3-0.4-0.3-0.9,0-1.3c0.2-0.4,6-9.5,14.8-9.5c8.6,0,14.6,9.1,14.8,9.5c0.3,0.4,0.3,0.9,0,1.4C1064.5,152.1,1058.4,161.2,1050,161.2z M1037.8,151c1.5,2,6.2,7.7,12.2,7.7c5.8,0,10.7-5.7,12.2-7.7c-1.5-2-6.2-7.7-12.2-7.7C1043.9,143.3,1039.2,149,1037.8,151z"/>
+										<path fill="#FFFFFF" d="M1050.2,156.1c-2.9,0-5.2-2.3-5.2-5.2c0-2.9,2.3-5.2,5.2-5.2c2.9,0,5.2,2.3,5.2,5.2C1055.4,153.8,1053,156.1,1050.2,156.1z M1050.2,148.2c-1.5,0-2.7,1.2-2.7,2.7c0,1.5,1.2,2.7,2.7,2.7c1.5,0,2.7-1.2,2.7-2.7C1052.9,149.4,1051.7,148.2,1050.2,148.2z"/>
+									</g>
+							<!--end 24-->
+
+							<!--25-->
+									<g>
+										<path fill="#FFFFFF" d="M1050,328.5c-20.7,0-37.5-16.8-37.5-37.5s16.8-37.5,37.5-37.5s37.5,16.8,37.5,37.5
+											S1070.7,328.5,1050,328.5z"/>
+										<path fill="#049094"class="25a" d="M1050,256c19.3,0,35,15.7,35,35s-15.7,35-35,35s-35-15.7-35-35S1030.7,256,1050,256 M1050,251
+											c-22.1,0-40,17.9-40,40c0,22.1,17.9,40,40,40c22.1,0,40-17.9,40-40C1090,268.9,1072.1,251,1050,251L1050,251z"/>
+										<circle fill="#049094"class="25a" cx="1050" cy="291" r="30"/>
+										<path fill="#FFFFFF" d="M1043.8,287.3c-0.6-0.6-1.6-0.6-2.2,0c-0.3,0.3-0.5,0.7-0.5,1.1c0,0.4,0.2,0.8,0.5,1.1c0.4,0.4,0.7,1,0.7,1.5c0,0.6-0.2,1.1-0.7,1.6c-0.6,0.6-0.6,1.5,0,2.1c0.3,0.3,0.7,0.4,1.1,0.4c0.4,0,0.8-0.2,1.1-0.4c1-1,1.6-2.3,1.6-3.7C1045.3,289.6,1044.8,288.3,1043.8,287.3"/>
+										<path fill="#FFFFFF" d="M1048.9,283.4c-0.6-0.6-1.6-0.6-2.2,0c-0.6,0.6-0.6,1.5,0,2.1c1.5,1.5,2.3,3.4,2.3,5.5c0,2.1-0.8,4-2.3,5.5c-0.6,0.6-0.6,1.6,0,2.1c0.3,0.3,0.7,0.4,1.1,0.4c0.4,0,0.8-0.2,1.1-0.4c2.1-2,3.2-4.7,3.2-7.6C1052.1,288.1,1051,285.4,1048.9,283.4"/>
+										<path fill="#FFFFFF" d="M1051.8,279.4c-0.6,0.6-0.6,1.6,0,2.1c2.6,2.5,4,5.9,4,9.4c0,3.6-1.4,6.9-4,9.4c-0.3,0.3-0.5,0.7-0.5,1.1c0,0.4,0.2,0.8,0.5,1.1c0.3,0.3,0.7,0.4,1.1,0.4c0.4,0,0.8-0.1,1.1-0.4c3.2-3.1,4.9-7.2,4.9-11.6c0-4.4-1.7-8.5-4.9-11.6C1053.4,278.9,1052.4,278.9,1051.8,279.4"/>
+									</g>
+							<!--end 25-->
+
+							<!--28-->
+									<g>
+										<path fill="#FFFFFF" d="M1246,268.5c-26.2,0-47.5-21.3-47.5-47.5s21.3-47.5,47.5-47.5s47.5,21.3,47.5,47.5
+											S1272.2,268.5,1246,268.5z"/>
+										<path fill="#666666" class="28a"d="M1246,176c24.8,0,45,20.2,45,45s-20.2,45-45,45s-45-20.2-45-45S1221.2,176,1246,176 M1246,171
+												c-27.6,0-50,22.4-50,50s22.4,50,50,50s50-22.4,50-50S1273.6,171,1246,171L1246,171z"/>
+										<circle fill="#666666" class="28a"cx="1246" cy="221" r="40"/>
+										<circle fill="#FFFFFF" cx="1242.3" cy="217.2" r="5.6"/>
+										<path fill="#FFFFFF" d="M1252.3,233.5V232c0-3.4-2.8-6.2-6.2-6.2h-7.5c-3.4,0-6.2,2.8-6.2,6.2v1.5H1252.3z"/>
+										<polyline fill="none" stroke="#FFFFFF" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="1251.9,213.7 1255.7,218.5 1262.9,208.1 		"/>
+									</g>
+							<!--end 28-->
+						</svg>
+			  </div>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>

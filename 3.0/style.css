@@ -1,5 +1,7 @@
 body{
 	font-family:Arial;
+	color: #6E6F72;
+	font-weight: 300;
 	margin:0;
 	padding:0;
 	background-color:white;
@@ -52,34 +54,50 @@ a {
 	margin-top:65px;
 }
 
+/*Side bar*/
 .lowerleft{
-	width:300px;
+	width:400px;
 	border-right: 1px solid #e3e3e3;
 	float:left;
 	height: 100%;
-	/*background-color:#e5e6e7;*/
 }
 .lowerleft h2 {
 	font-size:22px;
 	line-height:22px;
 	margin:0;
+	font-weight: 300;
 }
 .settingsbar {
 	overflow-y:scroll;
-	padding:65px 20px 0px 20px;
+	padding:85px 20px 0px 20px;
 }
 
-.slefttd{
-	width:160px;
-	font-weight:bold;
-	border-top: 1px solid #e3e3e3;
-	border-right: 1px solid #e3e3e3;
+/*Monthlies*/
+.monthly-section{
+	margin: 0px 20px 0px 0px;
 }
-.scentertd{
-	width:70px;
+.monthly-inputbox{
 }
-.srighttd{
+
+.channel-input-section{
+	margin: 0px 0px 20px 0px;
+	width: 100%;
+}
+.column-label, .column-before, .column-after{
+	padding: 5px 3px;
+}
+tr:hover{
+	background-color: #E6F4F4;
+}
+.channel-label{
+	font-weight: bold;
+}
+.column-before, .column-after{
 	width:70px;
+	text-align: right;
+}
+.mdl-checkbox{
+	width: auto !important; 	/*to override the 100% width from mdl*/
 }
 .customcheckbox{
 	margin:0 auto;
@@ -90,11 +108,11 @@ a {
 	border-radius:3px;
 	text-align:right;
 	padding:0;
-	margin:1px 0px 2px 0;
-	height:25px;
+	margin:0;
+	height:30px;
 	width:55px;
-	margin-left:2px;
-	padding:3px;
+	margin-left:10px;
+	padding:5px;
 }
 
 /*Buttons*/
@@ -105,12 +123,12 @@ a {
 }
 
 /*Calculate and Reset buttons and container*/
-.buttons{
+.calc-buttons-container{
 	position:fixed;
 	bottom:0px;
 	left:0px;
 	padding: 15px;
-	width:300px;
+	width:400px;
 	border-top: 1px solid #e3e3e3;
 	border-right: 1px solid #e3e3e3;
 	z-index: 20;
@@ -146,7 +164,7 @@ button.active a, .active a:hover{
 	padding-top:65px;
 	float:left;
 	background-color:#e5e6e7;
-	width:calc(100% - 300px);
+	width:calc(100% - 400px);
 	background-color:white;
 	height: calc(100% - 65px);
 }

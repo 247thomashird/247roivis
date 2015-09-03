@@ -533,6 +533,12 @@ function updatesummary(){
 		changecirclecolor(25,onoroff[25]);
 		changecirclecolor(28,onoroff[28]);
 		}
+
+function move2(){
+	$("#lowerleft").animate({
+    width: "toggle"
+	},500,function(){});
+}
 window.onload = function(){
 	resize();
 }

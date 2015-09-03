@@ -28,12 +28,14 @@
 <body>
 
 	<div class="topbar">
+		<a onclick="$('#lowerleft').toggle()">
 	  <img id="logo" src="img/24_7_LOGO.svg">
 	  <div id="app-title">ROI Service Calculator</div>
+		</a>
 	  <button id="about-btn" class="btn btn-default btn-sm">About</button>
 	</div>
 	<div class="lowersegment">
-		<div class="lowerleft">
+		<div class="lowerleft" id="lowerleft">
 			<div class="settingsbar" id="settingsbar">
 				<div class="channel-input-section monthly-section">
 					<h2>Monthly Voice Traffic</h2>
@@ -77,8 +79,8 @@
 							</tr>
 							<tr>
 								<td class="column-label">Containment Rate</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conivr1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conivr2"></td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="0%" id="conivr1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="0%" id="conivr2"></td>
 							</tr>
 						</table>
 				<!--Vivid Speech-->
@@ -95,8 +97,8 @@
 							</tr>
 							<tr>
 								<td class="column-label">Containment Rate</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="convs1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convs2"></td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="0%" id="convs1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="0%" id="convs2"></td>
 							</tr>
 						</table>
 				<!--Virtual Assistant-->
@@ -113,8 +115,8 @@
 							</tr>
 							<tr>
 								<td class="column-label">Containment Rate</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conva1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conva2"></td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="0%" id="conva1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="0%" id="conva2"></td>
 							</tr>
 						</table>
 				<!--Mobile Chat-->
@@ -131,8 +133,8 @@
 							</tr>
 							<tr>
 								<td class="column-label">First Chat Resolution</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conmc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conmc2"></td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="0%" id="conmc1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="0%" id="conmc2"></td>
 							</tr>
 						</table>
 				<!--Web Chat-->
@@ -149,14 +151,23 @@
 							</tr>
 							<tr>
 								<td class="column-label">First Chat Resolution</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conwc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conwc2"></td>
+								<td class="column-before"><input type="text" class="inputbox" placeholder="0%" id="conwc1"></td>
+								<td class="column-after"><input type="text" class="inputbox" placeholder="0%" id="conwc2"></td>
 							</tr>
 						</table>
+				<!--outcome based?-->
+					<table class="channel-input-section">
+						<tr>
+								<td class="column-label channel-label">Outcome Based</td>
+								<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbwc1"><input type="checkbox" id="cbob1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+								<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbwc2"><input type="checkbox" id="cbob2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							</tr>
+							</table>
 			</div>
 			<div class="calc-buttons-container">
 				<button class="btn btn-link btn-xs" id="reset-btn" style="">Reset</button>
-				<button class="btn btn-primary btn-lg" id="calculate-btn" style="">Calculate</button>
+
+				<button class="btn btn-primary btn-lg" id="calculate-btn" style="">Calculate</button><input type="text" class="inputbox" placeholder="Rounds" id="rounds" style="float:right; margin-right:10px;margin-top:8px;width:65px;">
 			</div>
 		</div>
 		<div class = "lowerright">

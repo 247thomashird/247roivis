@@ -1,4 +1,5 @@
 var debug = true;
+var rounds = 1;
 google.load('visualization','1.0', {'packages' :['corechart', 'bar']});
 google.setOnLoadCallback(drawchart);
 
@@ -25,7 +26,8 @@ google.setOnLoadCallback(drawchart);
 	var mobileweb = new device();
 	var mobilevoice = new device();
 	var phone = new device();
-	function product(){
+	function product(pname2){
+		this.pname=pname2;
 		this.enabled=false;
 		this.containment=0;
 		this.volume=0;
@@ -49,17 +51,18 @@ google.setOnLoadCallback(drawchart);
 			console.log("volume: "+this.volume+"  cost: "+this.cost);
 		}
 		this.printall = function(){
-			console.log("enabled: "+this.enabled+" containment: "+this.containment+
-				" volume: "+this.volume+" roundvolume: "+this.roundvolume+" cpi: "+this.cpi+" cost: "+this.cost);
+			console.log(this.pname+"\n\tenabled: "+this.enabled+"\n\tcontainment: "+this.containment+
+				"\n\tvolume: "+this.volume+"\n\troundvolume: "+this.roundvolume+"\n\tcpi: "+this.cpi+"\n\tcost: "+this.cost);
 		}
 	}
-	var before = {va:new product(),vs:new product,ivr:new product,
-	webagent:new product(),mobileagent:new product(),voiceagent:new product(),outcome:false};
-	var after = {va:new product(),vs:new product,ivr:new product,
-	webagent:new product(),mobileagent:new product(),voiceagent:new product(),outcome:false};
+	var before = {va:new product('va'),vs:new product('vs'),ivr:new product('ivr'),
+	webagent:new product('webagent'),mobileagent:new product('mobileagent'),
+	voiceagent:new product('voiceagent'),outcome:false};
+	var after = {va:new product('va'),vs:new product('vs'),ivr:new product('ivr'),
+	webagent:new product('webagent'),mobileagent:new product('mobileagent'),
+	voiceagent:new product('voiceagent'),outcome:false};
 
 function calculatebutton(){
-	var rounds = 2;
 	clearallproducts(before);
 	clearallproducts(after);
 
@@ -95,12 +98,6 @@ function calculatebutton(){
 		console.log("phone: "+phone.volume);
 	}
 	function printall(){
-		// web.printall();
-		// voice.printall();
-		// desktop.printall();
-		// mobileweb.printall();
-		// mobilevoice.printall();
-		// phone.printall();
 		console.log("before");
 		before.va.printall();
 		before.vs.printall();
@@ -118,6 +115,13 @@ function calculatebutton(){
 		console.log("\n\n")
 	}
 	function getvalues(){
+		rounds = document.getElementById('rounds').value;
+		if (rounds <1){
+			rounds = 1;
+		}
+		before.outcome = document.getElementById('cbob1').checked;
+		after.outcome = document.getElementById('cbob2').checked;
+
 		web.volume=document.getElementById('webtraffic').value*1000000;
 		voice.volume=document.getElementById('voicetraffic').value*1000000;
 
@@ -203,85 +207,21 @@ function calculatebutton(){
 		var phonevolume = voice.volume*phone.acceptpercent;
 		var remaining = rounds;
 
-		calculateroundvolumes2(before,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
-		calculateroundvolumes2(after,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
+		calculateroundvolumes(before,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
+		calculateroundvolumes(after,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
 		if (debug){
 			console.log("post cost printall\n");
 			printall();
 		}
 	}
 	function calculateroundvolumes(boa,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining){
-		if (remaining==0){
-			return 0;
-		} else{
-			
-			remaining-=1;
-		}
-		desktop.roundvolume = desktopvolume;
-		mobileweb.roundvolume = mobilewebvolume;
-		mobilevoice.roundvolume = mobilevoicevolume;
-		phone.roundvolume = phonevolume;
-
-		/*va*/
-		if(boa.va.enabled){
-			boa.va.roundvolume=desktopvolume*boa.va.containment;
-			desktopvolume-=boa.va.roundvolume*boa.va.containment;
-			boa.va.roundvolume+=mobilewebvolume*boa.va.containment;
-			mobilewebvolume-=mobileweb.roundvolume*boa.va.containment;
-			boa.va.calccost();
-		}
-		/*vs*/
-		if(boa.vs.enabled){
-			boa.vs.roundvolume=mobilevoice.roundvolume*boa.vs.containment;
-			mobilevoicevolume-=mobilevoice.roundvolume*boa.vs.containment;
-			boa.vs.calccost();
-		}
-		/*IVR*/
-		if(boa.ivr.enabled){
-			boa.ivr.roundvolume=mobilevoicevolume*boa.ivr.containment;
-			mobilevoicevolume-=mobilevoice.roundvolume*boa.ivr.containment;
-			boa.ivr.roundvolume+=phonevolume*boa.ivr.containment;
-			phonevolume-=phonevolume*boa.ivr.containment;
-			boa.ivr.calccost();
-		}
-		/*web chat*/
-	 	if(boa.webagent.enabled){
-	 		boa.webagent.roundvolume=desktopvolume*boa.webagent.containment;
-	 		desktopvolume-=desktopvolume*boa.webagent.containment;
-	 		boa.webagent.calccost();
-	 	}
-	 	/*mobile chat*/
-	 	if(boa.mobileagent.enabled){
-	 		boa.mobileagent.roundvolume=mobilewebvolume*boa.mobileagent.containment;
-	 		mobilewebvolume-=mobilewebvolume*boa.mobileagent.containment;
-	 		boa.mobileagent.calccost();
-	 	}
-	 	/*voice agents*/
-	 	if(boa.voiceagent.enabled){
-	 		boa.voiceagent.roundvolume=mobilevoicevolume*boa.voiceagent.containment;
-	 		mobilevoicevolume-=mobilevoicevolume*boa.voiceagent.containment;
-	 		boa.voiceagent.roundvolume+=phonevolume*boa.voiceagent.containment;
-	 		phonevolume-=phonevolume*boa.voiceagent.containment;
-	 		boa.voiceagent.calccost();
-	 	}
-	 	desktop.volume += desktop.roundvolume;
-		mobileweb.volume += mobileweb.roundvolume;
-		mobilevoice.volume += mobileweb.roundvolume;
-		phone.volume += phone.roundvolume;
-		if (debug){
-			console.log("remaining rounds: "+remaining+"\n\tdesktop: "+desktopvolume+"\n\tmobileweb: "+mobilewebvolume+
-				"\n\tmobilevoice: "+mobilevoicevolume+"\n\tphone: "+phonevolume);
-		}
-	 	calculateroundvolumes(boa,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
-	}
-	function calculateroundvolumes2(boa,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining){
 		if (remaining == 0){
 			if (debug){console.log("unattended:\n\tdesktop: "+desktopvolume+"\n\tmobileweb: "+mobilewebvolume+"\n\tmobilevoice: "+mobilevoicevolume+"\n\tphone: "+phonevolume);}
-			boa.voiceagent.volume+=desktopvolume+mobilevoicevolume+mobilewebvolume+phonevolume;
-			boa.voiceagent.calccost();
+			//boa.voiceagent.volume+=desktopvolume+mobilevoicevolume+mobilewebvolume+phonevolume;
+			//boa.voiceagent.calccost();
 			return 0;
 		} else {
-			console.log("\nround number: "+remaining);
+			if (debug){console.log("\nround number: "+remaining);}
 			if (debug){console.log("volumes:\n\tdesktop: "+desktopvolume+"\n\tmobileweb: "+mobilewebvolume+"\n\tmobilevoice: "+mobilevoicevolume+"\n\tphone: "+phonevolume);}
 			remaining -=1;
 		}
@@ -304,7 +244,7 @@ function calculatebutton(){
 		/*ivr*/
 		if (boa.ivr.enabled){
 			boa.ivr.roundvolume = (boa.outcome ? boa.ivr.containment*mobilevoicevolume:mobilevoicevolume);
-			moblievoicevolume-=boa.ivr.containment*mobilevoicevolume;
+			mobilevoicevolume-=boa.ivr.containment*mobilevoicevolume;
 			boa.ivr.roundvolume+= (boa.outcome ? boa.ivr.containment*phonevolume:phonevolume);
 			phonevolume-=boa.ivr.containment*phonevolume;
 			if (debug){
@@ -353,7 +293,7 @@ function calculatebutton(){
 		mobileweb.volume += mobileweb.roundvolume;
 		mobilevoice.volume += mobileweb.roundvolume;
 		phone.volume += phone.roundvolume;
-		calculateroundvolumes2(boa,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
+		calculateroundvolumes(boa,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
 	}	
 function updatesummary(){
 	function numberWithCommas(x) {
@@ -432,25 +372,63 @@ function updatesummary(){
 		document.getElementById('conwc1').value = 0;
 		document.getElementById('conwc2').value = 0;
 
+		document.getElementById('rounds').value = 1;
+		document.getElementById('cbob1').checked = false;
+		document.getElementById('cbob2').checked = true;
 
+		calculatebutton();
+ 	}
+ 	function scenario2(){
+		document.getElementById("voicetraffic").value=0.029319;
+		document.getElementById('webtraffic').value=0;
 
-		// web.volume=0;
-		// voice.volume=1250000;
-		// phone.acceptpercent = 0.5;
-		// mobilevoice.acceptpercent = 0.5;
-		// before.voiceagent.cpi=11.60;
-		// before.voiceagent.enabled = true;
-		// after.voiceagent.cpi=11.60;
-		// after.voiceagent.enabled = true;
+		document.getElementById('websplit').value = 50;
+		document.getElementById('voicesplit').value = 50;
 
-		// after.vs.enabled=true;
-		// after.vs.cpi=2.5;
-		// after.vs.containment=0.2;
-		calculatevolumes(before);
-		calculatevolumes(after);
-		updatesummary();
+		document.getElementById('cbvoi1').checked = true;
+		document.getElementById('cbvoi2').checked = true;
+		document.getElementById('cbivr1').checked = false;
+		document.getElementById('cbivr2').checked = true;
+		document.getElementById('cbvs1').checked = false;
+		document.getElementById('cbvs2').checked = false;
+		document.getElementById('cbva1').checked = false;
+		document.getElementById('cbva2').checked = false;
+		document.getElementById('cbmc1').checked = false;
+		document.getElementById('cbmc2').checked = false;
+		document.getElementById('cbwc1').checked = false;
+		document.getElementById('cbwc2').checked = false;
 
-		drawchart();
+		document.getElementById('cpivoi1').value = 14.11;
+		document.getElementById('cpivoi2').value = 14.11;
+		document.getElementById('cpiivr1').value = 0;
+		document.getElementById('cpiivr2').value = 0;
+		document.getElementById('cpivs1').value = 0;
+		document.getElementById('cpivs2').value = 0;
+		document.getElementById('cpiva1').value = 0;
+		document.getElementById('cpiva2').value = 0;
+		document.getElementById('cpimc1').value = 0;
+		document.getElementById('cpimc2').value = 0;
+		document.getElementById('cpiwc1').value = 0;
+		document.getElementById('cpiwc2').value = 0;
+
+		document.getElementById('convoi1').value = 40;
+		document.getElementById('convoi2').value = 50;
+		document.getElementById('conivr1').value = 0;
+		document.getElementById('conivr2').value = 20;
+		document.getElementById('convs1').value = 0;
+		document.getElementById('convs2').value = 0;
+		document.getElementById('conva1').value = 0;
+		document.getElementById('conva2').value = 0;
+		document.getElementById('conmc1').value = 0;
+		document.getElementById('conmc2').value = 0;
+		document.getElementById('conwc1').value = 0;
+		document.getElementById('conwc2').value = 0;
+
+		document.getElementById('rounds').value = 1;
+		document.getElementById('cbob1').checked = false;
+		document.getElementById('cbob2').checked = false;
+
+		calculatebutton();
  	}
 
 /*charts*/

@@ -57,7 +57,7 @@
 								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpivoi1"></td>
 								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpivoi2"></td>
 							</tr>
-							<tr>
+							<tr style="display:none;">
 								<td class="column-label">First Call Resolution</td>
 								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="convoi1"></td>
 								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convoi2"></td>
@@ -130,7 +130,7 @@
 								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpimc2"></td>
 							</tr>
 							<tr>
-								<td class="column-label">First Chat Resolution</td>
+								<td class="column-label">Containment</td>
 								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conmc1"></td>
 								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conmc2"></td>
 							</tr>
@@ -148,7 +148,7 @@
 								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiwc2"></td>
 							</tr>
 							<tr>
-								<td class="column-label">First Chat Resolution</td>
+								<td class="column-label">Containment</td>
 								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conwc1"></td>
 								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conwc2"></td>
 							</tr>
@@ -162,9 +162,9 @@
 		<div class = "lowerright">
 
 			<div style="text-align:center; margin-top:10px;">
-				<div class="btn-group tab-btn-group" role="group" style="display:inline-block;">
+				<div class="btn-group tab-btn-group" role="group" style="display:inline-block;" onclick="resize();">
 				  <button type="button" class="btn btn-default active"><a href="#summary" data-toggle="pill" role="button">Summary</a></button>
-				  <button type="button" class="btn btn-default"><a href="#chart" data-toggle="pill" role="button">Charts</a></button>
+				  <button type="button" class="btn btn-default" onclick="setTimeout(function(){drawchart();},200);"><a href="#chart" data-toggle="pill" role="button">Charts</a></button>
 				  <button type="button" class="btn btn-default"><a href="#map" data-toggle="pill" role="button">Journey Map</a></button>
 				</div>
 			</div>
@@ -230,9 +230,11 @@
 				</div>
 			  </div>
 			  <div id="chart" class="tab-pane fade">
+			    <div id="volumechart"></div>
 			    <div id="chart3"></div>
 			  </div>
 			  <div id="map" class="tab-pane fade">
+			  	<h2 style="text-align:center">New Journey Map</h2>
 			    <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"   viewBox="-50 0 1395 446.5" xml:space="preserve">
 							<!--22-->
 									<path fill="none" stroke="#912370" class="22a"stroke-width="20" stroke-miterlimit="10" d="M1047,151h-27.2c-10.6,0-20.8,4.2-28.3,11.7L796.9,357.3c-15.2,15.2-35.8,23.7-57.3,23.7H711"/>
@@ -435,6 +437,7 @@
 									</g>
 							<!--end 28-->
 						</svg>
+						<img src="img/labels.png" style="width:94%;margin-left:3%;">
 			  </div>
 			</div>
 

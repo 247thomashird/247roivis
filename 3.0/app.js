@@ -66,7 +66,9 @@ function calculatebutton(){
 	getvalues();
 	colorupdate();
 	
-	roundequation(rounds);
+	calculatevolumes(before);
+	calculatevolumes(after);
+	//roundequation(rounds);
 	updatesummary();
 	drawchart();
 }
@@ -363,11 +365,12 @@ function updatesummary(){
 		// after.vs.enabled=true;
 		// after.vs.cpi=2.5;
 		// after.vs.containment=0.2;
-		calculatevolumes(before);
-		calculatevolumes(after);
-		updatesummary();
+		// calculatevolumes(before);
+		// calculatevolumes(after);
+		// updatesummary();
 
-		drawchart();
+		// drawchart();
+		calculatebutton();
  	}
 
 /*charts*/
@@ -384,18 +387,36 @@ function updatesummary(){
 			costafter
 			])
 		var options = {
+			title: 'Volumes',
 			width:chartw,
 			height: 360,
 			legend:{ position: 'bottom'},
 			bar:{groupwidth:'75'},
 			isStacked: true,
-			colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370'],
-			hAxis: {
-	            maxValue: voice.volume
-	          }
+			colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370']
 		};
 		var chart = new google.visualization.BarChart(document.getElementById('chart3'));
 		chart.draw(data,options);
+
+		var volbefore=['before',before.voiceagent.cost,before.ivr.cost,before.vs.cost,
+		before.va.cost,before.mobileagent.cost,before.webagent.cost];
+		var volafter=['after',after.voiceagent.cost,after.ivr.cost,after.vs.cost,
+		after.va.cost,after.mobileagent.cost,after.webagent.cost];
+		var data2 = new google.visualization.arrayToDataTable([
+			products,
+			volbefore,
+			volafter])
+		var options2 = {
+			title: 'Costs',
+			width:chartw,
+			height:360,
+			legend:{position: 'bottom'},
+			bar: {groupwidth:'75'},
+			isStacked:true,
+			colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370']
+		};
+		var chart2 = new google.visualization.BarChart(document.getElementById('volumechart'));
+		chart2.draw(data2,options2);
 	}
 
 /*colors*/

@@ -1,5 +1,7 @@
 var debug = true;
 var rounds = 1;
+var lrwidthsub = 400;
+var fullsize = false;
 google.load('visualization','1.0', {'packages' :['corechart', 'bar']});
 google.setOnLoadCallback(drawchart);
 
@@ -538,6 +540,14 @@ function move2(){
 	$("#lowerleft").animate({
     width: "toggle"
 	},500,function(){});
+	if (fullsize){
+		//document.getElementsByClassName('lowerright')[0].style.width="calc(100% - 400px)";
+		fullsize=false;
+	} else{
+	//document.getElementsByClassName('lowerright')[0].style.width="100%";
+	fullsize = true;
+	}
+	resize();
 }
 window.onload = function(){
 	resize();
@@ -550,4 +560,10 @@ function resize(){
 	var height = $(window).height();
 	$("#settingsbar").height(height-65-76);
 	drawchart();
+	if (fullsize){
+		document.getElementsByClassName('lowerright')[0].style.width=window.innerWidth-400;
+		console.log()
+	} else {
+		document.getElementsByClassName('lowerright')[0].style.width=window.innerWidth;
+	}
 }

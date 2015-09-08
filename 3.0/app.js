@@ -119,8 +119,8 @@ function calculatebutton(){
 		after.voiceagent.printall();
 	}
 	function getvalues(){
-		web.volume=document.getElementById('webtraffic').value*1000000;
-		voice.volume=document.getElementById('voicetraffic').value*1000000;
+		web.volume=document.getElementById('webtraffic').value;
+		voice.volume=document.getElementById('voicetraffic').value;
 
 		desktop.acceptpercent = 1 - document.getElementById('websplit').value/100;
 		mobileweb.acceptpercent = document.getElementById('websplit').value/100;

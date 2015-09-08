@@ -100,7 +100,7 @@
 							</tr>
 						</table>
 				<!--Virtual Assistant-->
-				<table class="channel-input-section">
+					<table class="channel-input-section">
 							<tr>
 								<td class="column-label channel-label">Virtual Assistant</td>
 								<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbva1"><input type="checkbox" id="cbva1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
@@ -156,17 +156,24 @@
 			</div>
 			<div class="calc-buttons-container">
 				<button class="btn btn-link btn-xs" id="reset-btn" style="">Reset</button>
-				<button class="btn btn-primary btn-lg" id="calculate-btn" style="">Calculate</button>
+				<button class="btn btn-primary btn-lg" id="calculate-btn" style="" onclick="calculatebutton();">Calculate</button>
 			</div>
 		</div>
 		<div class = "lowerright">
 
-			<div style="text-align:center; margin-top:10px;">
+			<!-- <div style="text-align:center; margin-top:10px;">
 				<div class="btn-group tab-btn-group" role="group" style="display:inline-block;" onclick="resize();">
 				  <button type="button" class="btn btn-default active"><a href="#summary" data-toggle="pill" role="button">Summary</a></button>
 				  <button type="button" class="btn btn-default" onclick="setTimeout(function(){drawchart();},200);"><a href="#chart" data-toggle="pill" role="button">Charts</a></button>
 				  <button type="button" class="btn btn-default"><a href="#map" data-toggle="pill" role="button">Journey Map</a></button>
 				</div>
+			</div> -->
+			<div class="centered-pills">
+				<ul class="nav nav-pills" style="margin:auto;">
+				  <li class="active"><a data-toggle="pill" style="border-radius:0px;" href="#summary">Summary</a></li>
+				  <li><a data-toggle="pill" href="#chart" style="border-radius:0px;" onclick="setTimeout(function(){drawchart();},200);">Charts</a></li>
+				  <li><a data-toggle="pill" href="#map" style="border-radius:0px;">Journey Map</a></li>
+				</ul>
 			</div>
 
 			<div class="tab-content">

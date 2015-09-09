@@ -547,6 +547,11 @@ function move2(){
 	//document.getElementsByClassName('lowerright')[0].style.width="100%";
 	fullsize = true;
 	}
+	var newwidth = ((fullsize) ? window.innerWidth:window.innerWidth - 400).toString();
+	$('lowerright').animate({
+		width: newwidth
+	}, 500,function(){});
+	
 	resize();
 }
 window.onload = function(){
@@ -560,10 +565,13 @@ function resize(){
 	var height = $(window).height();
 	$("#settingsbar").height(height-65-76);
 	drawchart();
-	if (fullsize){
-		document.getElementsByClassName('lowerright')[0].style.width=window.innerWidth-400;
-		console.log()
+	if (!fullsize){
+		//document.getElementsByClassName('lowerright')[0].style.width=window.innerWidth-400;
+		//document.getElementById('lowerright').style.width = (window.innerWidth - 400).toString()+"px";
+		//console.log("fullsize width: "+document.getElementById('lowerright').style.width);
 	} else {
-		document.getElementsByClassName('lowerright')[0].style.width=window.innerWidth;
+		//document.getElementsByClassName('lowerright')[0].style.width=window.innerWidth;
+		//setTimeout(function(){document.getElementById('lowerright').style.width = (window.innerWidth).toString()+"px";},400);
+		//console.log("!fullsize width: "+document.getElementById('lowerright').style.width);
 	}
 }

@@ -13,11 +13,9 @@
 	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 
+	<!--my custom stuff-->
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="app.js"></script>
-
-
-
 
 	<!--material design library-->
 	<link rel="stylesheet" href="mdl/material.css">
@@ -30,20 +28,56 @@
 	<div class="topbar">
 	  <img id="logo" src="img/24_7_LOGO.svg">
 	  <div id="app-title">ROI Service Calculator</div>
-	  <button id="about-btn" class="btn btn-default btn-sm">About</button>
+	  <button id="about-btn" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">About</button>
 	</div>
+	<!--Modal-->
+	<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" style="font-size:22px;color:#777777;">About</h4>
+				</div>
+				<div class="modal-body">
+				  	<div class="textcontainer">
+						<div class="orangetext">
+							Service ROI Calculator
+						</div>
+						<div class="tealtext">
+							Illustrating the story and value we bring to enterprise
+						</div>
+						<div class="headertext">
+							Designed for use by [24]7 staff in conversation with new and existing enterprise customers to illustrate the value of adding [24]7 products and services to their Customer Services offering
+						</div>
+						<div class="regulartext"><br>
+							Costs and savings displayed in this website are estimates only and should not be considered a quote or commitment.<br><br>
+							Please send suggestions and feedback to <a href="mailto:neil.mckay@247-inc.com" target="_top">neil.mckay@247-inc.com</a><br><br>
+							Thomas Hird, UX Developer<br>
+							Neil Mckay, Director, Design<br>
+							Sally Grisedale, Chief Design Officer
+						</div>
+					</div>
+			    </div>
+			    <div class="modal-footer">
+					<button type="button" class="btn" data-dismiss="modal" style="background:#049094;color:white;float:right;width:190px;margin-left:0px;font-family:Arial;">Get Started</button>
+			    </div>
+			  </div>
+			</div>
+		</div>
 	<div class="lowersegment">
 		<div class="lowerleft">
 			<div class="settingsbar" id="settingsbar">
 				<div class="channel-input-section monthly-section">
 					<h2>Monthly Voice Traffic</h2>
 					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="voicetraffic">
-					<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="voicesplit">
+					<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="voicesplit"> -->
+					<input type="range" min="0" max="100" value="50" id="voicesplit">
 				</div>
 				<div class="channel-input-section monthly-section">
 					<h2>Monthly Web Traffic</h2>
 					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="webtraffic">
-					<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="websplit">
+					<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="websplit"> -->
+					<input type="range" min="0" max="100" value="50" id="websplit">
 				</div>
 				<!--voice Agents-->
 					<table class="channel-input-section">
@@ -170,9 +204,9 @@
 			</div> -->
 			<div class="centered-pills">
 				<ul class="nav nav-pills" style="margin:auto;">
-				  <li class="active"><a data-toggle="pill" style="border-radius:0px;" href="#summary">Summary</a></li>
+				  <li class="active"><a data-toggle="pill" class="leftpill" href="#summary">Summary</a></li>
 				  <li><a data-toggle="pill" href="#chart" style="border-radius:0px;" onclick="setTimeout(function(){drawchart();},200);">Charts</a></li>
-				  <li><a data-toggle="pill" href="#map" style="border-radius:0px;">Journey Map</a></li>
+				  <li><a data-toggle="pill" href="#map" class= "rightpill" style="border-radius:0px;">Journey Map</a></li>
 				</ul>
 			</div>
 

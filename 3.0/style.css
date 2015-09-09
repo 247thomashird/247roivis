@@ -202,8 +202,8 @@ button.active a, .active a:hover{
 .centered-pills ul.nav-pills {
     display: inline-block;
     border-radius:5px;
-    border: 1px solid #049094;
-        margin:0px;
+    border: 0px solid #049094;
+       margin:0px;
     padding:0px;
 }
 .centered-pills li {
@@ -212,7 +212,7 @@ button.active a, .active a:hover{
     margin:0px;
     padding:0px;
     margin-left:0 !important;
-    border:1px solid #049094;
+    border:0px solid #049094;
 }
 .centered-pills a {
     float: left;
@@ -221,7 +221,64 @@ button.active a, .active a:hover{
 .nav-pills > li > a{
 	margin-left:0;
 	margin-right:0;
+	padding:3px 12px;
+	color: #049094;
+	border: 1px solid #049094;
+}
+.leftpill {
+	border-top-left-radius: 3px !important;
+	border-bottom-left-radius:3px !important;
+	border-top-right-radius: 0px !important;
+	border-bottom-right-radius:0px !important;
+	border-right:0px !important;
+}
+.rightpill {
+	border-top-left-radius: 0px !important;
+	border-bottom-left-radius:0px !important;
+	border-top-right-radius: 3px !important;
+	border-bottom-right-radius:3px !important;
+	border-left:0px !important;
 }
 * html .centered-pills ul.nav-pills, *+html .centered-pills ul.nav-pills {
     display: inline;
 }
+
+/*Modal CSS*/
+	.orangetext{
+		font-size:28px;
+		color:#ef8822;
+	}
+	.tealtext{
+		font-size:24px;
+		color:#049094;
+		margin-top:20px;
+	}
+	.headertext{
+		font-size:24px;
+		margin-top:20px;
+		color:#777777;
+	}
+	.regulartext{
+		font-size:22px;
+		color:#777777;
+	}
+	.textcontainer{
+		width:880px;
+		padding-left: 80px;
+		overflow-y:scroll;
+		height:80%;
+		font-family:Arial;
+		max-height:520px;
+		padding-right:80px;
+	}
+	.modalbutton{
+		border: 2px solid #049094;
+		border-radius:10px;
+		width:110px;
+		color:#049094;
+		line-height:40px;
+		padding-left:10px;
+	}
+	a {
+		color:#049094;
+	}

@@ -44,6 +44,9 @@ a {
 #about-btn{
 	position: absolute; top: 16px; right: 20px;
 }
+#scenarios-btn{
+	position: absolute; top: 16px; right: 90px;
+}
 
 /*End Header bar*/
 

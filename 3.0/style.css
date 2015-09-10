@@ -99,8 +99,35 @@ tr:hover{
 	width:70px;
 	text-align: right;
 }
-.mdl-checkbox{
-	width: auto !important; 	/*to override the 100% width from mdl*/
+.checkbox {
+	display: inline-block;
+	cursor: pointer;
+	font-size: 13px; line-height:13px;
+	width: 14px;
+	height: 14px;
+	padding:0;
+	vertical-align:top;
+}
+input[type=checkbox] {
+	display:none; 
+}
+.checkbox:before {
+	content: "";
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	vertical-align:center;
+	background-color: #B4DEDF;
+	color: #f3f3f3;
+	text-align: center;
+	box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8); 
+	border-radius: 3px;
+}
+input[type=checkbox]:checked + .checkbox:before {
+	content: "\2713";
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+	font-size: 13px;
+	background-color: #049094;
 }
 .customcheckbox{
 	margin:0 auto;
@@ -269,7 +296,7 @@ button.active a, .active a:hover{
 		width:880px;
 		padding-left: 80px;
 		overflow-y:scroll;
-		height:80%;
+		height:800px;
 		font-family:Arial;
 		max-height:520px;
 		padding-right:80px;

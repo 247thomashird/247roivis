@@ -76,7 +76,13 @@ a {
 .monthly-section{
 	margin: 0px 20px 0px 0px;
 }
-.monthly-inputbox{
+.monthly-section input.monthly-inputbox{
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 40px;
+	height: 40px;
+	width: 100px;
+	margin: 5px 0px;
 }
 
 .channel-input-section{
@@ -104,16 +110,13 @@ tr:hover{
 }
 .inputbox{
 	border:1px solid lightgrey;
-	background-color:white;
+	/*background-color:white;*/
 	border-radius:3px;
 	text-align:right;
-	padding:0;
-	margin:0;
 	height:30px;
 	width:55px;
-	margin-left:10px;
 	padding:5px;
-	display:inline-block;
+	/*display:inline-block;*/
 }
 
 /*Buttons*/
@@ -195,7 +198,7 @@ button.active a, .active a:hover{
 
 
 
-.centered-pills {  
+.centered-pills {
 	margin-top:10px;
     text-align: center;
 }

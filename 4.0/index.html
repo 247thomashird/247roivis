@@ -4,238 +4,175 @@
 
 	<!--jquery-->
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<!--google charts related-->
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-
 	<!--bootstrap-->
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
+	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 
-	<!--my custom stuff-->
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="app.js"></script>
 
+	<!--material design library-->
+	<link rel="stylesheet" href="mdl/material.css">
+	<script src="mdl/material.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
 	<div class="topbar">
-	  <img id="logo" src="img/24_7_LOGO.svg">
-	  <div id="app-title">ROI Service Calculator</div>
-	  <a href="scenarios.pdf" target="_blank" id="scenarios-btn"><button class="btn btn-default btn-sm" >Scenarios</button></a>
-	  <button id="about-btn" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">About</button>
+		<a onclick="move2();">
+			<img id="logo" src="img/24_7_LOGO.svg">
+			<div id="app-title">ROI Service Calculator</div>
+		</a>
+		<button id="about-btn" class="btn btn-default btn-sm">About</button>
 	</div>
-	<!--Modal-->
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title" style="font-size:22px;color:#777777;">About</h4>
-				</div>
-				<div class="modal-body">
-				  	<div class="textcontainer">
-						<div class="orangetext">
-							Service ROI Calculator
-						</div>
-						<div class="tealtext">
-							Illustrating the story and value we bring to enterprise
-						</div>
-						<div class="headertext">
-							Designed for use by [24]7 staff in conversation with new and existing enterprise customers to illustrate the value of adding [24]7 products and services to their Customer Services offering
-						</div>
-						<div class="regulartext"><br>
-							Costs and savings displayed in this website are estimates only and should not be considered a quote or commitment.<br><br><br>
-							Please send suggestions and feedback to <a href="mailto:neil.mckay@247-inc.com" target="_top">neil.mckay@247-inc.com</a><br>
-							Thomas Hird, UX Developer<br>
-							Neil Mckay, Director, Design<br>
-							Sally Grisedale, Chief Design Officer
-						</div>
-					</div>
-			    </div>
-			    <div class="modal-footer">
-					<button type="button" class="btn" data-dismiss="modal" style="background:#049094;color:white;float:right;width:190px;margin-left:0px;font-family:Arial;">Get Started</button>
-			    </div>
-			  </div>
-			</div>
-		</div>
 	<div class="lowersegment">
-		<div class="lowerleft">
+		<div class="lowerleft" id="lowerleft">
 			<div class="settingsbar" id="settingsbar">
 				<div class="channel-input-section monthly-section">
-					<br><h2>Monthly Voice Traffic</h2>
-					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="voicetraffic"><select class= "form-control dropdown">
-				  <option value="volvo">Million</option>
-				  <option value="saab">Thousand</option>
-				</select>
-					<!-- <input type="range" min="0" max="100" value="50" id="voicesplit"> -->
-					<div id="tealslider" class="slider"></div><div class="showpercent" id="showpercentteal">50% mobile</div><script>
-						$(function(){
-							$( "#tealslider").slider({
-								orientation: "horizontal",
-								range: "min",
-								max:100,
-								value:50,
-								step:5,
-								min:0,
-								slide: newslide
-							});
-						})
-					</script>
+					<h2>Monthly Voice Traffic</h2>
+					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="voicetraffic">
+					<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="voicesplit">
 				</div>
 				<div class="channel-input-section monthly-section">
 					<h2>Monthly Web Traffic</h2>
 					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="webtraffic">
-					<!-- <input type="range" min="0" max="100" value="50" id="websplit"> -->
-					<div id="purpleslider" class="slider"></div><div class="showpercent" id="showpercentpurple">50% mobile</div><br><br><script>
-						$(function(){
-							$( "#purpleslider").slider({
-								orientation: "horizontal",
-								range: "min",
-								max:100,
-								value:50,
-								step:5,
-								slide: newslide
-							});
-						})
-					</script>
+					<input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="websplit">
 				</div>
 				<!--voice Agents-->
 					<table class="channel-input-section">
-							<tr>
-								<td class="column-label channel-label">Voice Agents</td>
-								<td class="column-before">
-									<input type="checkbox" value="" id="cbvoi1">
-									<label class="checkbox" for="cbvoi1"></label></td>
-								<td class="column-after">
-									<input type="checkbox" value="" id="cbvoi2"><label class="checkbox" for="cbvoi2"></label></td>
-							</tr>
-							<tr>
-								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpivoi1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpivoi2"></td>
-							</tr>
-							<tr style="display:none;">
-								<td class="column-label">First Call Resolution</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="convoi1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convoi2"></td>
-							</tr>
-						</table>
+						<tr>
+							<td class="column-label channel-label">Voice Agents</td>
+							<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbvoi1"><input type="checkbox" id="cbvoi1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox" for="cbvoi2"><input type="checkbox" id="cbvoi2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+						</tr>
+						<tr>
+							<td class="column-label">Cost Per Interaction</td>
+							<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpivoi1"></td>
+							<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpivoi2"></td>
+						</tr>
+						<tr>
+							<td class="column-label">First Call Resolution</td>
+							<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="convoi1"></td>
+							<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convoi2"></td>
+						</tr>
+					</table>
 				<!--IVR-->
 					<table class="channel-input-section">
-							<tr>
-								<td class="column-label channel-label">IVR</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbivr1">
-									<label class="checkbox" for="cbivr1"></label></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbivr2">
-									<label class="checkbox" for="cbivr2"></label></td>
-							</tr>
-							<tr>
-								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiivr1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiivr2"></td>
-							</tr>
-							<tr>
-								<td class="column-label">Containment Rate</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conivr1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conivr2"></td>
-							</tr>
-						</table>
+						<tr>
+							<td class="column-label channel-label">IVR</td>
+							<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbivr1"><input type="checkbox" id="cbivr1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbivr2"><input type="checkbox" id="cbivr2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+						</tr>
+						<tr>
+							<td class="column-label">Cost Per Interaction</td>
+							<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiivr1"></td>
+							<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiivr2"></td>
+						</tr>
+						<tr>
+							<td class="column-label">Containment Rate</td>
+							<td class="column-before"><input type="text" class="inputbox" placeholder="0%" id="conivr1"></td>
+							<td class="column-after"><input type="text" class="inputbox" placeholder="0%" id="conivr2"></td>
+						</tr>
+					</table>
 				<!--Vivid Speech-->
-						<table class="channel-input-section">
-							<tr>
-								<td class="column-label channel-label">Vivid Speech</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbvs1">
-									<label class="checkbox" for="cbvs1"></label></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbvs2">
-									<label class="checkbox" for="cbvs2"></label></td>
-							</tr>
-							<tr>
-								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpivs1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpivs2"></td>
-							</tr>
-							<tr>
-								<td class="column-label">Containment Rate</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="convs1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convs2"></td>
-							</tr>
-						</table>
+					<table class="channel-input-section">
+						<tr>
+							<td class="column-label channel-label">Vivid Speech</td>
+							<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbvs1"><input type="checkbox" id="cbvs1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbvs2"><input type="checkbox" id="cbvs2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+						</tr>
+						<tr>
+							<td class="column-label">Cost Per Interaction</td>
+							<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpivs1"></td>
+							<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpivs2"></td>
+						</tr>
+						<tr>
+							<td class="column-label">Containment Rate</td>
+							<td class="column-before"><input type="text" class="inputbox" placeholder="0%" id="convs1"></td>
+							<td class="column-after"><input type="text" class="inputbox" placeholder="0%" id="convs2"></td>
+						</tr>
+					</table>
 				<!--Virtual Assistant-->
 					<table class="channel-input-section">
-							<tr>
-								<td class="column-label channel-label">Virtual Assistant</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbva1">
-									<label class="checkbox" for="cbva1"></label></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbva2">
-									<label class="checkbox" for="cbva2"></label></td>
-							</tr>
-							<tr>
-								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiva1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiva2"></td>
-							</tr>
-							<tr>
-								<td class="column-label">Containment Rate</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conva1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conva2"></td>
-							</tr>
-						</table>
+						<tr>
+							<td class="column-label channel-label">Virtual Assistant</td>
+							<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbva1"><input type="checkbox" id="cbva1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbva2"><input type="checkbox" id="cbva2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+						</tr>
+						<tr>
+							<td class="column-label">Cost Per Interaction</td>
+							<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiva1"></td>
+							<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiva2"></td>
+						</tr>
+						<tr>
+							<td class="column-label">Containment Rate</td>
+							<td class="column-before"><input type="text" class="inputbox" placeholder="0%" id="conva1"></td>
+							<td class="column-after"><input type="text" class="inputbox" placeholder="0%" id="conva2"></td>
+						</tr>
+					</table>
 				<!--Mobile Chat-->
 					<table class="channel-input-section">
-							<tr>
-								<td class="column-label channel-label">Mobile Chat</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbmc1">
-								<label class="checkbox" for="cbmc1"></label></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbmc2">
-								<label class="checkbox" for="cbmc2"></label></td>
-							</tr>
-							<tr>
-								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpimc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpimc2"></td>
-							</tr>
-							<tr>
-								<td class="column-label">Containment</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conmc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conmc2"></td>
-							</tr>
-						</table>
+						<tr>
+							<td class="column-label channel-label">Mobile Chat</td>
+							<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbmc1"><input type="checkbox" id="cbmc1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbmc2"><input type="checkbox" id="cbmc2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+						</tr>
+						<tr>
+							<td class="column-label">Cost Per Interaction</td>
+							<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpimc1"></td>
+							<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpimc2"></td>
+						</tr>
+						<tr>
+							<td class="column-label">First Chat Resolution</td>
+							<td class="column-before"><input type="text" class="inputbox" placeholder="0%" id="conmc1"></td>
+							<td class="column-after"><input type="text" class="inputbox" placeholder="0%" id="conmc2"></td>
+						</tr>
+					</table>
 				<!--Web Chat-->
 					<table class="channel-input-section">
-							<tr>
-								<td class="column-label channel-label">Web Chat</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbwc1">
-								<label class="checkbox" for="cbwc1"></label></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbwc2">
-								<label class="checkbox" for="cbwc2"></label></td>
-							</tr>
-							<tr>
-								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiwc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiwc2"></td>
-							</tr>
-							<tr>
-								<td class="column-label">Containment</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conwc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conwc2"></td>
-							</tr>
-						</table>
+						<tr>
+							<td class="column-label channel-label">Web Chat</td>
+							<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbwc1"><input type="checkbox" id="cbwc1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbwc2"><input type="checkbox" id="cbwc2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+						</tr>
+						<tr>
+							<td class="column-label">Cost Per Interaction</td>
+							<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiwc1"></td>
+							<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiwc2"></td>
+						</tr>
+						<tr>
+							<td class="column-label">First Chat Resolution</td>
+							<td class="column-before"><input type="text" class="inputbox" placeholder="0%" id="conwc1"></td>
+							<td class="column-after"><input type="text" class="inputbox" placeholder="0%" id="conwc2"></td>
+						</tr>
+					</table>
+				<!--outcome based?-->
+					<table class="channel-input-section">
+						<tr>
+							<td class="column-label channel-label">Outcome Based</td>
+							<td class="column-before"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbob1"><input type="checkbox" id="cbob1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+							<td class="column-after"><label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbob2"><input type="checkbox" id="cbob2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label></td>
+						</tr>
+					</table>
 			</div>
 			<div class="calc-buttons-container">
 				<button class="btn btn-link btn-xs" id="reset-btn" style="">Reset</button>
-				<button class="btn btn-primary btn-lg" id="calculate-btn" style="" onclick="calculatebutton();">Calculate</button>
+
+				<button class="btn btn-primary btn-lg" id="calculate-btn" style="">Calculate</button><input type="text" class="inputbox" placeholder="Rounds" id="rounds" style="float:right; margin-right:10px;margin-top:8px;width:65px;">
 			</div>
 		</div>
-		<div class = "lowerright">
-			<div class="centered-pills">
-				<ul class="nav nav-pills" style="margin:auto;">
-				  <li class="active"><a data-toggle="pill" class="leftpill" href="#summary">Summary</a></li>
-				  <li><a data-toggle="pill" href="#chart" style="border-radius:0px;" onclick="setTimeout(function(){drawchart();},200);">Charts</a></li>
-				  <li><a data-toggle="pill" href="#map" class= "rightpill" style="border-radius:0px;">Journey Map</a></li>
-				</ul>
+		<div class = "lowerright" id="lowerright">
+
+			<div style="text-align:center; margin-top:10px;">
+				<div class="btn-group tab-btn-group" role="group" style="display:inline-block;">
+				  <button type="button" class="btn btn-default"><a href="#summary" data-toggle="pill" role="button">Summary</a></button>
+				  <button type="button" class="btn btn-default"><a href="#chart" data-toggle="pill" role="button">Charts</a></button>
+				  <button type="button" class="btn btn-default"><a href="#map" data-toggle="pill" role="button">Journey Map</a></button>
+				</div>
 			</div>
 
 			<div class="tab-content">
@@ -299,11 +236,11 @@
 				</div>
 			  </div>
 			  <div id="chart" class="tab-pane fade">
-			    <div id="volumechart"></div>
 			    <div id="chart3"></div>
+			    <div id="volumechart"></div>
 			  </div>
 			  <div id="map" class="tab-pane fade">
-			  	<h2 style="text-align:center">New Journey Map</h2>
+			  	<h2 style="text-align:center;">New Journey Map</h2>
 			    <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"   viewBox="-50 0 1395 446.5" xml:space="preserve">
 							<!--22-->
 									<path fill="none" stroke="#912370" class="22a"stroke-width="20" stroke-miterlimit="10" d="M1047,151h-27.2c-10.6,0-20.8,4.2-28.3,11.7L796.9,357.3c-15.2,15.2-35.8,23.7-57.3,23.7H711"/>
@@ -506,7 +443,7 @@
 									</g>
 							<!--end 28-->
 						</svg>
-						<img src="img/labels.png" style="width:94%;margin-left:3%;">
+				<img src="img/labels.png" style="width:94%; margin-left:3%">
 			  </div>
 			</div>
 

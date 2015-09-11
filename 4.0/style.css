@@ -1,0 +1,194 @@
+body{
+	font-family:Arial;
+	color: #6E6F72;
+	font-weight: 300;
+	margin:0;
+	padding:0;
+	background-color:white;
+	height:100%;
+	width:100%;
+}
+a {
+	color:black;
+}
+.primary{
+	background-color:#049094 !important;
+}
+.secondary{
+	background-color:#ef8822 !important;
+}
+
+/*Header bar*/
+.topbar {
+	background-color: white;
+	height:65px;
+	position: fixed;
+	top:0;
+	left:0;
+	width:100%;
+	z-index: 20;
+	border-bottom: 1px solid #e3e3e3;
+}
+.topbar > * {
+	display: block;
+}
+#logo{
+	height: 20px;
+	position: absolute; top: 22px; left: 20px;
+}
+#app-title{
+	font-size:25px;
+	font-weight: 300;
+	position: absolute; top: 23px; left: 100px;
+}
+#about-btn{
+	position: absolute; top: 16px; right: 20px;
+}
+
+/*End Header bar*/
+
+
+
+.lowersegments{
+	background-color:#e5e6e7;
+	margin-top:65px;
+}
+
+/*Side bar*/
+.lowerleft{
+	width:400px;
+	border-right: 1px solid #e3e3e3;
+	float:left;
+	height: 100%;
+}
+.lowerleft h2 {
+	font-size:22px;
+	line-height:22px;
+	margin:0;
+	font-weight: 300;
+}
+.settingsbar {
+	overflow-y:scroll;
+	overflow-x:hidden;
+	padding:85px 20px 0px 20px;
+}
+
+/*Monthlies*/
+.monthly-section{
+	margin: 0px 20px 0px 0px;
+}
+.monthly-inputbox{
+}
+
+.channel-input-section{
+	margin: 0px 0px 20px 0px;
+	width: 100%;
+}
+.column-label, .column-before, .column-after{
+	padding: 5px 3px;
+}
+tr:hover{
+	background-color: #E6F4F4;
+}
+.channel-label{
+	font-weight: bold;
+}
+.column-before, .column-after{
+	width:70px;
+	text-align: right;
+}
+.mdl-checkbox{
+	width: auto !important; 	/*to override the 100% width from mdl*/
+}
+.customcheckbox{
+	margin:0 auto;
+}
+.inputbox{
+	border:1px solid lightgrey;
+	background-color:white;
+	border-radius:3px;
+	text-align:right;
+	padding:0;
+	margin:0;
+	height:30px;
+	width:55px;
+	margin-left:10px;
+	padding:5px;
+}
+
+/*Buttons*/
+
+.btn-primary{
+	background-color:#049094 !important;
+	border-color:#049094 !important;
+}
+
+/*Calculate and Reset buttons and container*/
+.calc-buttons-container{
+	position:fixed;
+	bottom:0px;
+	left:0px;
+	padding: 15px;
+	width:400px;
+	border-top: 1px solid #e3e3e3;
+	border-right: 1px solid #e3e3e3;
+	z-index: 20;
+	background-color: white;
+}
+#calculate-btn{
+	float: right;
+	min-width: 130px;
+}
+#reset-btn, #reset-btn:hover{
+	color: #808080;
+}
+
+/*Tab Control Button Group */
+.tab-btn-group button{
+	border-color:#049094 !important;
+}
+button.active{
+	background-color:#049094 !important;
+	border-color:#049094 !important;
+}
+button a, button a:hover{
+	text-decoration: none;
+	color: #049094 !important;
+}
+button.active a, .active a:hover{
+	color: white !important;
+}
+
+
+
+.lowerright{
+	padding-top:65px;
+	float:left;
+	background-color:#e5e6e7;
+	width:calc(100% - 400px);
+	background-color:white;
+	height: calc(100% - 65px);
+}
+
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(4,144,148,0.8);
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,0,0,0.0);
+}

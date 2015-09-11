@@ -69,24 +69,36 @@ a {
 }
 .settingsbar {
 	overflow-y:scroll;
-	padding:85px 20px 0px 20px;
+	padding:65px 0px 0px 0px;
+}
+.form-group label{
+	font-weight: 300;
+	margin-bottom: 0px !important;
+}
+.form-control{
+	text-align:right;
+}
+
+.monthly-input-section, .channel-input-section{
+	padding: 20px;
+	width: 100%;
+	border-bottom: 1px solid #e3e3e3;
 }
 
 /*Monthlies*/
-.monthly-section{
-	margin: 0px 20px 0px 0px;
+.monthly-input-section .form-group{
+	margin: 15px 0px 0px 0px;
 }
-.monthly-section input.monthly-inputbox{
+.monthly-input-section input.monthly-inputbox{
 	font-size: 20px;
 	font-weight: 300;
 	line-height: 40px;
 	height: 40px;
 	width: 100px;
-	margin: 5px 0px;
 }
 
-.channel-input-section{
-	margin: 0px 0px 20px 0px;
+/*Channels*/
+.channel-input-section table{
 	width: 100%;
 }
 .column-label, .column-before, .column-after{
@@ -118,7 +130,6 @@ tr:hover{
 	padding:5px;
 	/*display:inline-block;*/
 }
-
 /*Buttons*/
 
 .btn-primary{

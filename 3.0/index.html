@@ -67,20 +67,33 @@
 	<div class="lowersegment">
 		<div class="lowerleft">
 			<div class="settingsbar" id="settingsbar">
-				<div class="channel-input-section monthly-section">
+				<div class="monthly-input-section">
 					<h2>Monthly Voice Traffic</h2>
-					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="voicetraffic">
-					<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="voicesplit"> -->
-					<input type="range" min="0" max="100" value="50" id="voicesplit">
+					<div class="form-group form-inline">
+						<input type="text" class="monthly-inputbox form-control" placeholder="0" id="voicetraffic">
+						<label for="voicetraffic">million</label>
+					</div>
+					<div class="form-group form-inline">
+						<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="voicesplit"> -->
+						<input type="range" min="0" max="100" value="50" id="voicesplit">
+						<label for="voicesplit">% mobile</label>
+					</div>
 				</div>
-				<div class="channel-input-section monthly-section">
+				<div class="monthly-input-section">
 					<h2>Monthly Web Traffic</h2>
-					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="webtraffic">
-					<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="websplit"> -->
-					<input type="range" min="0" max="100" value="50" id="websplit">
+					<div class="form-group form-inline">
+						<input type="text" class="monthly-inputbox form-control" placeholder="0" id="webtraffic">
+						<label for="webtraffic">million</label>
+					</div>
+					<div class="form-group form-inline">
+						<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="websplit"> -->
+						<input type="range" min="0" max="100" value="50" id="websplit">
+						<label for="websplit">% mobile</label>
+					</div>
 				</div>
 				<!--voice Agents-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Voice Agents</td>
 								<td class="column-before"><!-- <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbvoi1"><input type="checkbox" id="cbvoi1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label> -->
@@ -99,8 +112,10 @@
 								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convoi2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--IVR-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">IVR</td>
 								<td class="column-before"><input type="checkbox" value="" id="cbivr1"></td>
@@ -117,8 +132,10 @@
 								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conivr2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--Vivid Speech-->
-						<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Vivid Speech</td>
 								<td class="column-before"><input type="checkbox" value="" id="cbvs1"></td>
@@ -135,8 +152,10 @@
 								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convs2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--Virtual Assistant-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Virtual Assistant</td>
 								<td class="column-before"><input type="checkbox" value="" id="cbva1"></td>
@@ -153,8 +172,10 @@
 								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conva2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--Mobile Chat-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Mobile Chat</td>
 								<td class="column-before"><input type="checkbox" value="" id="cbmc1"></td>
@@ -171,8 +192,10 @@
 								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conmc2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--Web Chat-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Web Chat</td>
 								<td class="column-before"><input type="checkbox" value="" id="cbwc1"></td>
@@ -189,6 +212,7 @@
 								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conwc2"></td>
 							</tr>
 						</table>
+					</div>
 			</div>
 			<div class="calc-buttons-container">
 				<button class="btn btn-link btn-xs" id="reset-btn" style="">Reset</button>

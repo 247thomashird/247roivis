@@ -143,6 +143,10 @@ td > label{
 	border-right: 1px solid #e3e3e3;
 	z-index: 20;
 	background-color: white;
+
+  -webkit-box-shadow: 0 -8px 16px -16px black;
+     -moz-box-shadow: 0 -8px 16px -16px black;
+          box-shadow: 0 -8px 16px -16px black;
 }
 #calculate-btn{
 	float: right;

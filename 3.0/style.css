@@ -111,22 +111,34 @@ tr:hover{
 	font-weight: bold;
 }
 .column-before, .column-after{
-	width:70px;
-	text-align: right;
+	width:80px;
+	padding: 5px 5px 5px 10px;
+	/*text-align: right;*/
 }
-.mdl-checkbox{
-	width: auto !important; 	/*to override the 100% width from mdl*/
+td > label{
+	font-weight: 300;
+	font-size: 12px;
+	text-align: left;
+	margin-bottom: 0px;
+	display: block;
 }
-.customcheckbox{
+/*td > label input{
+	display: inline-block;
+	float: right;
+}*/
+/*.mdl-checkbox{
+	width: auto !important;
+}*/
+/*.customcheckbox{
 	margin:0 auto;
-}
+}*/
 .inputbox{
 	border:1px solid lightgrey;
 	/*background-color:white;*/
 	border-radius:3px;
 	text-align:right;
 	height:30px;
-	width:55px;
+	width:100%;
 	padding:5px;
 	/*display:inline-block;*/
 }

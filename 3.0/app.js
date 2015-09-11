@@ -3,6 +3,7 @@ google.load('visualization','1.0', {'packages' :['corechart', 'bar']});
 google.setOnLoadCallback(drawchart);
 
 /*variables*/
+var lvs = 50, dvs = 50;
 	function platform(){
 		this.volume=0;
 		this.clear = function(){
@@ -122,10 +123,10 @@ function calculatebutton(){
 		web.volume=document.getElementById('webtraffic').value;
 		voice.volume=document.getElementById('voicetraffic').value;
 
-		desktop.acceptpercent = 1 - document.getElementById('websplit').value/100;
-		mobileweb.acceptpercent = document.getElementById('websplit').value/100;
-		mobilevoice.acceptpercent = document.getElementById('voicesplit').value/100;
-		phone.acceptpercent = 1 - document.getElementById('voicesplit').value/100;
+		desktop.acceptpercent = (1-dvs)/100;//1 - document.getElementById('websplit').value/100;
+		mobileweb.acceptpercent = dvs/100;//document.getElementById('websplit').value/100;
+		mobilevoice.acceptpercent = lvs/100;//document.getElementById('voicesplit').value/100;
+		phone.acceptpercent = (1 - lvs)/100;//document.getElementById('voicesplit').value/100;
 
 		function updateproduct(product,shorthand){
 			if (debug){console.log("getting values"+product);}
@@ -505,3 +506,11 @@ function resize(){
 	$("#settingsbar").height(height-65-76);
 	drawchart();
 }
+function newslide(){
+		console.log("newslide change");
+		setTimeout(function(){lvs =Number($("#tealslider").slider("option","value"));
+		dvs=Number($("#purpleslider").slider("option","value"));
+		document.getElementById("showpercentteal").innerHTML = lvs+"% mobile";
+		document.getElementById("showpercentpurple").innerHTML = dvs+"% mobile";
+		lvs=lvs/100;dvs=dvs/100;},10);
+	}

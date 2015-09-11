@@ -3,24 +3,20 @@
 <head>
 
 	<!--jquery-->
-
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<!--google charts related-->
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
 	<!--bootstrap-->
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 
 	<!--my custom stuff-->
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="app.js"></script>
 
-	<!--material design library-->
-	<!-- <link rel="stylesheet" href="mdl/material.css">
-	<script src="mdl/material.js"></script>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -71,23 +67,46 @@
 				<div class="channel-input-section monthly-section">
 					<h2>Monthly Voice Traffic</h2>
 					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="voicetraffic">
-					<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="voicesplit"> -->
-					<input type="range" min="0" max="100" value="50" id="voicesplit">
+					<!-- <input type="range" min="0" max="100" value="50" id="voicesplit"> -->
+					<div id="tealslider" class="slider"></div><div class="showpercent" id="showpercentteal">50% mobile</div><script>
+						$(function(){
+							$( "#tealslider").slider({
+								orientation: "horizontal",
+								range: "min",
+								max:100,
+								value:50,
+								step:5,
+								min:0,
+								slide: newslide
+							});
+						})
+					</script>
 				</div>
 				<div class="channel-input-section monthly-section">
 					<h2>Monthly Web Traffic</h2>
 					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="webtraffic">
-					<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="websplit"> -->
-					<input type="range" min="0" max="100" value="50" id="websplit">
+					<!-- <input type="range" min="0" max="100" value="50" id="websplit"> -->
+					<div id="purpleslider" class="slider"></div><div class="showpercent" id="showpercentpurple">50% mobile</div><br><br><script>
+						$(function(){
+							$( "#purpleslider").slider({
+								orientation: "horizontal",
+								range: "min",
+								max:100,
+								value:50,
+								step:5,
+								slide: newslide
+							});
+						})
+					</script>
 				</div>
 				<!--voice Agents-->
 					<table class="channel-input-section">
 							<tr>
 								<td class="column-label channel-label">Voice Agents</td>
-								<td class="column-before"><!-- <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbvoi1"><input type="checkbox" id="cbvoi1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label> -->
+								<td class="column-before">
 									<input type="checkbox" value="" id="cbvoi1">
 									<label class="checkbox" for="cbvoi1"></label></td>
-								<td class="column-after"><!-- <label class="mdl-checkbox mdl-js-checkbox" for="cbvoi2"><input type="checkbox" id="cbvoi2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label> -->
+								<td class="column-after">
 									<input type="checkbox" value="" id="cbvoi2"><label class="checkbox" for="cbvoi2"></label></td>
 							</tr>
 							<tr>
@@ -208,14 +227,6 @@
 			</div>
 		</div>
 		<div class = "lowerright">
-
-			<!-- <div style="text-align:center; margin-top:10px;">
-				<div class="btn-group tab-btn-group" role="group" style="display:inline-block;" onclick="resize();">
-				  <button type="button" class="btn btn-default active"><a href="#summary" data-toggle="pill" role="button">Summary</a></button>
-				  <button type="button" class="btn btn-default" onclick="setTimeout(function(){drawchart();},200);"><a href="#chart" data-toggle="pill" role="button">Charts</a></button>
-				  <button type="button" class="btn btn-default"><a href="#map" data-toggle="pill" role="button">Journey Map</a></button>
-				</div>
-			</div> -->
 			<div class="centered-pills">
 				<ul class="nav nav-pills" style="margin:auto;">
 				  <li class="active"><a data-toggle="pill" class="leftpill" href="#summary">Summary</a></li>

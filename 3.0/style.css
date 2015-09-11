@@ -315,3 +315,16 @@ button.active a, .active a:hover{
 	a {
 		color:#049094;
 	}
+/*slider styling*/
+.ui-slider .ui-slider-handle {border-radius:7px; width:14px;background:#049094;border:0px;height:14px;margin-top:4px;}
+.ui-slider .ui-slider-range {background:#B4DEDF;border-radius:7px;}
+.ui-slider {border-radius:6px;border:0px;margin-left:5px;height:12px;}
+.slider{
+	width:150px;
+	display:inline-block;
+}
+.showpercent{
+	display:inline-block;
+	text-align:right;
+	width:100px;
+}

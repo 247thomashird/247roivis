@@ -62,9 +62,16 @@ a {
 }
 .settingsbar {
 	overflow-y:scroll;
-	padding:65px 20px 0px 20px;
+	padding:0px 20px 0px 20px;
+	margin-top:65px;
 }
-
+.dropdown{
+	width:80px;
+	margin-left:20px;
+	height:25px;
+	border-radius:0px;
+	display:inline-block;
+}
 .slefttd{
 	width:160px;
 	font-weight:bold;
@@ -150,7 +157,7 @@ button.active a, .active a:hover{
 
 /* Let's get this party started */
 ::-webkit-scrollbar {
-    width: 4px;
+    width: 2px;
 }
 
 /* Track */

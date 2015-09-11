@@ -228,6 +228,7 @@ function updatesummary(){
 		calculatevolumes(before);
 		calculatevolumes(after);
 		updatesummary();
+		colorupdate();
 
 		drawchart();
 	}

@@ -77,6 +77,9 @@ a {
 }
 .form-control{
 	text-align:right;
+	height:30px;
+	width:100%;
+	padding:5px;
 }
 
 .monthly-input-section, .channel-input-section{
@@ -89,7 +92,7 @@ a {
 .monthly-input-section .form-group{
 	margin: 15px 0px 0px 0px;
 }
-.monthly-input-section input.monthly-inputbox{
+.monthly-input-section input.monthly-form-control{
 	font-size: 20px;
 	font-weight: 300;
 	line-height: 40px;
@@ -113,7 +116,6 @@ tr:hover{
 .column-before, .column-after{
 	width:80px;
 	padding: 5px 5px 5px 10px;
-	/*text-align: right;*/
 }
 td > label{
 	font-weight: 300;
@@ -122,26 +124,7 @@ td > label{
 	margin-bottom: 0px;
 	display: block;
 }
-/*td > label input{
-	display: inline-block;
-	float: right;
-}*/
-/*.mdl-checkbox{
-	width: auto !important;
-}*/
-/*.customcheckbox{
-	margin:0 auto;
-}*/
-.inputbox{
-	border:1px solid lightgrey;
-	/*background-color:white;*/
-	border-radius:3px;
-	text-align:right;
-	height:30px;
-	width:100%;
-	padding:5px;
-	/*display:inline-block;*/
-}
+
 /*Buttons*/
 
 .btn-primary{

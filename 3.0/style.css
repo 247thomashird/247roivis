@@ -72,24 +72,39 @@ a {
 }
 .settingsbar {
 	overflow-y:scroll;
-	padding:85px 20px 0px 20px;
+	padding:65px 0px 0px 0px;
+}
+.form-group label{
+	font-weight: 300;
+	margin-bottom: 0px !important;
+}
+.form-control{
+	text-align:right;
+	height:30px;
+	width:100%;
+	padding:5px;
+}
+
+.monthly-input-section, .channel-input-section{
+	padding: 20px;
+	width: 100%;
+	border-bottom: 1px solid #e3e3e3;
 }
 
 /*Monthlies*/
-.monthly-section{
-	margin: 0px 20px 0px 0px;
+.monthly-input-section .form-group{
+	margin: 15px 0px 0px 0px;
 }
-.monthly-section input.monthly-inputbox{
+.monthly-input-section input.monthly-form-control{
 	font-size: 20px;
 	font-weight: 300;
 	line-height: 40px;
 	height: 40px;
 	width: 100px;
-	margin: 5px 0px;
 }
 
-.channel-input-section{
-	margin: 0px 0px 20px 0px;
+/*Channels*/
+.channel-input-section table{
 	width: 100%;
 }
 .column-label, .column-before, .column-after{
@@ -137,16 +152,15 @@ input[type=checkbox]:checked + .checkbox:before {
 }
 .customcheckbox{
 	margin:0 auto;
+	width:80px;
+	padding: 5px 5px 5px 10px;
 }
-.inputbox{
-	border:1px solid lightgrey;
-	/*background-color:white;*/
-	border-radius:3px;
-	text-align:right;
-	height:30px;
-	width:55px;
-	padding:5px;
-	/*display:inline-block;*/
+td > label{
+	font-weight: 300;
+	font-size: 12px;
+	text-align: left;
+	margin-bottom: 0px;
+	display: block;
 }
 
 /*Buttons*/
@@ -167,6 +181,10 @@ input[type=checkbox]:checked + .checkbox:before {
 	border-right: 1px solid #e3e3e3;
 	z-index: 20;
 	background-color: white;
+
+  -webkit-box-shadow: 0 -8px 16px -16px black;
+     -moz-box-shadow: 0 -8px 16px -16px black;
+          box-shadow: 0 -8px 16px -16px black;
 }
 #calculate-btn{
 	float: right;

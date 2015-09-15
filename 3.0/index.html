@@ -64,11 +64,17 @@
 	<div class="lowersegment">
 		<div class="lowerleft">
 			<div class="settingsbar" id="settingsbar">
-				<div class="channel-input-section monthly-section">
+				<div class="monthly-input-section">
 					<h2>Monthly Voice Traffic</h2>
-					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="voicetraffic">
-					<!-- <input type="range" min="0" max="100" value="50" id="voicesplit"> -->
-					<div id="tealslider" class="slider"></div><div class="showpercent" id="showpercentteal">50% mobile</div><script>
+					<div class="form-group form-inline">
+						<input type="text" class=" form-control monthly-form-control" placeholder="0" id="voicetraffic">
+						<label for="voicetraffic">million</label>
+					</div>
+					<div class="form-group form-inline">
+						<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="voicesplit"> -->
+						<!-- <input type="range" min="0" max="100" value="50" id="voicesplit">
+						<label for="voicesplit">% mobile</label> -->
+						<div id="tealslider" class="slider"></div><div class="showpercent" id="showpercentteal">50% mobile</div><script>
 						$(function(){
 							$( "#tealslider").slider({
 								orientation: "horizontal",
@@ -81,12 +87,17 @@
 							});
 						})
 					</script>
+					</div>
 				</div>
-				<div class="channel-input-section monthly-section">
+				<div class="monthly-input-section">
 					<h2>Monthly Web Traffic</h2>
-					<input type="text" class="inputbox monthly-inputbox" placeholder="0" id="webtraffic">
-					<!-- <input type="range" min="0" max="100" value="50" id="websplit"> -->
-					<div id="purpleslider" class="slider"></div><div class="showpercent" id="showpercentpurple">50% mobile</div><br><br><script>
+					<div class="form-group form-inline">
+						<input type="text" class="form-control monthly-form-control" placeholder="0" id="webtraffic">
+						<label for="webtraffic">million</label>
+					</div>
+					<div class="form-group form-inline">
+						<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="websplit"> -->
+						<div id="purpleslider" class="slider"></div><div class="showpercent" id="showpercentpurple">50% mobile</div><br><br><script>
 						$(function(){
 							$( "#purpleslider").slider({
 								orientation: "horizontal",
@@ -98,128 +109,176 @@
 							});
 						})
 					</script>
+					</div>
 				</div>
 				<!--voice Agents-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Voice Agents</td>
-								<td class="column-before">
-									<input type="checkbox" value="" id="cbvoi1">
-									<label class="checkbox" for="cbvoi1"></label></td>
-								<td class="column-after">
-									<input type="checkbox" value="" id="cbvoi2"><label class="checkbox" for="cbvoi2"></label></td>
+								<td class="column-before"><!-- <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbvoi1"><input type="checkbox" id="cbvoi1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label> -->
+									<label>
+										<input type="checkbox" value="" id="cbvoi1"> Current
+									</label>
+								</td>
+								<td class="column-after"><!-- <label class="mdl-checkbox mdl-js-checkbox" for="cbvoi2"><input type="checkbox" id="cbvoi2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label> -->
+									<label>
+										<input type="checkbox" value="" id="cbvoi2"> Future
+									</label>
+								</td>
 							</tr>
 							<tr>
 								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpivoi1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpivoi2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpivoi1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpivoi2"></td>
 							</tr>
 							<tr style="display:none;">
 								<td class="column-label">First Call Resolution</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="convoi1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convoi2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="convoi1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="convoi2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--IVR-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">IVR</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbivr1">
-									<label class="checkbox" for="cbivr1"></label></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbivr2">
-									<label class="checkbox" for="cbivr2"></label></td>
+								<td class="column-before">
+									<label>
+										<input type="checkbox" value="" id="cbivr1"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label>
+										<input type="checkbox" value="" id="cbivr2"> Future
+									</label>
+								</td>
 							</tr>
 							<tr>
 								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiivr1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiivr2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpiivr1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpiivr2"></td>
 							</tr>
 							<tr>
 								<td class="column-label">Containment Rate</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conivr1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conivr2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="conivr1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="conivr2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--Vivid Speech-->
-						<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Vivid Speech</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbvs1">
-									<label class="checkbox" for="cbvs1"></label></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbvs2">
-									<label class="checkbox" for="cbvs2"></label></td>
+								<td class="column-before">
+									<label>
+										<input type="checkbox" value="" id="cbvs1"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label>
+										<input type="checkbox" value="" id="cbvs2"> Future
+									</label>
+								</td>
 							</tr>
 							<tr>
 								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpivs1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpivs2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpivs1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpivs2"></td>
 							</tr>
 							<tr>
 								<td class="column-label">Containment Rate</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="convs1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convs2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="convs1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="convs2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--Virtual Assistant-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Virtual Assistant</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbva1">
-									<label class="checkbox" for="cbva1"></label></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbva2">
-									<label class="checkbox" for="cbva2"></label></td>
+								<td class="column-before">
+									<label>
+										<input type="checkbox" value="" id="cbva1"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label>
+										<input type="checkbox" value="" id="cbva2"> Future
+									</label>
+								</td>
 							</tr>
 							<tr>
 								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiva1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiva2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpiva1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpiva2"></td>
 							</tr>
 							<tr>
 								<td class="column-label">Containment Rate</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conva1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conva2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="conva1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="conva2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--Mobile Chat-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Mobile Chat</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbmc1">
-								<label class="checkbox" for="cbmc1"></label></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbmc2">
-								<label class="checkbox" for="cbmc2"></label></td>
+								<td class="column-before">
+									<label>
+										<input type="checkbox" value="" id="cbmc1"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label>
+										<input type="checkbox" value="" id="cbmc2"> Future
+									</label>
+								</td>
 							</tr>
 							<tr>
 								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpimc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpimc2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpimc1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpimc2"></td>
 							</tr>
 							<tr>
 								<td class="column-label">Containment</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conmc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conmc2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="conmc1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="conmc2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--Web Chat-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Web Chat</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbwc1">
-								<label class="checkbox" for="cbwc1"></label></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbwc2">
-								<label class="checkbox" for="cbwc2"></label></td>
+								<td class="column-before">
+									<label>
+										<input type="checkbox" value="" id="cbwc1"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label>
+										<input type="checkbox" value="" id="cbwc2"> Future
+									</label>
+								</td>
 							</tr>
 							<tr>
 								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiwc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiwc2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpiwc1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpiwc2"></td>
 							</tr>
 							<tr>
 								<td class="column-label">Containment</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conwc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conwc2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="conwc1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="conwc2"></td>
 							</tr>
 						</table>
+					</div>
 			</div>
 			<div class="calc-buttons-container">
 				<button class="btn btn-link btn-xs" id="reset-btn" style="">Reset</button>

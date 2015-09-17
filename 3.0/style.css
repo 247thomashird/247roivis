@@ -130,7 +130,7 @@ tr:hover{
 	vertical-align:top;
 }
 input[type=checkbox] {
-	display:none; 
+	display:inline-block; 
 }
 .checkbox:before {
 	content: "";
@@ -342,7 +342,7 @@ button.active a, .active a:hover{
 	display:inline-block;
 }
 .cblabel{
-	
+
 }
 .showpercent{
 	display:inline-block;

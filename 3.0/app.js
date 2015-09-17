@@ -120,8 +120,8 @@ function calculatebutton(){
 		after.voiceagent.printall();
 	}
 	function getvalues(){
-		web.volume=document.getElementById('webtraffic').value;
-		voice.volume=document.getElementById('voicetraffic').value;
+		web.volume=document.getElementById('webtraffic').value*1000000;
+		voice.volume=document.getElementById('voicetraffic').value*1000000;
 
 		desktop.acceptpercent = (1-dvs)/100;//1 - document.getElementById('websplit').value/100;
 		mobileweb.acceptpercent = dvs/100;//document.getElementById('websplit').value/100;
@@ -303,6 +303,12 @@ function updatesummary(){
 	document.getElementById('totala').innerHTML = numberWithCommas(aftersum);
 	document.getElementById('totals').innerHTML = numberWithCommas(savingssum);
 	//console.log('beforesum:'+numberWithCommas(aftersum));
+}
+function backgroundcolors(id,on){
+	document.getElementById('cpi'+id).style.borderColor= (on ? '#049094':'#cccccc');
+	document.getElementById('con'+id).style.borderColor= (on ? '#049094':'#cccccc');
+	// document.getElementById('cpi'+id).style.backgroundColor= (on ? '#fafafa':'#ffffff');
+	// document.getElementById('con'+id).style.backgroundColor= (on ? '#E6F4F4':'#ffffff');
 }
 
 /*demos*/

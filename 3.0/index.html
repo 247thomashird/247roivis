@@ -118,12 +118,12 @@
 								<td class="column-label channel-label">Voice Agents</td>
 								<td class="column-before"><!-- <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbvoi1"><input type="checkbox" id="cbvoi1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label> -->
 									<label class="cblabel">
-										<input type="checkbox" value="" id="cbvoi1"> Current
+										<input type="checkbox" value="" id="cbvoi1" onclick="backgroundcolors('voi1',this.checked);"> Current
 									</label>
 								</td>
 								<td class="column-after"><!-- <label class="mdl-checkbox mdl-js-checkbox" for="cbvoi2"><input type="checkbox" id="cbvoi2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label> -->
 									<label class="cblabel">
-										<input type="checkbox" value="" id="cbvoi2"> Future
+										<input type="checkbox" value="" id="cbvoi2" onclick="backgroundcolors('voi2',this.checked);"> Future
 									</label>
 								</td>
 							</tr>
@@ -146,12 +146,12 @@
 								<td class="column-label channel-label">IVR</td>
 								<td class="column-before">
 									<label class="cblabel">
-										<input type="checkbox" value="" id="cbivr1"> Current
+										<input type="checkbox" value="" id="cbivr1" onclick="backgroundcolors('ivr1',this.checked);"> Current
 									</label>
 								</td>
 								<td class="column-after">
 									<label class="cblabel">
-										<input type="checkbox" value="" id="cbivr2"> Future
+										<input type="checkbox" value="" id="cbivr2" onclick="backgroundcolors('ivr2',this.checked);"> Future
 									</label>
 								</td>
 							</tr>
@@ -174,12 +174,12 @@
 								<td class="column-label channel-label">Vivid Speech</td>
 								<td class="column-before">
 									<label class="cblabel">
-										<input type="checkbox" value="" id="cbvs1"> Current
+										<input type="checkbox" value="" id="cbvs1" onclick="backgroundcolors('vs1',this.checked);"> Current
 									</label>
 								</td>
 								<td class="column-after">
 									<label class="cblabel">
-										<input type="checkbox" value="" id="cbvs2"> Future
+										<input type="checkbox" value="" id="cbvs2" onclick="backgroundcolors('vs2',this.checked);"> Future
 									</label>
 								</td>
 							</tr>
@@ -202,12 +202,12 @@
 								<td class="column-label channel-label">Virtual Assistant</td>
 								<td class="column-before">
 									<label class="cblabel">
-										<input type="checkbox" value="" id="cbva1"> Current
+										<input type="checkbox" value="" id="cbva1" onclick="backgroundcolors('va1',this.checked);"> Current
 									</label>
 								</td>
 								<td class="column-after">
 									<label class="cblabel">
-										<input type="checkbox" value="" id="cbva2"> Future
+										<input type="checkbox" value="" id="cbva2" onclick="backgroundcolors('va2',this.checked);"> Future
 									</label>
 								</td>
 							</tr>
@@ -230,12 +230,12 @@
 								<td class="column-label channel-label">Mobile Chat</td>
 								<td class="column-before">
 									<label class="cblabel">
-										<input type="checkbox" value="" id="cbmc1"> Current
+										<input type="checkbox" value="" id="cbmc1" onclick="backgroundcolors('mc1',this.checked);"> Current
 									</label>
 								</td>
 								<td class="column-after">
 									<label class="cblabel">
-										<input type="checkbox" value="" id="cbmc2"> Future
+										<input type="checkbox" value="" id="cbmc2" onclick="backgroundcolors('mc2',this.checked);"> Future
 									</label>
 								</td>
 							</tr>
@@ -258,12 +258,12 @@
 								<td class="column-label channel-label">Web Chat</td>
 								<td class="column-before">
 									<label class="cblabel">
-										<input type="checkbox" value="" id="cbwc1"> Current
+										<input type="checkbox" value="" id="cbwc1" onclick="backgroundcolors('wc1',this.checked);"> Current
 									</label>
 								</td>
 								<td class="column-after">
 									<label class="cblabel">
-										<input type="checkbox" value="" id="cbwc2"> Future
+										<input type="checkbox" value="" id="cbwc2" onclick="backgroundcolors('wc2',this.checked);"> Future
 									</label>
 								</td>
 							</tr>
@@ -298,11 +298,11 @@
 			  <div id="summary" class="tab-pane fade in active">
 			  	<br>
 			    <div style="margin: 0 50px 0 50px;">
-				    <table class="table">
+				    <table class="table" style="margin: 0 auto;max-width:800px">
 					    <thead>
 					      <tr>
 					        <th></th>
-					        <th>Curren Plan Cost</th>
+					        <th>Current Plan Cost</th>
 					        <th>New Plan Cost</th>
 					        <th>Savings</th>
 					      </tr>

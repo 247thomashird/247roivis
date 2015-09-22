@@ -50,6 +50,15 @@ a {
 
 /*End Header bar*/
 
+.run-btn{
+	border: 2px solid #049094;
+	background-color:white;
+	color: #049094;
+	border-radius:5px;
+	width:115px;
+	padding:5px;
+	margin: 10px 0 10px 0;
+}
 
 
 .lowersegments{

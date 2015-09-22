@@ -26,6 +26,7 @@
 	  <div id="app-title">ROI Service Calculator</div>
 	  <a href="scenarios.pdf" target="_blank" id="scenarios-btn"><button class="btn btn-default btn-sm" >Scenarios</button></a>
 	  <button id="about-btn" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">About</button>
+	  <button id="about-btn" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal2">Scenarios</button>
 	</div>
 	<!--Modal-->
 	<div class="modal fade" id="myModal" role="dialog">
@@ -52,6 +53,69 @@
 							Thomas Hird, UX Developer<br>
 							Neil Mckay, Director, Design<br>
 							Sally Grisedale, Chief Design Officer
+						</div>
+					</div>
+			    </div>
+			    <div class="modal-footer">
+					<button type="button" class="btn" data-dismiss="modal" style="background:#049094;color:white;float:right;width:190px;margin-left:0px;font-family:Arial;">Get Started</button>
+			    </div>
+			  </div>
+			</div>
+		</div>
+	<div class="modal fade" id="myModal2" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" style="font-size:22px;color:#777777;">About</h4>
+				</div>
+				<div class="modal-body">
+				  	<div class="textcontainer">
+						<div class="orangetext">
+							Scenarios
+						</div>
+						<div class="tealtext">
+							Scenario 1 Vivid speech
+						</div>
+						<div class="headertext">
+							Setup
+						</div>
+						<div class="regulartext"><br>
+							A client currently uses [24]7 to process a specific customer journey. Each month they get <b>125,000 (0.125 million)</b> calls for this journey per month where <b>50%</b> of the traffic is from mobile phones. Each of these calls currently costs the client <b>$11.60.</b> <br>
+							We'd like to run a scenario where this client uses our Vivid Speech Solution to reduce the calls. By feeding 100% of traffic through vivid speech, we can contain <b>20%</b> of calls and each of these calls will only cost the client <b>$2.50</b>. This is an outcome based deal so only calls which solve the customer's problem without going to a voice agent will result in the client being charged.
+						</div>
+						<div class="headertext">
+							Results
+						</div>
+						<div class="regulartext"><br>
+							Summary Page: Here we can see a breakdown of exactly where costs occur and what they are. Each month the client will pay us around $31,000, but will reduce their costs by $114,000 per month. The cost of Voice agent interactions doesn't change, but because a huge chunk of the volume is taken care of by Vivid Speech, our voice agents end up costing less.<br>
+							Charts Page: This page shows breakdowns of where the costs come from and how much volume each solution ends up handling. In this scenario, they both show that Voice Agents remain the primary source of costs and solutions, but show that while Vivid Speech is providing a significant chunk of the solutions, its costs are nothing in comparison.<br>
+							Journey Map: This is our Customer Engagement Journey Map which shows the possible paths a customer could take to get their problems solved and which paths the client is currently taking advantage of.
+						</div>
+						<div class="run-btn" onclick="scenario1();" data-dismiss="modal">
+							Run Scenario 1
+						</div>
+						<div class="tealtext">
+							Scenario 2 Virtual Assistant
+						</div>
+						<div class="headertext">
+							Setup
+						</div>
+						<div class="regulartext">
+							[24]7 Currently handles all of a client's Customer Engagements. Each month, the client gets 24 million interactions per month via voice channels, of which 50% are mobile. They also have 15 million interactions per month via web channels of which 40% are mobile.<br>
+							This client uses a much more complicated system to manage all of their customer interactions. They currently use Voice Agents at an average rate of $9.60 per interaction. In our next implementation we will be using Assist for Voice so our interaction costs should go down to $7.20. The client uses an IVR system to handle voice traffic at $1 per interaction with a 60% containment rate which we won't be touching.<br>
+							For their web channels we are going to add a Virtual Assistant in front of web chats which should take 10% of the traffic at $3 per interaction. They currently employ web chat at $3 per interaction and with a 5% containment rate, but because of the traffic routed to it by the Virtual Assistant we are going to increase its rate to 25%.
+						</div>
+						<div class="headertext">
+							Results
+						</div>
+						<div class="regulartext">
+							Summary: This scenario has a much more complicated breakdown of costs. Glossing over Voice agents for the moment, lets begin with IVR. As nothing has changed with IVR between current and future, there are no savings here. Virtual Assistant is introduced in the Future scenario so it is only an additional cost for now. Next we have Web Chat which hasn't changed in price, but is handling a lot more volume, even with the reduction by the Virtual Assistant and as a result is an increase in cost. Going back to Voice Agents, we can see that the cost is greatly reduced. This reduction is where all of the savings comes from and is many times greater than the costs introduced with the new products. 
+							Charts: In the charts page we can fully see the effects of the minor changes we've made. Voice Agents still take most of the volume and cost, but with the changes to web chat and addition of Virtual Assistant there is a dramatic change in cost primarily due to the change in volume to voice agents. 
+							Journey Map: The Journey Map here is entirely full showing that the client is now engaging their customers on all possible channels.
+						</div>
+						<div class="run-btn" onclick="scenario2();" data-dismiss="modal">
+							Run Scenario 2
 						</div>
 					</div>
 			    </div>
@@ -136,6 +200,19 @@
 								<td class="column-label">First Call Resolution</td>
 								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="convoi1"></td>
 								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="convoi2"></td>
+							</tr>
+							<tr>
+								<td class="column-label channel-label">Assist for Voice</td>
+								<td class="column-before">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="a4vcurrent"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="a4vfuture"> Future
+									</label>
+								</td>
 							</tr>
 						</table>
 					</div>

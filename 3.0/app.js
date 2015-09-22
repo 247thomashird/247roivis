@@ -3,6 +3,7 @@ google.load('visualization','1.0', {'packages' :['corechart', 'bar']});
 google.setOnLoadCallback(drawchart);
 
 /*variables*/
+var a4vcur=false, a4vfut=false;
 var lvs = 50, dvs = 50;
 	function platform(){
 		this.volume=0;
@@ -26,7 +27,8 @@ var lvs = 50, dvs = 50;
 	var mobileweb = new device();
 	var mobilevoice = new device();
 	var phone = new device();
-	function product(){
+	function product(entname){
+		this.printname = entname;
 		this.enabled=false;
 		this.containment=0;
 		this.volume=0;
@@ -50,14 +52,14 @@ var lvs = 50, dvs = 50;
 			console.log("volume: "+this.volume+"  cost: "+this.cost);
 		}
 		this.printall = function(){
-			console.log("enabled: "+this.enabled+" containment: "+this.containment+
+			console.log(this.printname+" enabled: "+this.enabled+" containment: "+this.containment+
 				" volume: "+this.volume+" roundvolume: "+this.roundvolume+" cpi: "+this.cpi+" cost: "+this.cost);
 		}
 	}
-	var before = {va:new product(),vs:new product,ivr:new product,
-	webagent:new product(),mobileagent:new product(),voiceagent:new product()};
-	var after = {va:new product(),vs:new product,ivr:new product,
-	webagent:new product(),mobileagent:new product(),voiceagent:new product()};
+	var before = {va:new product('before va'),vs:new product('before vs'),ivr:new product('before ivr'),
+	webagent:new product('before webagent'),mobileagent:new product('before mobileagent'),voiceagent:new product('before voiceagent')};
+	var after = {va:new product('after va'),vs:new product('after vs'),ivr:new product('after ivr'),
+	webagent:new product('after webagent'),mobileagent:new product('after mobileagent'),voiceagent:new product('after voiceagent')};
 
 function calculatebutton(){
 	var rounds = 1;
@@ -72,6 +74,7 @@ function calculatebutton(){
 	//roundequation(rounds);
 	updatesummary();
 	drawchart();
+	if (debug) {printall();}
 }
 /*math*/
 	function clearallproducts(boa){
@@ -123,10 +126,10 @@ function calculatebutton(){
 		web.volume=document.getElementById('webtraffic').value*1000000;
 		voice.volume=document.getElementById('voicetraffic').value*1000000;
 
-		desktop.acceptpercent = (1-dvs)/100;//1 - document.getElementById('websplit').value/100;
+		desktop.acceptpercent = (100-dvs)/100;//1 - document.getElementById('websplit').value/100;
 		mobileweb.acceptpercent = dvs/100;//document.getElementById('websplit').value/100;
 		mobilevoice.acceptpercent = lvs/100;//document.getElementById('voicesplit').value/100;
-		phone.acceptpercent = (1 - lvs)/100;//document.getElementById('voicesplit').value/100;
+		phone.acceptpercent = (100 - lvs)/100;//document.getElementById('voicesplit').value/100;
 
 		function updateproduct(product,shorthand){
 			if (debug){console.log("getting values"+product);}
@@ -145,7 +148,9 @@ function calculatebutton(){
 		updateproduct('va','va');
 		updateproduct('webagent','wc');
 		updateproduct('mobileagent','mc');
-		if (debug){console.log("post value gather printall\n\n");printall();};
+		//if (debug){console.log("post value gather printall\n\n");printall();};
+
+		a4vfut = document.getElementById('a4vfuture').checked;
 
 	}
 
@@ -168,12 +173,6 @@ function calculatebutton(){
 			mobilewebvolume-=mobileweb.volume*boa.va.containment;
 			boa.va.calccost();
 		}
-		/*vs*/
-		if(boa.vs.enabled){
-			boa.vs.volume=mobilevoice.volume*boa.vs.containment;
-			mobilevoicevolume-=mobilevoice.volume*boa.vs.containment;
-			boa.vs.calccost();
-		}
 		/*IVR*/
 		if(boa.ivr.enabled){
 			boa.ivr.volume=mobilevoice.volume*boa.ivr.containment;
@@ -181,6 +180,12 @@ function calculatebutton(){
 			boa.ivr.volume+=phone.volume*boa.ivr.containment;
 			phonevolume-=phonevolume*boa.ivr.containment;
 			boa.ivr.calccost();
+		}
+		/*vs*/
+		if(boa.vs.enabled){
+			boa.vs.volume=mobilevoicevolume*boa.vs.containment;
+			mobilevoicevolume-=mobilevoicevolume*boa.vs.containment;
+			boa.vs.calccost();
 		}
 		/*web chat*/
 	 	if(boa.webagent.enabled){
@@ -316,8 +321,8 @@ function backgroundcolors(id,on){
 		document.getElementById("voicetraffic").value=1.25;
 		document.getElementById('webtraffic').value=0;
 
-		document.getElementById('websplit').value = 50;
-		document.getElementById('voicesplit').value = 50;
+		$( "#tealslider").slider('value',50);
+		$( "#purpleslider").slider('value',50);
 
 		document.getElementById('cbvoi1').checked = true;
 		document.getElementById('cbvoi2').checked = true;
@@ -345,8 +350,8 @@ function backgroundcolors(id,on){
 		document.getElementById('cpiwc1').value = 0;
 		document.getElementById('cpiwc2').value = 0;
 
-		document.getElementById('convoi1').value = 40;
-		document.getElementById('convoi2').value = 40;
+		document.getElementById('convoi1').value = 100;
+		document.getElementById('convoi2').value = 100;
 		document.getElementById('conivr1').value = 0;
 		document.getElementById('conivr2').value = 0;
 		document.getElementById('convs1').value = 0;
@@ -357,26 +362,55 @@ function backgroundcolors(id,on){
 		document.getElementById('conmc2').value = 0;
 		document.getElementById('conwc1').value = 0;
 		document.getElementById('conwc2').value = 0;
+		calculatebutton();
+ 	}
+ 	function scenario2(){
+		document.getElementById("voicetraffic").value=24;
+		document.getElementById('webtraffic').value=15;
 
+		$( "#tealslider").slider('value',50);
+		$( "#purpleslider").slider('value',40);
 
+		document.getElementById('cbvoi1').checked = true;
+		document.getElementById('cbvoi2').checked = true;
+		document.getElementById('cbivr1').checked = true;
+		document.getElementById('cbivr2').checked = true;
+		document.getElementById('cbvs1').checked = false;
+		document.getElementById('cbvs2').checked = false;
+		document.getElementById('cbva1').checked = false;
+		document.getElementById('cbva2').checked = true;
+		document.getElementById('cbmc1').checked = false;
+		document.getElementById('cbmc2').checked = false;
+		document.getElementById('cbwc1').checked = true;
+		document.getElementById('cbwc2').checked = true;
 
-		// web.volume=0;
-		// voice.volume=1250000;
-		// phone.acceptpercent = 0.5;
-		// mobilevoice.acceptpercent = 0.5;
-		// before.voiceagent.cpi=11.60;
-		// before.voiceagent.enabled = true;
-		// after.voiceagent.cpi=11.60;
-		// after.voiceagent.enabled = true;
+		document.getElementById('a4vfuture').checked = true;
 
-		// after.vs.enabled=true;
-		// after.vs.cpi=2.5;
-		// after.vs.containment=0.2;
-		// calculatevolumes(before);
-		// calculatevolumes(after);
-		// updatesummary();
+		document.getElementById('cpivoi1').value = 9.60;
+		document.getElementById('cpivoi2').value = 7.20;
+		document.getElementById('cpiivr1').value = 1;
+		document.getElementById('cpiivr2').value = 1;
+		document.getElementById('cpivs1').value = 0;
+		document.getElementById('cpivs2').value = 0;
+		document.getElementById('cpiva1').value = 0;
+		document.getElementById('cpiva2').value = 3;
+		document.getElementById('cpimc1').value = 0;
+		document.getElementById('cpimc2').value = 0;
+		document.getElementById('cpiwc1').value = 4;
+		document.getElementById('cpiwc2').value = 4;
 
-		// drawchart();
+		document.getElementById('convoi1').value = 100;
+		document.getElementById('convoi2').value = 100;
+		document.getElementById('conivr1').value = 60;
+		document.getElementById('conivr2').value = 60;
+		document.getElementById('convs1').value = 0;
+		document.getElementById('convs2').value = 0;
+		document.getElementById('conva1').value = 0;
+		document.getElementById('conva2').value = 10;
+		document.getElementById('conmc1').value = 0;
+		document.getElementById('conmc2').value = 0;
+		document.getElementById('conwc1').value = 5;
+		document.getElementById('conwc2').value = 25;
 		calculatebutton();
  	}
 
@@ -447,6 +481,8 @@ function backgroundcolors(id,on){
 		seton('mobileagent',[0,2,5,8,10,11,15,19,24,26,28]);
 		seton('webagent',[0,1,4,7,10,11,15,19,24,26,28]);
 		seton('va',[0,1,2,4,5,7,8,10,12,14,20,24,26,28]);
+
+		onoroff[22] = a4vfut;
 
 		onoroff[0] = ((onoroff[0]) ? '#666666':off);
 		onoroff[1] = ((onoroff[1]) ? '#666666':off);

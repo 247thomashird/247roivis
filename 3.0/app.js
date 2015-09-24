@@ -68,7 +68,10 @@ function calculatebutton(){
 
 	getvalues();
 	colorupdate();
+<<<<<<< HEAD
 	setbackgroundcolors();
+=======
+>>>>>>> e35af0a370f76bea5e31dcc2c3ca3492315df53f
 
 	calculatevolumes(before);
 	calculatevolumes(after);
@@ -229,7 +232,7 @@ function setbackgroundcolors(){
 		if (remaining==0){
 			return 0;
 		} else{
-			
+
 			remaining-=1;
 		}
 		desktop.roundvolume = desktopvolume;
@@ -323,13 +326,22 @@ function backgroundcolors(id,on){
 	// document.getElementById('cpi'+id).style.backgroundColor= (on ? '#fafafa':'#ffffff');
 	// document.getElementById('con'+id).style.backgroundColor= (on ? '#E6F4F4':'#ffffff');
 	if (!on){
+<<<<<<< HEAD
 		$("#cpi"+id).removeClass("form-teal").addClass("form-grey");
 		$("#con"+id).removeClass("form-teal").addClass("form-grey");
 	} else {
 		$("#cpi"+id).removeClass("form-grey").addClass("form-teal");
 		$("#con"+id).removeClass("form-grey").addClass("form-teal");
+=======
+	$("#cpi"+id).removeClass("form-teal").addClass("form-grey");
+	$("#con"+id).removeClass("form-teal").addClass("form-grey");
+	} else {
+	$("#cpi"+id).removeClass("form-grey").addClass("form-teal");
+	$("#con"+id).removeClass("form-grey").addClass("form-teal");
+>>>>>>> e35af0a370f76bea5e31dcc2c3ca3492315df53f
 	}
 }
+
 
 /*demos*/
 	function scenario1(){

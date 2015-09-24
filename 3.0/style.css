@@ -9,7 +9,7 @@ body{
 	width:100%;
 }
 a {
-	color:black;
+	color:#049094;
 }
 .primary{
 	background-color:#049094 !important;
@@ -335,17 +335,14 @@ button.active a, .active a:hover{
 		max-height:520px;
 		padding-right:80px;
 	}
-	.modalbutton{
+	/*.modalbutton{
 		border: 2px solid #049094;
 		border-radius:10px;
 		width:110px;
 		color:#049094;
 		line-height:40px;
 		padding-left:10px;
-	}
-	a {
-		color:#049094;
-	}
+	}*/
 /*slider styling*/
 .ui-slider .ui-slider-handle {border-radius:7px; width:14px;background:#049094;border:0px;height:14px;margin-top:0px;}
 .ui-slider .ui-slider-range {background:#B4DEDF;border-radius:7px;height:4px;}

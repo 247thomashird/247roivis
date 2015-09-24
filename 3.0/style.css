@@ -72,6 +72,7 @@ a {
 	border-right: 1px solid #e3e3e3;
 	float:left;
 	height: 100%;
+	background-color: #F2F2F2;
 }
 .lowerleft h2 {
 	font-size:22px;
@@ -120,7 +121,10 @@ a {
 	padding: 5px 3px;
 }
 tr:hover{
-	background-color: #E6F4F4;
+	/*background-color: white; */
+	/*background-color: #E6F4F4; */ /* Light Teal */
+	/*background-color: #049094; */ /* Teal */
+	background-color: #CDE9EA;
 }
 .channel-label{
 	font-weight: bold;

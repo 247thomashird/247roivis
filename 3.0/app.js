@@ -68,7 +68,7 @@ function calculatebutton(){
 
 	getvalues();
 	colorupdate();
-	
+
 	calculatevolumes(before);
 	calculatevolumes(after);
 	//roundequation(rounds);
@@ -221,7 +221,7 @@ function calculatebutton(){
 		if (remaining==0){
 			return 0;
 		} else{
-			
+
 			remaining-=1;
 		}
 		desktop.roundvolume = desktopvolume;
@@ -310,11 +310,19 @@ function updatesummary(){
 	//console.log('beforesum:'+numberWithCommas(aftersum));
 }
 function backgroundcolors(id,on){
-	document.getElementById('cpi'+id).style.borderColor= (on ? '#049094':'#cccccc');
-	document.getElementById('con'+id).style.borderColor= (on ? '#049094':'#cccccc');
+	//document.getElementById('cpi'+id).style.borderColor= (on ? '#049094':'#cccccc');
+	//document.getElementById('con'+id).style.borderColor= (on ? '#049094':'#cccccc');
 	// document.getElementById('cpi'+id).style.backgroundColor= (on ? '#fafafa':'#ffffff');
 	// document.getElementById('con'+id).style.backgroundColor= (on ? '#E6F4F4':'#ffffff');
+	if (!on){
+	$("#cpi"+id).removeClass("form-teal").addClass("form-grey");
+	$("#con"+id).removeClass("form-teal").addClass("form-grey");
+	} else {
+	$("#cpi"+id).removeClass("form-grey").addClass("form-teal");
+	$("#con"+id).removeClass("form-grey").addClass("form-teal");
+	}
 }
+
 
 /*demos*/
 	function scenario1(){

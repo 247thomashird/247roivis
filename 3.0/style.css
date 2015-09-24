@@ -122,7 +122,7 @@ a {
 	width:70px;
 	text-align: right;
 }
-.checkbox {
+/*.checkbox {
 	display: inline-block;
 	cursor: pointer;
 	font-size: 13px; line-height:13px;
@@ -130,8 +130,8 @@ a {
 	height: 14px;
 	padding:0;
 	vertical-align:top;
-}
-input[type=checkbox] {
+}*/
+/*input[type=checkbox] {
 	display:inline-block;
 }
 .checkbox:before {
@@ -151,12 +151,12 @@ input[type=checkbox]:checked + .checkbox:before {
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 	font-size: 13px;
 	background-color: #049094;
-}
-.customcheckbox{
+}*/
+/*.customcheckbox{
 	margin:0 auto;
 	width:80px;
 	padding: 5px 5px 5px 10px;
-}
+}*/
 td > label{
 	font-weight: 300;
 	font-size: 12px;
@@ -164,7 +164,12 @@ td > label{
 	margin-bottom: 0px;
 	display: block;
 }
-
+.form-grey{}
+.form-teal{
+	border-color: #049094;
+	background-color: #E6F4F4;
+	color: black;
+}
 /*Buttons*/
 
 .btn-primary{

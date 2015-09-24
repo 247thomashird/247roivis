@@ -494,6 +494,7 @@ function backgroundcolors(id,on){
 		var costafter=['after',after.voiceagent.volume,after.ivr.volume,after.vs.volume,
 		after.va.volume,after.mobileagent.volume,after.webagent.volume];
 		var chartw = window.innerWidth-400;
+		var charth = (window.innerHeight>850 ? 360: window.innerHeight/2-65);
 		var data = new google.visualization.arrayToDataTable([
 			products,
 			costbefore,
@@ -502,7 +503,7 @@ function backgroundcolors(id,on){
 		var options = {
 			title: 'Volumes',
 			width:chartw,
-			height: 360,
+			height: charth,
 			legend:{ position: 'bottom'},
 			bar:{groupwidth:'75'},
 			isStacked: true,
@@ -522,7 +523,7 @@ function backgroundcolors(id,on){
 		var options2 = {
 			title: 'Costs',
 			width:chartw,
-			height:360,
+			height:charth,
 			legend:{position: 'bottom'},
 			bar: {groupwidth:'75'},
 			isStacked:true,
@@ -615,10 +616,11 @@ $(window).resize(function(){
 	resize();
 });
 function resize(){
+	drawchart();
 	console.log("resize");
 	var height = $(window).height();
 	$("#settingsbar").height(height-65-76);
-	drawchart();
+	
 }
 function newslide(){
 		console.log("newslide change");

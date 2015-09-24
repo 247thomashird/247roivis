@@ -44,9 +44,21 @@ a {
 #about-btn{
 	position: absolute; top: 16px; right: 20px;
 }
+#scenarios-btn{
+	position: absolute; top: 16px; right: 90px;
+}
 
 /*End Header bar*/
 
+.run-btn{
+	border: 2px solid #049094;
+	background-color:white;
+	color: #049094;
+	border-radius:5px;
+	width:115px;
+	padding:5px;
+	margin: 10px 0 10px 0;
+}
 
 
 .lowersegments{
@@ -69,24 +81,39 @@ a {
 }
 .settingsbar {
 	overflow-y:scroll;
-	padding:85px 20px 0px 20px;
+	padding:65px 0px 0px 0px;
+}
+.form-group label{
+	font-weight: 300;
+	margin-bottom: 0px !important;
+}
+.form-control{
+	text-align:right;
+	height:30px;
+	width:100%;
+	padding:5px;
+}
+
+.monthly-input-section, .channel-input-section{
+	padding: 20px;
+	width: 100%;
+	border-bottom: 1px solid #e3e3e3;
 }
 
 /*Monthlies*/
-.monthly-section{
-	margin: 0px 20px 0px 0px;
+.monthly-input-section .form-group{
+	margin: 15px 0px 0px 0px;
 }
-.monthly-section input.monthly-inputbox{
+.monthly-input-section input.monthly-form-control{
 	font-size: 20px;
 	font-weight: 300;
 	line-height: 40px;
 	height: 40px;
 	width: 100px;
-	margin: 5px 0px;
 }
 
-.channel-input-section{
-	margin: 0px 0px 20px 0px;
+/*Channels*/
+.channel-input-section table{
 	width: 100%;
 }
 .column-label, .column-before, .column-after{
@@ -102,21 +129,47 @@ tr:hover{
 	width:70px;
 	text-align: right;
 }
-.mdl-checkbox{
-	width: auto !important; 	/*to override the 100% width from mdl*/
+.checkbox {
+	display: inline-block;
+	cursor: pointer;
+	font-size: 13px; line-height:13px;
+	width: 14px;
+	height: 14px;
+	padding:0;
+	vertical-align:top;
+}
+input[type=checkbox] {
+	display:inline-block; 
+}
+.checkbox:before {
+	content: "";
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	vertical-align:center;
+	background-color: #B4DEDF;
+	color: #f3f3f3;
+	text-align: center;
+	box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8); 
+	border-radius: 3px;
+}
+input[type=checkbox]:checked + .checkbox:before {
+	content: "\2713";
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+	font-size: 13px;
+	background-color: #049094;
 }
 .customcheckbox{
 	margin:0 auto;
+	width:80px;
+	padding: 5px 5px 5px 10px;
 }
-.inputbox{
-	border:1px solid lightgrey;
-	/*background-color:white;*/
-	border-radius:3px;
-	text-align:right;
-	height:30px;
-	width:55px;
-	padding:5px;
-	/*display:inline-block;*/
+td > label{
+	font-weight: 300;
+	font-size: 12px;
+	text-align: left;
+	margin-bottom: 0px;
+	display: block;
 }
 
 /*Buttons*/
@@ -137,6 +190,10 @@ tr:hover{
 	border-right: 1px solid #e3e3e3;
 	z-index: 20;
 	background-color: white;
+
+  -webkit-box-shadow: 0 -8px 16px -16px black;
+     -moz-box-shadow: 0 -8px 16px -16px black;
+          box-shadow: 0 -8px 16px -16px black;
 }
 #calculate-btn{
 	float: right;
@@ -269,7 +326,7 @@ button.active a, .active a:hover{
 		width:880px;
 		padding-left: 80px;
 		overflow-y:scroll;
-		height:80%;
+		height:800px;
 		font-family:Arial;
 		max-height:520px;
 		padding-right:80px;
@@ -285,3 +342,19 @@ button.active a, .active a:hover{
 	a {
 		color:#049094;
 	}
+/*slider styling*/
+.ui-slider .ui-slider-handle {border-radius:7px; width:14px;background:#049094;border:0px;height:14px;margin-top:0px;}
+.ui-slider .ui-slider-range {background:#B4DEDF;border-radius:7px;height:4px;}
+.ui-slider {border-radius:6px;border:0px solid #bbbbbb;margin-left:5px;height:4px;background:#bbbbbb;}
+.slider{
+	width:250px;
+	display:inline-block;
+}
+.cblabel{
+
+}
+.showpercent{
+	display:inline-block;
+	text-align:right;
+	width:100px;
+}

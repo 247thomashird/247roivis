@@ -3,24 +3,20 @@
 <head>
 
 	<!--jquery-->
-
 	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<!--google charts related-->
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
 	<!--bootstrap-->
 	<link rel="stylesheet" href="bootstrap/css/bootstrap.css">
-	<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"> -->
 	<script src="bootstrap/js/bootstrap.min.js"></script>
 
 	<!--my custom stuff-->
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="app.js"></script>
 
-	<!--material design library-->
-	<link rel="stylesheet" href="mdl/material.css">
-	<script src="mdl/material.js"></script>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -28,7 +24,9 @@
 	<div class="topbar">
 	  <img id="logo" src="img/24_7_LOGO.svg">
 	  <div id="app-title">ROI Service Calculator</div>
+	  <a href="scenarios.pdf" target="_blank" id="scenarios-btn"><button class="btn btn-default btn-sm" >Scenarios</button></a>
 	  <button id="about-btn" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">About</button>
+	  <button id="about-btn" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal2">Scenarios</button>
 	</div>
 	<!--Modal-->
 	<div class="modal fade" id="myModal" role="dialog">
@@ -50,8 +48,8 @@
 							Designed for use by [24]7 staff in conversation with new and existing enterprise customers to illustrate the value of adding [24]7 products and services to their Customer Services offering
 						</div>
 						<div class="regulartext"><br>
-							Costs and savings displayed in this website are estimates only and should not be considered a quote or commitment.<br><br>
-							Please send suggestions and feedback to <a href="mailto:neil.mckay@247-inc.com" target="_top">neil.mckay@247-inc.com</a><br><br>
+							Costs and savings displayed in this website are estimates only and should not be considered a quote or commitment.<br><br><br>
+							Please send suggestions and feedback to <a href="mailto:neil.mckay@247-inc.com" target="_top">neil.mckay@247-inc.com</a><br>
 							Thomas Hird, UX Developer<br>
 							Neil Mckay, Director, Design<br>
 							Sally Grisedale, Chief Design Officer
@@ -64,133 +62,317 @@
 			  </div>
 			</div>
 		</div>
+	<div class="modal fade" id="myModal2" role="dialog">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title" style="font-size:22px;color:#777777;">About</h4>
+				</div>
+				<div class="modal-body">
+				  	<div class="textcontainer">
+						<div class="orangetext">
+							Scenarios
+						</div>
+						<div class="tealtext">
+							Scenario 1 Vivid speech
+						</div>
+						<div class="headertext">
+							Setup
+						</div>
+						<div class="regulartext"><br>
+							A client currently uses [24]7 to process a specific customer journey. Each month they get <b>125,000 (0.125 million)</b> calls for this journey per month where <b>50%</b> of the traffic is from mobile phones. Each of these calls currently costs the client <b>$11.60.</b> <br>
+							We'd like to run a scenario where this client uses our Vivid Speech Solution to reduce the calls. By feeding 100% of traffic through vivid speech, we can contain <b>20%</b> of calls and each of these calls will only cost the client <b>$2.50</b>. This is an outcome based deal so only calls which solve the customer's problem without going to a voice agent will result in the client being charged.
+						</div>
+						<div class="headertext">
+							Results
+						</div>
+						<div class="regulartext"><br>
+							Summary Page: Here we can see a breakdown of exactly where costs occur and what they are. Each month the client will pay us around $31,000, but will reduce their costs by $114,000 per month. The cost of Voice agent interactions doesn't change, but because a huge chunk of the volume is taken care of by Vivid Speech, our voice agents end up costing less.<br>
+							Charts Page: This page shows breakdowns of where the costs come from and how much volume each solution ends up handling. In this scenario, they both show that Voice Agents remain the primary source of costs and solutions, but show that while Vivid Speech is providing a significant chunk of the solutions, its costs are nothing in comparison.<br>
+							Journey Map: This is our Customer Engagement Journey Map which shows the possible paths a customer could take to get their problems solved and which paths the client is currently taking advantage of.
+						</div>
+						<div class="run-btn" onclick="scenario1();" data-dismiss="modal">
+							Run Scenario 1
+						</div>
+						<div class="tealtext">
+							Scenario 2 Virtual Assistant
+						</div>
+						<div class="headertext">
+							Setup
+						</div>
+						<div class="regulartext">
+							[24]7 Currently handles all of a client's Customer Engagements. Each month, the client gets 24 million interactions per month via voice channels, of which 50% are mobile. They also have 15 million interactions per month via web channels of which 40% are mobile.<br>
+							This client uses a much more complicated system to manage all of their customer interactions. They currently use Voice Agents at an average rate of $9.60 per interaction. In our next implementation we will be using Assist for Voice so our interaction costs should go down to $7.20. The client uses an IVR system to handle voice traffic at $1 per interaction with a 60% containment rate which we won't be touching.<br>
+							For their web channels we are going to add a Virtual Assistant in front of web chats which should take 10% of the traffic at $3 per interaction. They currently employ web chat at $3 per interaction and with a 5% containment rate, but because of the traffic routed to it by the Virtual Assistant we are going to increase its rate to 25%.
+						</div>
+						<div class="headertext">
+							Results
+						</div>
+						<div class="regulartext">
+							Summary: This scenario has a much more complicated breakdown of costs. Glossing over Voice agents for the moment, lets begin with IVR. As nothing has changed with IVR between current and future, there are no savings here. Virtual Assistant is introduced in the Future scenario so it is only an additional cost for now. Next we have Web Chat which hasn't changed in price, but is handling a lot more volume, even with the reduction by the Virtual Assistant and as a result is an increase in cost. Going back to Voice Agents, we can see that the cost is greatly reduced. This reduction is where all of the savings comes from and is many times greater than the costs introduced with the new products.
+							Charts: In the charts page we can fully see the effects of the minor changes we've made. Voice Agents still take most of the volume and cost, but with the changes to web chat and addition of Virtual Assistant there is a dramatic change in cost primarily due to the change in volume to voice agents.
+							Journey Map: The Journey Map here is entirely full showing that the client is now engaging their customers on all possible channels.
+						</div>
+						<div class="run-btn" onclick="scenario2();" data-dismiss="modal">
+							Run Scenario 2
+						</div>
+					</div>
+			    </div>
+			    <div class="modal-footer">
+					<button type="button" class="btn" data-dismiss="modal" style="background:#049094;color:white;float:right;width:190px;margin-left:0px;font-family:Arial;">Get Started</button>
+			    </div>
+			  </div>
+			</div>
+		</div>
 	<div class="lowersegment">
 		<div class="lowerleft">
 			<div class="settingsbar" id="settingsbar">
-				<div class="channel-input-section monthly-section form-group form-inline">
+
+				<!-- <div class="channel-input-section monthly-section form-group form-inline">
 					<h2>Monthly Voice Traffic</h2>
 					<input type="text" class="inputbox monthly-inputbox form-control" placeholder="0" id="voicetraffic">
 					<label for="voicetraffic">Million</label>
-					<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="voicesplit"> -->
+
 					<input type="range" min="0" max="100" value="50" id="voicesplit">
 				</div>
 				<div class="channel-input-section monthly-section form-group form-inline">
 					<h2>Monthly Web Traffic</h2>
 					<input type="text" class="inputbox monthly-inputbox form-control" placeholder="0" id="webtraffic">
 					<label for="webtraffic">Million</label>
-					<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="websplit"> -->
+
 					<input type="range" min="0" max="100" value="50" id="websplit">
+				-->
+
+				<div class="monthly-input-section">
+					<h2>Monthly Voice Traffic</h2>
+					<div class="form-group form-inline">
+						<input type="text" class=" form-control monthly-form-control" placeholder="0" id="voicetraffic">
+						<label for="voicetraffic">million</label>
+					</div>
+					<div class="form-group form-inline">
+						<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="voicesplit"> -->
+						<!-- <input type="range" min="0" max="100" value="50" id="voicesplit">
+						<label for="voicesplit">% mobile</label> -->
+						<div id="tealslider" class="slider"></div><div class="showpercent" id="showpercentteal">50% mobile</div><script>
+						$(function(){
+							$( "#tealslider").slider({
+								orientation: "horizontal",
+								range: "min",
+								max:100,
+								value:50,
+								step:5,
+								min:0,
+								slide: newslide
+							});
+						})
+					</script>
+					</div>
+				</div>
+				<div class="monthly-input-section">
+					<h2>Monthly Web Traffic</h2>
+					<div class="form-group form-inline">
+						<input type="text" class="form-control monthly-form-control" placeholder="0" id="webtraffic">
+						<label for="webtraffic">million</label>
+					</div>
+					<div class="form-group form-inline">
+						<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="websplit"> -->
+						<div id="purpleslider" class="slider"></div><div class="showpercent" id="showpercentpurple">50% mobile</div><br><br><script>
+						$(function(){
+							$( "#purpleslider").slider({
+								orientation: "horizontal",
+								range: "min",
+								max:100,
+								value:50,
+								step:5,
+								slide: newslide
+							});
+						})
+					</script>
+					</div>
+
 				</div>
 				<!--voice Agents-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Voice Agents</td>
 								<td class="column-before"><!-- <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbvoi1"><input type="checkbox" id="cbvoi1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label> -->
-									<input type="checkbox" value="" id="cbvoi1"></td>
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbvoi1" onclick="backgroundcolors('voi1',this.checked);"> Current
+									</label>
+								</td>
 								<td class="column-after"><!-- <label class="mdl-checkbox mdl-js-checkbox" for="cbvoi2"><input type="checkbox" id="cbvoi2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label> -->
-									<input type="checkbox" value="" id="cbvoi2"></td>
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbvoi2" onclick="backgroundcolors('voi2',this.checked);"> Future
+									</label>
+								</td>
 							</tr>
 							<tr>
 								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpivoi1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpivoi2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpivoi1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpivoi2"></td>
 							</tr>
 							<tr style="display:none;">
 								<td class="column-label">First Call Resolution</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="convoi1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convoi2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="convoi1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="convoi2"></td>
+							</tr>
+							<tr>
+								<td class="column-label channel-label">Assist for Voice</td>
+								<td class="column-before">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="a4vcurrent"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="a4vfuture"> Future
+									</label>
+								</td>
 							</tr>
 						</table>
+					</div>
 				<!--IVR-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">IVR</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbivr1"></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbivr2"></td>
+								<td class="column-before">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbivr1" onclick="backgroundcolors('ivr1',this.checked);"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbivr2" onclick="backgroundcolors('ivr2',this.checked);"> Future
+									</label>
+								</td>
 							</tr>
 							<tr>
 								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiivr1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiivr2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpiivr1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpiivr2"></td>
 							</tr>
 							<tr>
 								<td class="column-label">Containment Rate</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conivr1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conivr2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="conivr1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="conivr2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--Vivid Speech-->
-						<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Vivid Speech</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbvs1"></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbvs2"></td>
+								<td class="column-before">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbvs1" onclick="backgroundcolors('vs1',this.checked);"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbvs2" onclick="backgroundcolors('vs2',this.checked);"> Future
+									</label>
+								</td>
 							</tr>
 							<tr>
 								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpivs1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpivs2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpivs1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpivs2"></td>
 							</tr>
 							<tr>
 								<td class="column-label">Containment Rate</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="convs1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="convs2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="convs1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="convs2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--Virtual Assistant-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Virtual Assistant</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbva1"></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbva2"></td>
+								<td class="column-before">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbva1" onclick="backgroundcolors('va1',this.checked);"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbva2" onclick="backgroundcolors('va2',this.checked);"> Future
+									</label>
+								</td>
 							</tr>
 							<tr>
 								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiva1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiva2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpiva1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpiva2"></td>
 							</tr>
 							<tr>
 								<td class="column-label">Containment Rate</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conva1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conva2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="conva1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="conva2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--Mobile Chat-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Mobile Chat</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbmc1"></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbmc2"></td>
+								<td class="column-before">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbmc1" onclick="backgroundcolors('mc1',this.checked);"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbmc2" onclick="backgroundcolors('mc2',this.checked);"> Future
+									</label>
+								</td>
 							</tr>
 							<tr>
 								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpimc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpimc2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpimc1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpimc2"></td>
 							</tr>
 							<tr>
 								<td class="column-label">Containment</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conmc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conmc2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="conmc1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="conmc2"></td>
 							</tr>
 						</table>
+					</div>
 				<!--Web Chat-->
-					<table class="channel-input-section">
+				<div class="channel-input-section">
+					<table>
 							<tr>
 								<td class="column-label channel-label">Web Chat</td>
-								<td class="column-before"><input type="checkbox" value="" id="cbwc1"></td>
-								<td class="column-after"><input type="checkbox" value="" id="cbwc2"></td>
+								<td class="column-before">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbwc1" onclick="backgroundcolors('wc1',this.checked);"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbwc2" onclick="backgroundcolors('wc2',this.checked);"> Future
+									</label>
+								</td>
 							</tr>
 							<tr>
 								<td class="column-label">Cost Per Interaction</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="$0.00" id="cpiwc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="$0.00" id="cpiwc2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpiwc1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpiwc2"></td>
 							</tr>
 							<tr>
 								<td class="column-label">Containment</td>
-								<td class="column-before"><input type="text" class="inputbox" placeholder="00%" id="conwc1"></td>
-								<td class="column-after"><input type="text" class="inputbox" placeholder="00%" id="conwc2"></td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="conwc1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="conwc2"></td>
 							</tr>
 						</table>
+					</div>
 			</div>
 			<div class="calc-buttons-container">
 				<button class="btn btn-link btn-xs" id="reset-btn" style="">Reset</button>
@@ -198,14 +380,6 @@
 			</div>
 		</div>
 		<div class = "lowerright">
-
-			<!-- <div style="text-align:center; margin-top:10px;">
-				<div class="btn-group tab-btn-group" role="group" style="display:inline-block;" onclick="resize();">
-				  <button type="button" class="btn btn-default active"><a href="#summary" data-toggle="pill" role="button">Summary</a></button>
-				  <button type="button" class="btn btn-default" onclick="setTimeout(function(){drawchart();},200);"><a href="#chart" data-toggle="pill" role="button">Charts</a></button>
-				  <button type="button" class="btn btn-default"><a href="#map" data-toggle="pill" role="button">Journey Map</a></button>
-				</div>
-			</div> -->
 			<div class="centered-pills">
 				<ul class="nav nav-pills" style="margin:auto;">
 				  <li class="active"><a data-toggle="pill" class="leftpill" href="#summary">Summary</a></li>
@@ -218,11 +392,11 @@
 			  <div id="summary" class="tab-pane fade in active">
 			  	<br>
 			    <div style="margin: 0 50px 0 50px;">
-				    <table class="table">
+				    <table class="table" style="margin: 0 auto;max-width:800px">
 					    <thead>
 					      <tr>
 					        <th></th>
-					        <th>Curren Plan Cost</th>
+					        <th>Current Plan Cost</th>
 					        <th>New Plan Cost</th>
 					        <th>Savings</th>
 					      </tr>

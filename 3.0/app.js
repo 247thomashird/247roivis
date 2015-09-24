@@ -310,10 +310,17 @@ function updatesummary(){
 	//console.log('beforesum:'+numberWithCommas(aftersum));
 }
 function backgroundcolors(id,on){
-	document.getElementById('cpi'+id).style.borderColor= (on ? '#049094':'#cccccc');
-	document.getElementById('con'+id).style.borderColor= (on ? '#049094':'#cccccc');
+	//document.getElementById('cpi'+id).style.borderColor= (on ? '#049094':'#cccccc');
+	//document.getElementById('con'+id).style.borderColor= (on ? '#049094':'#cccccc');
 	// document.getElementById('cpi'+id).style.backgroundColor= (on ? '#fafafa':'#ffffff');
 	// document.getElementById('con'+id).style.backgroundColor= (on ? '#E6F4F4':'#ffffff');
+	if (!on){
+		$("#cpi"+id).removeClass("form-teal").addClass("form-grey");
+		$("#con"+id).removeClass("form-teal").addClass("form-grey");
+	} else {
+		$("#cpi"+id).removeClass("form-grey").addClass("form-teal");
+		$("#con"+id).removeClass("form-grey").addClass("form-teal");
+	}
 }
 
 /*demos*/
@@ -363,6 +370,7 @@ function backgroundcolors(id,on){
 		document.getElementById('conwc1').value = 0;
 		document.getElementById('conwc2').value = 0;
 		calculatebutton();
+		newslide();
  	}
  	function scenario2(){
 		document.getElementById("voicetraffic").value=24;
@@ -412,6 +420,7 @@ function backgroundcolors(id,on){
 		document.getElementById('conwc1').value = 5;
 		document.getElementById('conwc2').value = 25;
 		calculatebutton();
+		newslide();
  	}
 
 /*charts*/

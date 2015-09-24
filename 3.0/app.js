@@ -68,13 +68,21 @@ function calculatebutton(){
 
 	getvalues();
 	colorupdate();
-	
+	setbackgroundcolors();
+
 	calculatevolumes(before);
 	calculatevolumes(after);
 	//roundequation(rounds);
 	updatesummary();
 	drawchart();
 	if (debug) {printall();}
+
+}
+function setbackgroundcolors(){
+	var array = ['voi1','voi2','ivr1','ivr2','vs1','vs2','va1','va2','mc1','mc2','wc1','wc2'];
+	for (tech of array){
+	backgroundcolors(tech,document.getElementById('cb'+tech).checked);
+	}
 }
 /*math*/
 	function clearallproducts(boa){
@@ -371,6 +379,7 @@ function backgroundcolors(id,on){
 		document.getElementById('conwc2').value = 0;
 		calculatebutton();
 		newslide();
+
  	}
  	function scenario2(){
 		document.getElementById("voicetraffic").value=24;
@@ -421,6 +430,59 @@ function backgroundcolors(id,on){
 		document.getElementById('conwc2').value = 25;
 		calculatebutton();
 		newslide();
+
+ 	}
+ 	 	function reset(){
+		document.getElementById("voicetraffic").value='';
+		document.getElementById('webtraffic').value='';
+
+		$( "#tealslider").slider('value',50);
+		$( "#purpleslider").slider('value',50);
+
+		document.getElementById('cbvoi1').checked = false;
+		document.getElementById('cbvoi2').checked = false;
+		document.getElementById('cbivr1').checked = false;
+		document.getElementById('cbivr2').checked = false;
+		document.getElementById('cbvs1').checked = false;
+		document.getElementById('cbvs2').checked = false;
+		document.getElementById('cbva1').checked = false;
+		document.getElementById('cbva2').checked = false;
+		document.getElementById('cbmc1').checked = false;
+		document.getElementById('cbmc2').checked = false;
+		document.getElementById('cbwc1').checked = false;
+		document.getElementById('cbwc2').checked = false;
+
+		document.getElementById('a4vfuture').checked = false;
+		document.getElementById('a4vcurrent').checked = false;
+
+		document.getElementById('cpivoi1').value = '';
+		document.getElementById('cpivoi2').value = '';
+		document.getElementById('cpiivr1').value = '';
+		document.getElementById('cpiivr2').value = '';
+		document.getElementById('cpivs1').value = '';
+		document.getElementById('cpivs2').value = '';
+		document.getElementById('cpiva1').value = '';
+		document.getElementById('cpiva2').value = '';
+		document.getElementById('cpimc1').value = '';
+		document.getElementById('cpimc2').value = '';
+		document.getElementById('cpiwc1').value = '';
+		document.getElementById('cpiwc2').value = '';
+
+		document.getElementById('convoi1').value = '';
+		document.getElementById('convoi2').value = '';
+		document.getElementById('conivr1').value = '';
+		document.getElementById('conivr2').value = '';
+		document.getElementById('convs1').value = '';
+		document.getElementById('convs2').value = '';
+		document.getElementById('conva1').value = '';
+		document.getElementById('conva2').value = '';
+		document.getElementById('conmc1').value = '';
+		document.getElementById('conmc2').value = '';
+		document.getElementById('conwc1').value = '';
+		document.getElementById('conwc2').value = '';
+		calculatebutton();
+		newslide();
+
  	}
 
 /*charts*/

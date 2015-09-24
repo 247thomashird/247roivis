@@ -50,17 +50,6 @@ a {
 
 /*End Header bar*/
 
-.run-btn{
-	border: 2px solid #049094;
-	background-color:white;
-	color: #049094;
-	border-radius:5px;
-	width:115px;
-	padding:5px;
-	margin: 10px 0 10px 0;
-}
-
-
 .lowersegments{
 	background-color:#e5e6e7;
 	margin-top:65px;
@@ -120,11 +109,11 @@ a {
 .column-label, .column-before, .column-after{
 	padding: 5px 3px;
 }
-tr:hover{
+.channel-input-section tr:hover{
 	/*background-color: white; */
 	/*background-color: #E6F4F4; */ /* Light Teal */
 	/*background-color: #049094; */ /* Teal */
-	background-color: #CDE9EA;
+	background-color: #EBEBEB;
 }
 .channel-label{
 	font-weight: bold;
@@ -335,14 +324,11 @@ button.active a, .active a:hover{
 		max-height:520px;
 		padding-right:80px;
 	}
-	/*.modalbutton{
-		border: 2px solid #049094;
-		border-radius:10px;
-		width:110px;
-		color:#049094;
-		line-height:40px;
-		padding-left:10px;
-	}*/
+	.run-btn{
+		border-color: #049094;
+		color: #049094;
+	}
+
 /*slider styling*/
 .ui-slider .ui-slider-handle {border-radius:7px; width:14px;background:#049094;border:0px;height:14px;margin-top:0px;}
 .ui-slider .ui-slider-range {background:#B4DEDF;border-radius:7px;height:4px;}

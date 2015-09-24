@@ -62,6 +62,9 @@ var lvs = 50, dvs = 50;
 	webagent:new product('after webagent'),mobileagent:new product('after mobileagent'),voiceagent:new product('after voiceagent')};
 
 function calculatebutton(){
+	$("#splash").hide();
+	$("#table").show();
+
 	var rounds = 1;
 	clearallproducts(before);
 	clearallproducts(after);
@@ -322,12 +325,17 @@ function backgroundcolors(id,on){
 	//document.getElementById('con'+id).style.borderColor= (on ? '#049094':'#cccccc');
 	// document.getElementById('cpi'+id).style.backgroundColor= (on ? '#fafafa':'#ffffff');
 	// document.getElementById('con'+id).style.backgroundColor= (on ? '#E6F4F4':'#ffffff');
+	var time = 0;
 	if (!on){
-	$("#cpi"+id).removeClass("form-teal").addClass("form-grey");
-	$("#con"+id).removeClass("form-teal").addClass("form-grey");
+	// $("#cpi"+id).removeClass("form-teal").addClass("form-grey");
+	// $("#con"+id).removeClass("form-teal").addClass("form-grey");
+	$('#cpi'+id).switchClass("form-teal","form-grey",time);
+	$('#con'+id).switchClass("form-teal","form-grey",time);
 	} else {
-	$("#cpi"+id).removeClass("form-grey").addClass("form-teal");
-	$("#con"+id).removeClass("form-grey").addClass("form-teal");
+	// $("#cpi"+id).removeClass("form-grey").addClass("form-teal");
+	// $("#con"+id).removeClass("form-grey").addClass("form-teal");
+	$('#cpi'+id).switchClass("form-grey","form-teal",time);
+	$('#con'+id).switchClass("form-grey","form-teal",time);
 	}
 }
 
@@ -494,7 +502,8 @@ function backgroundcolors(id,on){
 		var costafter=['after',after.voiceagent.volume,after.ivr.volume,after.vs.volume,
 		after.va.volume,after.mobileagent.volume,after.webagent.volume];
 		var chartw = window.innerWidth-400;
-		var charth = (window.innerHeight>850 ? 360: window.innerHeight/2-65);
+		if (chartw < 800){chartw=800;}
+		var charth = (window.innerHeight>850 ? 360: window.innerHeight/2-85);
 		var data = new google.visualization.arrayToDataTable([
 			products,
 			costbefore,
@@ -504,7 +513,7 @@ function backgroundcolors(id,on){
 			title: 'Volumes',
 			width:chartw,
 			height: charth,
-			legend:{ position: 'bottom'},
+			legend: 'none',//{ position: 'none'},
 			bar:{groupwidth:'75'},
 			isStacked: true,
 			colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370']
@@ -524,8 +533,7 @@ function backgroundcolors(id,on){
 			title: 'Costs',
 			width:chartw,
 			height:charth,
-			legend:{position: 'bottom'},
-			bar: {groupwidth:'75'},
+			legend: 'none',//{position: 'none'},
 			isStacked:true,
 			colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370']
 		};
@@ -610,6 +618,7 @@ function backgroundcolors(id,on){
 		changecirclecolor(28,onoroff[28]);
 		}
 window.onload = function(){
+	$("#table").hide();
 	resize();
 }
 $(window).resize(function(){

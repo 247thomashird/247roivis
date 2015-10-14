@@ -102,22 +102,6 @@
 	<div class="lowersegment">
 		<div class="lowerleft">
 			<div class="settingsbar" id="settingsbar">
-
-				<!-- <div class="channel-input-section monthly-section form-group form-inline">
-					<h2>Monthly Voice Traffic</h2>
-					<input type="text" class="inputbox monthly-inputbox form-control" placeholder="0" id="voicetraffic">
-					<label for="voicetraffic">Million</label>
-
-					<input type="range" min="0" max="100" value="50" id="voicesplit">
-				</div>
-				<div class="channel-input-section monthly-section form-group form-inline">
-					<h2>Monthly Web Traffic</h2>
-					<input type="text" class="inputbox monthly-inputbox form-control" placeholder="0" id="webtraffic">
-					<label for="webtraffic">Million</label>
-
-					<input type="range" min="0" max="100" value="50" id="websplit">
-				-->
-
 				<div class="monthly-input-section">
 					<h2>Monthly Voice Traffic</h2>
 					<div class="form-group form-inline">
@@ -125,9 +109,6 @@
 						<label for="voicetraffic">million</label>
 					</div>
 					<div class="form-group form-inline">
-						<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="voicesplit"> -->
-						<!-- <input type="range" min="0" max="100" value="50" id="voicesplit">
-						<label for="voicesplit">% mobile</label> -->
 						<div id="tealslider" class="slider"></div><div class="showpercent" id="showpercentteal">50% mobile</div><script>
 						$(function(){
 							$( "#tealslider").slider({
@@ -150,7 +131,6 @@
 						<label for="webtraffic">million</label>
 					</div>
 					<div class="form-group form-inline">
-						<!-- <input class="mdl-slider mdl-js-slider" type="range" min="0" max="100" value="50" id="websplit"> -->
 						<div id="purpleslider" class="slider"></div><div class="showpercent" id="showpercentpurple">50% mobile</div><br><br><script>
 						$(function(){
 							$( "#purpleslider").slider({
@@ -171,12 +151,12 @@
 					<table>
 							<tr>
 								<td class="column-label channel-label">Voice Agents</td>
-								<td class="column-before"><!-- <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="cbvoi1"><input type="checkbox" id="cbvoi1" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label> -->
+								<td class="column-before">
 									<label class="cblabel">
 										<input type="checkbox" value="" id="cbvoi1" onclick="backgroundcolors('voi1',this.checked);"> Current
 									</label>
 								</td>
-								<td class="column-after"><!-- <label class="mdl-checkbox mdl-js-checkbox" for="cbvoi2"><input type="checkbox" id="cbvoi2" class="mdl-checkbox__input" checked /><span class="mdl-checkbox__label"></span></label> -->
+								<td class="column-after">
 									<label class="cblabel">
 										<input type="checkbox" value="" id="cbvoi2" onclick="backgroundcolors('voi2',this.checked);"> Future
 									</label>
@@ -187,7 +167,7 @@
 								<td class="column-before"><input type="text" class="form-control form-grey" placeholder="$0.00" id="cpivoi1"></td>
 								<td class="column-after"><input type="text" class="form-control form-grey" placeholder="$0.00" id="cpivoi2"></td>
 							</tr>
-							<tr style="display:none;">
+							<tr>
 								<td class="column-label">First Call Resolution</td>
 								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="convoi1"></td>
 								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="convoi2"></td>
@@ -313,7 +293,7 @@
 								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpimc2"></td>
 							</tr>
 							<tr>
-								<td class="column-label">Containment</td>
+								<td class="column-label">First Chat Resolution</td>
 								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="conmc1"></td>
 								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="conmc2"></td>
 							</tr>
@@ -341,9 +321,32 @@
 								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpiwc2"></td>
 							</tr>
 							<tr>
-								<td class="column-label">Containment</td>
+								<td class="column-label">First Chat Resolution</td>
 								<td class="column-before"><input type="text" class="form-control" placeholder="00%" id="conwc1"></td>
 								<td class="column-after"><input type="text" class="form-control" placeholder="00%" id="conwc2"></td>
+							</tr>
+						</table>
+					</div>
+				<!--Set Up-->
+				<div class="channel-input-section">
+					<table>
+							<tr>
+								<td class="column-label channel-label">Setup</td>
+								<td class="column-before">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbsu1" onclick="backgroundcolors('su1',this.checked);"> Current
+									</label>
+								</td>
+								<td class="column-after">
+									<label class="cblabel">
+										<input type="checkbox" value="" id="cbsu2" onclick="backgroundcolors('su2',this.checked);"> Future
+									</label>
+								</td>
+							</tr>
+							<tr>
+								<td class="column-label">Cost</td>
+								<td class="column-before"><input type="text" class="form-control" placeholder="$0.00" id="cpisu1"></td>
+								<td class="column-after"><input type="text" class="form-control" placeholder="$0.00" id="cpisu2"></td>
 							</tr>
 						</table>
 					</div>
@@ -422,6 +425,81 @@
 				        <td id="totalb"></td>
 				        <td id="totala"></td>
 				        <td id="totals"></td>
+				      </tr>
+				      <tr>
+				      	<td>Voice Resolutions</td>
+				      	<td id="uvb"></td>
+				      	<td id="uva"></td>
+				      	<td id="uvs"></td>
+				      </tr>
+				      <tr>
+				      	<td>Web Resolutions</td>
+				      	<td id="uwb"></td>
+				      	<td id="uwa"></td>
+				      	<td id="uws"></td>
+				      </tr>
+				    </tbody>
+				  </table>
+				</div>
+
+				<div style="margin: 0 50px 0 50px;" id="table2">
+				    <table class="table" style="margin: 0 auto;max-width:800px">
+					    <thead>
+					      <tr>
+					        <th></th>
+					        <th>Current Plan Cost</th>
+					        <th>New Plan Cost</th>
+					        <th>Savings</th>
+					      </tr>
+					    </thead>
+				    <tbody>
+				      <tr>
+				        <td>Voice Agents</td>
+				        <td id="voib3"></td>
+				        <td id="voia3"></td>
+				        <td id="vois3"></td>
+				      </tr>
+				      <tr>
+				        <td>IVR</td>
+				        <td id="ivrb3"></td>
+				        <td id="ivra3"></td>
+				        <td id="ivrs3"></td>
+				      </tr>
+				      <tr>
+				        <td>Vivid Speech</td>
+				        <td id="vsb3"></td>
+				        <td id="vsa3"></td>
+				        <td id="vss3"></td>
+				      </tr>
+				      <tr>
+				        <td>Virtual Assistant</td>
+				        <td id="vab3"></td>
+				        <td id="vaa3"></td>
+				        <td id="vas3"></td>
+				      </tr>
+				      <tr>
+				        <td>Mobile Chat</td>
+				        <td id="mcb3"></td>
+				        <td id="mca3"></td>
+				        <td id="mcs3"></td>
+				      </tr>
+				      <tr>
+				        <td>Web Chat</td>
+				        <td id="wcb3"></td>
+				        <td id="wca3"></td>
+				        <td id="wcs3"></td>
+				      </tr>
+				      <tr>
+				        <td>Setup Cost</td>
+				        <td id="setupb3"></td>
+				        <td id="setupa3"></td>
+				        <td id="setups3"></td>
+				      </tr>
+				      <tr>
+				        <td>Totals</td>
+				        <td id="totalb3"></td>
+				        <td id="totala3"></td>
+				        <td id="totals3"></td>
 				      </tr>
 				    </tbody>
 				  </table>

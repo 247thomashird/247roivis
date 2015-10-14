@@ -3,8 +3,10 @@ google.load('visualization','1.0', {'packages' :['corechart', 'bar']});
 google.setOnLoadCallback(drawchart);
 
 /*variables*/
-var a4vcur=false, a4vfut=false;
-var lvs = 50, dvs = 50;
+	var a4vcur=false, a4vfut=false;
+	var lvs = 50, dvs = 50;
+	var bsu = 0, asu = 0;
+	
 	function platform(){
 		this.volume=0;
 		this.clear = function(){
@@ -60,6 +62,10 @@ var lvs = 50, dvs = 50;
 	webagent:new product('before webagent'),mobileagent:new product('before mobileagent'),voiceagent:new product('before voiceagent')};
 	var after = {va:new product('after va'),vs:new product('after vs'),ivr:new product('after ivr'),
 	webagent:new product('after webagent'),mobileagent:new product('after mobileagent'),voiceagent:new product('after voiceagent')};
+	var beforeunweb = 0, beforeunvoice = 0;
+	var afterunweb = 0, afterunvoice = 0;
+	var beforeweb = 0, beforevoice = 0;
+	var afterweb = 0, aftervoice = 0;
 
 function calculatebutton(){
 	$("#splash").hide();
@@ -78,7 +84,7 @@ function calculatebutton(){
 	//roundequation(rounds);
 	updatesummary();
 	drawchart();
-	if (debug) {printall();}
+	//if (debug) {printall();}
 
 }
 function setbackgroundcolors(){
@@ -143,7 +149,7 @@ function setbackgroundcolors(){
 		phone.acceptpercent = (100 - lvs)/100;//document.getElementById('voicesplit').value/100;
 
 		function updateproduct(product,shorthand){
-			if (debug){console.log("getting values"+product);}
+			//if (debug){console.log("getting values"+product);}
 			eval('before.'+product+'.enabled = document.getElementById("cb'+shorthand+'1").checked');
 			eval('after.'+product+'.enabled = document.getElementById("cb'+shorthand+'2").checked');
 
@@ -159,14 +165,14 @@ function setbackgroundcolors(){
 		updateproduct('va','va');
 		updateproduct('webagent','wc');
 		updateproduct('mobileagent','mc');
-		//if (debug){console.log("post value gather printall\n\n");printall();};
 
 		a4vfut = document.getElementById('a4vfuture').checked;
-
+		bsu = Number(document.getElementById('cpisu1').value);
+		asu = Number(document.getElementById('cpisu2').value);
 	}
 
 	function calculatevolumes(boa){
-
+		console.log("webvolume: "+web.volume+"voicevolume: "+voice.volume);
 		desktop.volume=web.volume*desktop.acceptpercent;
 		var desktopvolume = desktop.volume;
 		mobileweb.volume=web.volume*mobileweb.acceptpercent;
@@ -175,6 +181,10 @@ function setbackgroundcolors(){
 		var mobilevoicevolume = mobilevoice.volume;
 		phone.volume = voice.volume*phone.acceptpercent;
 		var phonevolume = phone.volume;
+		console.log("desktopvolume: "+desktopvolume+" mobilewebvolume: "+mobilewebvolume+" mobilevoicevolume: "
+			+mobilevoicevolume+" phonevolume: "+ phonevolume);
+		console.log("percents- desktop: "+desktop.acceptpercent+" mobileweb: "+mobileweb.acceptpercent+
+			" mobilevoice: "+mobilevoice.acceptpercent+" phone: "+phone.acceptpercent);
 
 		/*va*/
 		if(boa.va.enabled){
@@ -210,87 +220,33 @@ function setbackgroundcolors(){
 	 		mobilewebvolume-=mobilewebvolume*boa.mobileagent.containment;
 	 		boa.mobileagent.calccost();
 	 	}
-	 	boa.voiceagent.volume=desktopvolume+mobilewebvolume+mobilevoicevolume+phonevolume;
-	 	boa.voiceagent.calccost();
-
-	}
-	function roundequation(rounds){
-		var desktopvolume=web.volume*desktop.acceptpercent;
-		var mobilewebvolume=web.volume*mobileweb.acceptpercent;
-		var mobilevoicevolume = voice.volume*mobilevoice.acceptpercent;
-		var phonevolume = voice.volume*phone.acceptpercent;
-		var remaining = rounds;
-
-		calculateroundvolumes(before,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
-		calculateroundvolumes(after,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
-		if (debug){
-			console.log("post cost printall\n");
-			printall();
-		}
-	}
-	function calculateroundvolumes(boa,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining){
-		if (remaining==0){
-			return 0;
-		} else{
-
-			remaining-=1;
-		}
-		desktop.roundvolume = desktopvolume;
-		mobileweb.roundvolume = mobilewebvolume;
-		mobilevoice.roundvolume = mobilevoicevolume;
-		phone.roundvolume = phonevolume;
-
-		/*va*/
-		if(boa.va.enabled){
-			boa.va.roundvolume=desktop.roundvolume*boa.va.containment;
-			desktopvolume-=boa.va.volume;
-			boa.va.roundvolume+=mobileweb.roundvolume*boa.va.containment;
-			mobilewebvolume-=mobileweb.roundvolume*boa.va.containment;
-			boa.va.calccost();
-		}
-		/*vs*/
-		if(boa.vs.enabled){
-			boa.vs.roundvolume=mobilevoice.roundvolume*boa.vs.containment;
-			mobilevoicevolume-=mobilevoice.roundvolume*boa.vs.containment;
-			boa.vs.calccost();
-		}
-		/*IVR*/
-		if(boa.ivr.enabled){
-			boa.ivr.roundvolume=mobilevoice.roundvolume*boa.ivr.containment;
-			mobilevoicevolume-=mobilevoice.roundvolume*boa.ivr.containment;
-			boa.ivr.roundvolume+=phone.roundvolume*boa.ivr.containment;
-			phonevolume-=phonevolume*boa.ivr.containment;
-			boa.ivr.calccost();
-		}
-		/*web chat*/
-	 	if(boa.webagent.enabled){
-	 		boa.webagent.roundvolume=desktopvolume*boa.webagent.containment;
-	 		desktopvolume-=desktopvolume*boa.webagent.containment;
-	 		boa.webagent.calccost();
-	 	}
-	 	/*mobile chat*/
-	 	if(boa.mobileagent.enabled){
-	 		boa.mobileagent.roundvolume=mobilewebvolume*boa.mobileagent.containment;
-	 		mobilewebvolume-=mobilewebvolume*boa.mobileagent.containment;
-	 		boa.mobileagent.calccost();
-	 	}
 	 	if(boa.voiceagent.enabled){
-	 		boa.voiceagent.roundvolume=mobilevoicevolume*boa.voiceagent.containment;
+	 		boa.voiceagent.volume = mobilevoicevolume*boa.voiceagent.containment;
 	 		mobilevoicevolume-=mobilevoicevolume*boa.voiceagent.containment;
-	 		boa.voiceagent.roundvolume+=phonevolume*boa.voiceagent.containment;
-	 		phonevolume-=phonevolume*boa.voiceagent.containment;
+	 		boa.voiceagent.volume += phonevolume*boa.voiceagent.containment;
+	 		phonevolume -= phonevolume*boa.voiceagent.containment;
 	 		boa.voiceagent.calccost();
 	 	}
-	 	desktop.volume += desktop.roundvolume;
-		mobileweb.volume += mobileweb.roundvolume;
-		mobilevoice.volume += mobileweb.roundvolume;
-		phone.volume += phone.roundvolume;
-		if (debug){
-			console.log("remaining rounds: "+remaining+"\n\tdesktop: "+desktopvolume+"\n\tmobileweb: "+mobilewebvolume+
-				"\n\tmobilevoice: "+mobilevoicevolume+"\n\tphone: "+phonevolume);
+	 	// boa.voiceagent.volume=desktopvolume+mobilewebvolume+mobilevoicevolume+phonevolume;
+	 	// boa.voiceagent.calccost();
+	 	if (boa == before){ 
+	 		
+		 	beforeweb = web.volume - (desktopvolume+mobilewebvolume);
+		 	beforevoice = voice.volume - (mobilevoicevolume+phonevolume);
+		 	beforeunweb = desktopvolume+mobilewebvolume;
+		 	beforeunvoice = mobilevoicevolume+phonevolume;
+		 	console.log('beforeunweb: '+beforeunweb+' beforeunvoice: '+beforeunvoice);
 		}
-	 	calculateroundvolumes(boa,desktopvolume,mobilewebvolume,mobilevoicevolume,phonevolume,remaining);
+		if (boa == after){
+			console.log('boa=after');
+		 	afterweb = web.volume - (desktopvolume+mobilewebvolume);
+		 	aftervoice = voice.volume - (mobilevoicevolume+phonevolume);
+		 	afterunweb = desktopvolume+mobilewebvolume;
+		 	afterunvoice = mobilevoicevolume+phonevolume;
+		 	console.log('afterunweb: '+afterunweb+' afterunvoice: '+afterunvoice);
+		}
 	}
+
 function updatesummary(){
 	function numberWithCommas(x) {
 		if (x==0){return '';}
@@ -301,14 +257,31 @@ function updatesummary(){
 	    return "($"+parts.join(".")+")";}
 	    return "$"+parts.join(".");
 	}
+	function numberWithCommas2(x) {
+		if (x==0){return '';}
+		var parens = (x>0 ? false:true);
+	    var parts = Math.floor(Math.abs(x)).toString().split(".");
+	    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    if (parens){
+	    return "("+parts.join(".")+")";}
+	    return ""+parts.join(".");
+	}
 	var beforesum = 0,aftersum = 0, savingssum = 0;
+	var beforesum3 = 0,aftersum3 = 0, savingssum3 = 0;
 	function updateline(tslot,pslot){
 	document.getElementById(tslot+'b').innerHTML = numberWithCommas( eval('before.'+pslot+'.cost'));
 	document.getElementById(tslot+'a').innerHTML = numberWithCommas( eval('after.'+pslot+'.cost'));
 	document.getElementById(tslot+'s').innerHTML = numberWithCommas( eval('before.'+pslot+'.cost - after.'+pslot+'.cost'));
 	beforesum+= eval('before.'+pslot+'.cost');aftersum+=eval('after.'+pslot+'.cost');savingssum+=eval('before.'+pslot+'.cost - after.'+pslot+'.cost');
+	
+	document.getElementById(tslot+'b3').innerHTML = numberWithCommas( eval('before.'+pslot+'.cost * 36'));
+	document.getElementById(tslot+'a3').innerHTML = numberWithCommas( eval('after.'+pslot+'.cost * 36'));
+	document.getElementById(tslot+'s3').innerHTML = numberWithCommas( eval('before.'+pslot+'.cost * 36 - after.'+pslot+'.cost * 36'));
+	beforesum3+= eval('before.'+pslot+'.cost * 36');aftersum3+=eval('after.'+pslot+'.cost * 36');savingssum3+=eval('before.'+pslot+'.cost * 36 - after.'+pslot+'.cost * 36');
 	}
-
+	beforesum3-=bsu;
+	aftersum3-=asu;
+	savingssum3+= bsu - asu;
 	updateline('voi','voiceagent');
 	updateline('ivr','ivr');
 	updateline('vs','vs');
@@ -318,6 +291,18 @@ function updatesummary(){
 	document.getElementById('totalb').innerHTML = numberWithCommas(beforesum);
 	document.getElementById('totala').innerHTML = numberWithCommas(aftersum);
 	document.getElementById('totals').innerHTML = numberWithCommas(savingssum);
+	document.getElementById('totalb3').innerHTML = numberWithCommas(beforesum3);
+	document.getElementById('totala3').innerHTML = numberWithCommas(aftersum3);
+	document.getElementById('totals3').innerHTML = numberWithCommas(savingssum3);
+	document.getElementById('setupb3').innerHTML = numberWithCommas(bsu);
+	document.getElementById('setupa3').innerHTML = numberWithCommas(asu);
+	document.getElementById('setups3').innerHTML = numberWithCommas(bsu-asu);
+	document.getElementById('uvb').innerHTML = numberWithCommas2(beforevoice);
+	document.getElementById('uva').innerHTML = numberWithCommas2(aftervoice);
+	document.getElementById('uvs').innerHTML = numberWithCommas2(Number(aftervoice-beforevoice));
+	document.getElementById('uwb').innerHTML = numberWithCommas2(beforeweb);
+	document.getElementById('uwa').innerHTML = numberWithCommas2(afterweb);
+	document.getElementById('uws').innerHTML = numberWithCommas2(Number(afterweb-beforeweb));
 	//console.log('beforesum:'+numberWithCommas(aftersum));
 }
 function backgroundcolors(id,on){
@@ -396,7 +381,9 @@ function backgroundcolors(id,on){
 
 		$( "#tealslider").slider('value',50);
 		$( "#purpleslider").slider('value',40);
-
+		lvs =Number($("#tealslider").slider("option","value"));
+		dvs=Number($("#purpleslider").slider("option","value"));
+		
 		document.getElementById('cbvoi1').checked = true;
 		document.getElementById('cbvoi2').checked = true;
 		document.getElementById('cbivr1').checked = true;
@@ -425,10 +412,10 @@ function backgroundcolors(id,on){
 		document.getElementById('cpiwc1').value = 4;
 		document.getElementById('cpiwc2').value = 4;
 
-		document.getElementById('convoi1').value = 100;
-		document.getElementById('convoi2').value = 100;
-		document.getElementById('conivr1').value = 60;
-		document.getElementById('conivr2').value = 60;
+		document.getElementById('convoi1').value = 40;
+		document.getElementById('convoi2').value = 40;
+		document.getElementById('conivr1').value = 10;
+		document.getElementById('conivr2').value = 10;
 		document.getElementById('convs1').value = 0;
 		document.getElementById('convs2').value = 0;
 		document.getElementById('conva1').value = 0;
@@ -437,8 +424,9 @@ function backgroundcolors(id,on){
 		document.getElementById('conmc2').value = 0;
 		document.getElementById('conwc1').value = 5;
 		document.getElementById('conwc2').value = 25;
+
 		calculatebutton();
-		newslide();
+		
 
  	}
  	 	function reset(){
@@ -496,11 +484,11 @@ function backgroundcolors(id,on){
 
 /*charts*/
 	function drawchart(){
-		var  products=['genre','Voice Agents','IVR','Vivid Speech', 'Virtual Assistant','Mobile Chat', 'Web Chat'];
+		var  products=['genre','Voice Agents','IVR','Vivid Speech', 'Virtual Assistant','Mobile Chat', 'Web Chat', 'Unresolved'];
 		var costbefore=['before',before.voiceagent.volume,before.ivr.volume,before.vs.volume,
-		before.va.volume,before.mobileagent.volume,before.webagent.volume];
+		before.va.volume,before.mobileagent.volume,before.webagent.volume,(beforeunweb+beforeunvoice)];
 		var costafter=['after',after.voiceagent.volume,after.ivr.volume,after.vs.volume,
-		after.va.volume,after.mobileagent.volume,after.webagent.volume];
+		after.va.volume,after.mobileagent.volume,after.webagent.volume,(afterunweb+afterunvoice)];
 		var chartw = window.innerWidth-400;
 		if (chartw < 800){chartw=800;}
 		var charth = (window.innerHeight>850 ? 360: window.innerHeight/2-85);
@@ -516,17 +504,17 @@ function backgroundcolors(id,on){
 			legend: 'none',//{ position: 'none'},
 			bar:{groupwidth:'75'},
 			isStacked: true,
-			colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370']
+			colors: ['#049094','#f5b77a','#f29f4e','#ef8822','#a74e8c','#912370','#bbbbbb']
 		};
 		var chart = new google.visualization.BarChart(document.getElementById('chart3'));
 		chart.draw(data,options);
-
+		var  productscost=['genre','Voice Agents','IVR','Vivid Speech', 'Virtual Assistant','Mobile Chat', 'Web Chat'];
 		var volbefore=['before',before.voiceagent.cost,before.ivr.cost,before.vs.cost,
 		before.va.cost,before.mobileagent.cost,before.webagent.cost];
 		var volafter=['after',after.voiceagent.cost,after.ivr.cost,after.vs.cost,
 		after.va.cost,after.mobileagent.cost,after.webagent.cost];
 		var data2 = new google.visualization.arrayToDataTable([
-			products,
+			productscost,
 			volbefore,
 			volafter])
 		var options2 = {
@@ -619,6 +607,7 @@ function backgroundcolors(id,on){
 		}
 window.onload = function(){
 	$("#table").hide();
+	$("#table2").hide();
 	resize();
 }
 $(window).resize(function(){
@@ -632,10 +621,11 @@ function resize(){
 	
 }
 function newslide(){
-		console.log("newslide change");
+		//console.log("newslide change");
 		setTimeout(function(){lvs =Number($("#tealslider").slider("option","value"));
 		dvs=Number($("#purpleslider").slider("option","value"));
 		document.getElementById("showpercentteal").innerHTML = lvs+"% mobile";
 		document.getElementById("showpercentpurple").innerHTML = dvs+"% mobile";
-		lvs=lvs/100;dvs=dvs/100;},10);
+		//lvs=lvs/100;dvs=dvs/100;
+		},10);
 	}
